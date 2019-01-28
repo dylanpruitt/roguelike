@@ -20,11 +20,12 @@
 	<string>
 	"Entity.h"
 
-1548554586 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\utilityfunctions.cpp
+1548717508 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\utilityfunctions.cpp
 	"utilityFunctions.h"
 	<stdlib.h>
 	<time.h>
 	<iostream>
+	<limits>
 
 1548717368 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\game.cpp
 	"Game.h"
@@ -41,10 +42,11 @@
 	"Room.h"
 	"Power.h"
 
-1548622286 source:c:\users\dylan\documents\programming projects 2019\roguelike\main.cpp
+1548717508 source:c:\users\dylan\documents\programming projects 2019\roguelike\main.cpp
 	<iostream>
 	"Game.h"
 	"skillFunctions.h"
+	"utilityFunctions.h"
 
 1548677055 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\aifunctions.cpp
 	"aiFunctions.h"

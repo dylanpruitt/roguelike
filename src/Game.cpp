@@ -30,7 +30,7 @@ void Game::battle (Entity &player, Entity &enemy) {
         int choice = -1; bool looping = true;
 
         while (looping) {
-            std::cin >> choice;
+            choice = utilityFunctions::getIntegerInput ();
 
             if (choice >= 0 && choice < 3) { looping = false; }
 
@@ -203,7 +203,7 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.skillset [0] = &gameSkills [2];
         entity.skillset [1] = &gameSkills [1];
 
-        entity.rewardSkill = &gameSkills [6];
+        entity.rewardSkill = &gameSkills [2];
 
         entity.ai = aiFunctions::spore_flower;
     }
@@ -301,7 +301,7 @@ void Game::replaceSkill (Entity &player, Skill *rewardSkill) {
 
         }
 
-        std::cin >> choice;
+        choice = utilityFunctions::getIntegerInput ();
 
         if (choice >= 0 && choice < 3) { looping = false; }
     }
@@ -439,7 +439,7 @@ void Game::loop (Entity &player) {
         std::cout << player.name << " HP " << player.health << " / " << player.maxHealth << " - " << player.gold << " G" << std::endl;
         displayRoomChoices (roomIndex);
 
-        int choice = -1; std::cin >> choice;
+        int choice = -1; choice = utilityFunctions::getIntegerInput ();
 
         if (roomIndex == 0) { roomIndex = choice;
         } else if (roomIndex >= 10 && roomIndex <= 12) { roomIndex = 13;
@@ -478,7 +478,7 @@ void Game::shop (Entity &player, int roomIndex) {
         std::cout << "SHOP\n[1] Buy Skill " << floorMap [roomIndex].skillReward.name << " - " << floorMap [roomIndex].priceOfSkill << std::endl;
         std::cout << "[2] Heal " << (player.maxHealth / 2) << " HP - " << floorMap [roomIndex].priceOfHeal << std::endl;
         std::cout << "[3] Exit" << std::endl;
-        int choice = 0; std::cin >> choice;
+        int choice = 0; choice = utilityFunctions::getIntegerInput ();
 
         if (choice == 1) {
             if (player.gold >= floorMap [roomIndex].priceOfSkill) {

@@ -452,6 +452,12 @@ void Game::loop (Entity &player) {
 
     }
 
+    if (player.health <= 0) {
+        std::cout << "You died..." << std::endl;
+        std::cin.get ();
+
+    }
+
 }
 
 void Game::executeRoomLogic (Entity &player, int roomIndex) {

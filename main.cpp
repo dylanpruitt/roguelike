@@ -12,6 +12,8 @@ int main()
     std::cout << "Enter a seed (number): ";
     int seed = 0; seed = utilityFunctions::getIntegerInput ();
     game.generateFloor (seed);
+    std::cout << "Name your player: ";
+    std::cin >> player.name;
     game.displayPaths ();
     game.loop (player);
     return 0;

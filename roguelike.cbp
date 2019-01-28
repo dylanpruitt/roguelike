@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="roguelike" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/roguelike" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/roguelike" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="include/Entity.h" />
+		<Unit filename="include/Game.h" />
+		<Unit filename="include/Power.h" />
+		<Unit filename="include/Room.h" />
+		<Unit filename="include/Skill.h" />
+		<Unit filename="include/Status.h" />
+		<Unit filename="include/aiFunctions.h" />
+		<Unit filename="include/powerFunctions.h" />
+		<Unit filename="include/skillFunctions.h" />
+		<Unit filename="include/statusFunctions.h" />
+		<Unit filename="include/utilityFunctions.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/aiFunctions.cpp" />
+		<Unit filename="src/powerFunctions.cpp" />
+		<Unit filename="src/skillFunctions.cpp" />
+		<Unit filename="src/statusFunctions.cpp" />
+		<Unit filename="src/utilityFunctions.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

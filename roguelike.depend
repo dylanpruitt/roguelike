@@ -1,0 +1,83 @@
+# depslib dependency file v1.0
+1548717317 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\skillfunctions.cpp
+	"SkillFunctions.h"
+	<iostream>
+	"statusFunctions.h"
+	"utilityFunctions.h"
+
+1548646668 c:\users\dylan\documents\programming projects 2019\roguelike\include\skillfunctions.h
+	"Entity.h"
+	"Status.h"
+
+1548619813 c:\users\dylan\documents\programming projects 2019\roguelike\include\entity.h
+	<string>
+	<vector>
+
+1548717440 c:\users\dylan\documents\programming projects 2019\roguelike\include\utilityfunctions.h
+	"Skill.h"
+
+1548543464 c:\users\dylan\documents\programming projects 2019\roguelike\include\skill.h
+	<string>
+	"Entity.h"
+
+1548554586 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\utilityfunctions.cpp
+	"utilityFunctions.h"
+	<stdlib.h>
+	<time.h>
+	<iostream>
+
+1548717368 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\game.cpp
+	"Game.h"
+	"Status.h"
+	"aiFunctions.h"
+	"powerFunctions.h"
+	"skillFunctions.h"
+	"utilityFunctions.h"
+	<iostream>
+	<time.h>
+
+1548716873 c:\users\dylan\documents\programming projects 2019\roguelike\include\game.h
+	<vector>
+	"Room.h"
+	"Power.h"
+
+1548622286 source:c:\users\dylan\documents\programming projects 2019\roguelike\main.cpp
+	<iostream>
+	"Game.h"
+	"skillFunctions.h"
+
+1548677055 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\aifunctions.cpp
+	"aiFunctions.h"
+
+1548646639 c:\users\dylan\documents\programming projects 2019\roguelike\include\aifunctions.h
+	"Entity.h"
+	"Skill.h"
+
+1548553769 c:\users\dylan\documents\programming projects 2019\roguelike\include\room.h
+	"Skill.h"
+
+1548676959 c:\users\dylan\documents\programming projects 2019\roguelike\include\status.h
+	"Skill.h"
+
+1548622752 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\powerfunctions.cpp
+	"powerFunctions.h"
+	<iostream>
+
+1548622469 c:\users\dylan\documents\programming projects 2019\roguelike\include\powerfunctions.h
+	"Skill.h"
+
+1548617247 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\statusfunctions.cpp
+	"statusFunctions.h"
+
+1548617287 c:\users\dylan\documents\programming projects 2019\roguelike\include\statusfunctions.h
+	"Status.h"
+
+1548619881 c:\users\dylan\documents\programming projects 2019\roguelike\include\power.h
+	"Entity.h"
+
+1548717278 c:\users\dylan\documents\programming projects 2019\roguelike\include\gamedatastructures.h
+	"statusFunctions.h"
+
+1548717055 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\gamedatastructures.cpp
+	"gameDataStructures.h"
+

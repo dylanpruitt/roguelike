@@ -22,6 +22,8 @@ namespace aiFunctions
 
     void brute (Entity &user, Entity &target, int turnCounter);
 
+    void bowman (Entity &user, Entity &target, int turnCounter);
+
     void wither (Entity &user, Entity &target, int turnCounter);
 };
 

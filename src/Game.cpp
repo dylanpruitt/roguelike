@@ -100,6 +100,8 @@ void Game::initializeSkills () {
 
     Skill guardBreak; guardBreak.name = "Guard Break"; guardBreak.use = skillFunctions::guard_break; gameSkills.push_back (guardBreak);
 
+    Skill arrow; arrow.name = "Arrow"; arrow.use = skillFunctions::arrow; gameSkills.push_back (arrow);
+
 }
 
 void Game::initializePowers () {
@@ -225,6 +227,20 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.powers.push_back (&gamePowers [1]);
         entity.ai = aiFunctions::brute;
     }
+    if (name == "Bowman") {
+        entity.health = 19;
+        entity.maxHealth = 19;
+        entity.name = "Bowman";
+
+        entity.gold = utilityFunctions::random (16, 22);
+
+        entity.skillset [0] = &gameSkills [8];
+        entity.skillset [1] = &gameSkills [3];
+
+        entity.rewardSkill = &gameSkills [8];
+
+        entity.ai = aiFunctions::bowman;
+    }
     if (name == "Artifact") {
         entity.health = 36;
         entity.maxHealth = 36;
@@ -285,43 +301,112 @@ void Game::replaceSkill (Entity &player, Skill *rewardSkill) {
 
 }
 
-void Game::generateFloor (int seed) {
+void Game::generateMap (int seed) {
+    for (int i = 0; i < 10; i++) {
+        dungeon [i] = generateFloor (seed, i + 1);
 
+    }
+}
+
+Floor Game::generateFloor (int seed, int floorNumber) {
+
+    Floor floor;
     Room startingPoint; startingPoint.roomType = "start";
 
-    floorMap [0] = startingPoint;
+    floor.floorMap [0] = startingPoint;
 
     for (int i = 0; i < 12; i++) { srand (seed*i);
 
-        floorMap [1+i] = generateRoom ();
+        floor.floorMap [1+i] = generateRoom (floorNumber);
 
     }
 
-    Room midBoss; midBoss.roomType = "enemy"; midBoss.entityInRoom = returnEntityFromName ("Artifact");
+    Room midBoss; midBoss.roomType = "enemy"; midBoss.entityInRoom = returnEntityFromName ("Bowman");
 
-    floorMap [13] = midBoss;
+    floor.floorMap [13] = midBoss;
 
     for (int i = 0; i < 12; i++) {  srand (seed*i);
 
 
-        floorMap [14+i] = generateRoom ();
+        floor.floorMap [14+i] = generateRoom (floorNumber);
 
     }
 
-    Room boss; boss.roomType = "enemy"; boss.entityInRoom = returnEntityFromName ("Wither");
+    Room boss; boss.roomType = "enemy"; boss.entityInRoom = returnEntityFromName ("Blue Slime");
 
-    floorMap [26] = boss;
+    floor.floorMap [26] = boss;
 
+    int index = utilityFunctions::random (0, gamePowers.size () - 1);
+    floor.powerReward = gamePowers [index];
+
+    return floor;
 }
 
-Room Game::generateRoom () {
+Room Game::generateRoom (int floorNumber) {
     int random = utilityFunctions::random (1, 100); Room room;
 
     if (random >= 40) {
-        const int AMOUNT_OF_ENEMIES = 8;
-        std::string enemyNames [AMOUNT_OF_ENEMIES] = {"Rock", "Thornbush", "Slime", "Shield Warrior", "Vampire","Brute","Blue Slime","Artifact"};
+        std::vector <std::string> enemyNames;
 
-        int index = utilityFunctions::random (0, AMOUNT_OF_ENEMIES - 1);
+        switch (floorNumber) {
+            case 1: {
+                enemyNames.push_back ("Rock");
+                enemyNames.push_back ("Slime");
+                enemyNames.push_back ("Shield Warrior");
+                enemyNames.push_back ("Vampire");
+
+            } break;
+            case 2: {
+                enemyNames.push_back ("Vampire");
+                enemyNames.push_back ("Thornbush");
+                enemyNames.push_back ("Rock");
+
+            } break;
+            case 3: {
+                enemyNames.push_back ("Vampire");
+                enemyNames.push_back ("Thornbush");
+                enemyNames.push_back ("Rock");
+                enemyNames.push_back ("Brute");
+                enemyNames.push_back ("Blue Slime");
+
+            } break;
+            case 4: {
+                enemyNames.push_back ("Rock");
+                enemyNames.push_back ("Brute");
+                enemyNames.push_back ("Blue Slime");
+
+            } break;
+            case 5: {
+                enemyNames.push_back ("Rock");
+                enemyNames.push_back ("Brute");
+                enemyNames.push_back ("Blue Slime");
+
+            } break;
+            case 6: {
+                enemyNames.push_back ("Rock");
+                enemyNames.push_back ("Brute");
+                enemyNames.push_back ("Blue Slime");
+
+            } break;
+            case 7: {
+                enemyNames.push_back ("Rock");
+
+            } break;
+            case 8: {
+                enemyNames.push_back ("Rock");
+
+            } break;
+            case 9: {
+                enemyNames.push_back ("Rock");
+
+            } break;
+            case 10: {
+                enemyNames.push_back ("Rock");
+
+            } break;
+        }
+
+        int index = utilityFunctions::random (0, enemyNames.size () - 1);
 
         room.entityInRoom = returnEntityFromName (enemyNames [index]); room.roomType = "enemy";
 
@@ -345,71 +430,101 @@ Room Game::generateRoom () {
 void Game::displayRoomChoices (int roomIndex) {
     const int START = 0, MIDBOSS = 13, BOSS = 26;
     if (roomIndex == START) {
-        std::cout << "[1] " << floorMap [1].roomType << std::endl;
-        std::cout << "[2] " << floorMap [2].roomType << std::endl;
-        std::cout << "[3] " << floorMap [3].roomType << std::endl;
+        std::cout << "[1] " << dungeon [floor - 1].floorMap [1].roomType << std::endl;
+        std::cout << "[2] " << dungeon [floor - 1].floorMap [2].roomType << std::endl;
+        std::cout << "[3] " << dungeon [floor - 1].floorMap [3].roomType << std::endl;
     } else if (roomIndex >= 10 && roomIndex <= 12) {
         std::cout << "[1] Midboss" << std::endl;
     } else if (roomIndex == MIDBOSS) {
-        std::cout << "[1] " << floorMap [14].roomType << std::endl;
-        std::cout << "[2] " << floorMap [15].roomType << std::endl;
-        std::cout << "[3] " << floorMap [16].roomType << std::endl;
+        std::cout << "[1] " << dungeon [floor - 1].floorMap [14].roomType << std::endl;
+        std::cout << "[2] " << dungeon [floor - 1].floorMap [15].roomType << std::endl;
+        std::cout << "[3] " << dungeon [floor - 1].floorMap [16].roomType << std::endl;
     } else if (roomIndex >= 23 && roomIndex <= 25) {
         std::cout << "[1] Floor boss" << std::endl;
     } else if (roomIndex < BOSS) {
-        std::cout << "[1] " << floorMap [roomIndex+3].roomType << std::endl;
+        std::cout << "[1] " << dungeon [floor - 1].floorMap [roomIndex+3].roomType << std::endl;
     }
 }
 
 void Game::displayPaths () {
 
     std::cout << "Path 1: ";
-    for (unsigned int i = 0; i < 4; i++) { std::cout << floorMap [1 + i*3].roomType;
-        if (floorMap [1 + i*3].roomType == "enemy") {
-            std::cout << " - " << floorMap [1 + i*3].entityInRoom.name;
+    for (unsigned int i = 0; i < 4; i++) { std::cout << dungeon [floor - 1].floorMap [1 + i*3].roomType;
+        if (dungeon [floor - 1].floorMap [1 + i*3].roomType == "enemy") {
+            std::cout << " - " << dungeon [floor - 1].floorMap [1 + i*3].entityInRoom.name;
         }
         std::cout << ", ";
     }
-    std::cout << floorMap [13].roomType << ", ";
-    for (unsigned int i = 0; i < 4; i++) { std::cout << floorMap [14 + i*3].roomType;
-        if (floorMap [14 + i*3].roomType == "enemy") {
-            std::cout << " - " << floorMap [14 + i*3].entityInRoom.name;
+    std::cout << dungeon [floor - 1].floorMap [13].roomType << ", ";
+    for (unsigned int i = 0; i < 4; i++) { std::cout << dungeon [floor - 1].floorMap [14 + i*3].roomType;
+        if (dungeon [floor - 1].floorMap [14 + i*3].roomType == "enemy") {
+            std::cout << " - " << dungeon [floor - 1].floorMap [14 + i*3].entityInRoom.name;
         }
         std::cout << ", ";
     }
-    std::cout << floorMap [26].roomType << std::endl;
+    std::cout << dungeon [floor - 1].floorMap [26].roomType << std::endl;
 
     std::cout << "Path 2: ";
-    for (unsigned int i = 0; i < 4; i++) { std::cout << floorMap [2 + i*3].roomType;
-        if (floorMap [2 + i*3].roomType == "enemy") {
-            std::cout << " - " << floorMap [2 + i*3].entityInRoom.name;
+    for (unsigned int i = 0; i < 4; i++) { std::cout << dungeon [floor - 1].floorMap [2 + i*3].roomType;
+        if (dungeon [floor - 1].floorMap [2 + i*3].roomType == "enemy") {
+            std::cout << " - " << dungeon [floor - 1].floorMap [2 + i*3].entityInRoom.name;
         }
         std::cout << ", ";
     }
-    std::cout << floorMap [13].roomType << ", ";
-    for (unsigned int i = 0; i < 4; i++) { std::cout << floorMap [15 + i*3].roomType;
-        if (floorMap [15 + i*3].roomType == "enemy") {
-            std::cout << " - " << floorMap [15 + i*3].entityInRoom.name;
+    std::cout << dungeon [floor - 1].floorMap [13].roomType << ", ";
+    for (unsigned int i = 0; i < 4; i++) { std::cout << dungeon [floor - 1].floorMap [15 + i*3].roomType;
+        if (dungeon [floor - 1].floorMap [15 + i*3].roomType == "enemy") {
+            std::cout << " - " << dungeon [floor - 1].floorMap [15 + i*3].entityInRoom.name;
         }
         std::cout << ", ";
     }
-    std::cout << floorMap [26].roomType << std::endl;
+    std::cout << dungeon [floor - 1].floorMap [26].roomType << std::endl;
 
     std::cout << "Path 3: ";
-    for (unsigned int i = 0; i < 4; i++) { std::cout << floorMap [3 + i*3].roomType;
-        if (floorMap [3 + i*3].roomType == "enemy") {
-            std::cout << " - " << floorMap [3 + i*3].entityInRoom.name;
+    for (unsigned int i = 0; i < 4; i++) { std::cout << dungeon [floor - 1].floorMap [3 + i*3].roomType;
+        if (dungeon [floor - 1].floorMap [3 + i*3].roomType == "enemy") {
+            std::cout << " - " << dungeon [floor - 1].floorMap [3 + i*3].entityInRoom.name;
         }
         std::cout << ", ";
     }
-    std::cout << floorMap [13].roomType << ", ";
-    for (unsigned int i = 0; i < 4; i++) { std::cout << floorMap [16 + i*3].roomType;
-        if (floorMap [16 + i*3].roomType == "enemy") {
-            std::cout << " - " << floorMap [16 + i*3].entityInRoom.name;
+    std::cout << dungeon [floor - 1].floorMap [13].roomType << ", ";
+    for (unsigned int i = 0; i < 4; i++) { std::cout << dungeon [floor - 1].floorMap [16 + i*3].roomType;
+        if (dungeon [floor - 1].floorMap [16 + i*3].roomType == "enemy") {
+            std::cout << " - " << dungeon [floor - 1].floorMap [16 + i*3].entityInRoom.name;
         }
         std::cout << ", ";
     }
-    std::cout << floorMap [26].roomType << std::endl;
+    std::cout << dungeon [floor - 1].floorMap [26].roomType << std::endl;
+}
+
+void Game::rewardPower (Entity &player) {
+    int option_one, option_two, option_three;
+
+    int index = utilityFunctions::random (0, gamePowers.size () - 1);
+    option_one = index;
+
+    index = utilityFunctions::random (0, gamePowers.size () - 1);
+    option_two = index;
+
+    index = utilityFunctions::random (0, gamePowers.size () - 1);
+    option_three = index;
+
+    std::cout << "Choose a power: \n[1] " << gamePowers [option_one].name << "\n[2] " << gamePowers [option_two].name
+        << "\n[3] " << gamePowers [option_three].name << std::endl;
+    int choice = 1;
+    choice = utilityFunctions::getIntegerInput ();
+
+    switch (choice) {
+        case 1: {
+            player.powers.push_back (&gamePowers [option_one]);
+        } break;
+        case 2: {
+            player.powers.push_back (&gamePowers [option_two]);
+        } break;
+        case 3: {
+            player.powers.push_back (&gamePowers [option_three]);
+        } break;
+    }
 }
 
 void Game::loop (Entity &player) {
@@ -424,12 +539,14 @@ void Game::loop (Entity &player) {
         if (roomIndex == 0) { roomIndex = choice;
         } else if (roomIndex >= 10 && roomIndex <= 12) { roomIndex = 13;
         } else if (roomIndex >= 23 && roomIndex <= 25) { roomIndex = 26;
+        } else if (roomIndex == 13) { roomIndex = choice + 13;
         } else {
             roomIndex += 3;
         }
 
         executeRoomLogic (player, roomIndex);
 
+        if (roomIndex == 26) { roomIndex = 0; floor++; std::cout << "You made it to floor " << floor << "!" << std::endl; std::cin.get (); rewardPower (player); }
     }
 
     if (player.health <= 0) {
@@ -441,18 +558,18 @@ void Game::loop (Entity &player) {
 }
 
 void Game::executeRoomLogic (Entity &player, int roomIndex) {
-    if (floorMap [roomIndex].roomType == "enemy") {
-        battle (player, floorMap [roomIndex].entityInRoom);
+    if (dungeon [floor - 1].floorMap [roomIndex].roomType == "enemy") {
+        battle (player, dungeon [floor - 1].floorMap [roomIndex].entityInRoom);
 
-    } else if (floorMap [roomIndex].roomType == "shop") {
+    } else if (dungeon [floor - 1].floorMap [roomIndex].roomType == "shop") {
         shop (player, roomIndex);
 
-    } else if (floorMap [roomIndex].roomType == "skillreward") {
+    } else if (dungeon [floor - 1].floorMap [roomIndex].roomType == "skillreward") {
         std::cout << "You find an ancient text that teaches you a skill." << std::endl;
-        replaceSkill (player, &floorMap [roomIndex].skillReward);
+        replaceSkill (player, &dungeon [floor - 1].floorMap [roomIndex].skillReward);
     } else {
         std::cout << "You found a chest of gold!" << std::endl;
-        player.gold += floorMap [roomIndex].goldReward;
+        player.gold += dungeon [floor - 1].floorMap [roomIndex].goldReward;
     }
 }
 
@@ -461,15 +578,16 @@ void Game::shop (Entity &player, int roomIndex) {
     bool looping = true;
     while (looping) {
 
-        std::cout << "SHOP\n[1] Buy Skill " << floorMap [roomIndex].skillReward.name << " - " << floorMap [roomIndex].priceOfSkill << std::endl;
-        std::cout << "[2] Heal " << (player.maxHealth / 2) << " HP - " << floorMap [roomIndex].priceOfHeal << std::endl;
+        std::cout << "SHOP\n[1] Buy Skill " << dungeon [floor - 1].floorMap [roomIndex].skillReward.name << " - "
+            << dungeon [floor - 1].floorMap [roomIndex].priceOfSkill << std::endl;
+        std::cout << "[2] Heal " << (player.maxHealth / 2) << " HP - " << dungeon [floor - 1].floorMap [roomIndex].priceOfHeal << std::endl;
         std::cout << "[3] Exit" << std::endl;
         int choice = 0; choice = utilityFunctions::getIntegerInput ();
 
         if (choice == 1) {
-            if (player.gold >= floorMap [roomIndex].priceOfSkill) {
-                player.gold -= floorMap [roomIndex].priceOfSkill;
-                replaceSkill (player, &floorMap [roomIndex].skillReward);
+            if (player.gold >= dungeon [floor - 1].floorMap [roomIndex].priceOfSkill) {
+                player.gold -= dungeon [floor - 1].floorMap [roomIndex].priceOfSkill;
+                replaceSkill (player, &dungeon [floor - 1].floorMap [roomIndex].skillReward);
 
             } else {
                 std::cout << "Not enough money!" << std::endl;
@@ -477,8 +595,8 @@ void Game::shop (Entity &player, int roomIndex) {
 
         }
         if (choice == 2) {
-            if (player.gold >= floorMap [roomIndex].priceOfHeal) {
-                player.gold -= floorMap [roomIndex].priceOfHeal;
+            if (player.gold >= dungeon [floor - 1].floorMap [roomIndex].priceOfHeal) {
+                player.gold -= dungeon [floor - 1].floorMap [roomIndex].priceOfHeal;
                 player.health += (player.maxHealth / 2); if (player.health > player.maxHealth) { player.health = player.maxHealth; }
 
             } else {

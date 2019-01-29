@@ -1,4 +1,5 @@
 #include "aiFunctions.h"
+#include "utilityFunctions.h"
 
 void aiFunctions::slime (Entity &user, Entity &target, int turnCounter) {
     const int ATTACK = 0, DONOTHING = 1; int offset = 1;
@@ -107,6 +108,19 @@ void aiFunctions::brute (Entity &user, Entity &target, int turnCounter) {
     const int ATTACK = 0, DEFEND = 1;
 
     if ((turnCounter+1) % 3 != DEFEND) {
+        user.skillset [ATTACK]->use (user, target);
+    } else {
+        user.skillset [DEFEND]->use (user, target);
+    }
+
+}
+
+void aiFunctions::bowman (Entity &user, Entity &target, int turnCounter) {
+    const int ATTACK = 0, DEFEND = 1, ATTACK_CHANCE = 75;
+
+    int random = utilityFunctions::random (1,100);
+
+    if (random < ATTACK_CHANCE) {
         user.skillset [ATTACK]->use (user, target);
     } else {
         user.skillset [DEFEND]->use (user, target);

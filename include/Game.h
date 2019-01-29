@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <vector>
-#include "Room.h"
+#include "Floor.h"
 #include "Power.h"
 
 class Game
@@ -22,7 +22,7 @@ class Game
 
         void replaceSkill (Entity &player, Skill *rewardSkill);
 
-        void generateFloor (int seed);
+        void generateMap (int seed);
 
         void displayRoomChoices (int roomIndex);
 
@@ -30,18 +30,24 @@ class Game
 
         void displayPaths ();
 
+        void rewardPower (Entity &player);
+
         std::vector <Skill> gameSkills;
 
         std::vector <Power> gamePowers;
 
     private:
-        Room floorMap [27];
+        Floor dungeon [10];
 
         void executeRoomLogic (Entity &player, int roomIndex);
 
         void shop (Entity &player, int roomIndex);
 
-        Room generateRoom ();
+        Room generateRoom (int floorNumber);
+
+        Floor generateFloor (int seed, int floorNumber);
+
+        int floor = 1;
 };
 
 #endif // GAME_H

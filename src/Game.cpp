@@ -368,15 +368,20 @@ Room Game::generateRoom () {
 }
 
 void Game::displayRoomChoices (int roomIndex) {
+    const int START = 0, MIDBOSS = 13, BOSS = 26;
     if (roomIndex == 0) {
         std::cout << "[1] " << floorMap [1].roomType << std::endl;
         std::cout << "[2] " << floorMap [2].roomType << std::endl;
         std::cout << "[3] " << floorMap [3].roomType << std::endl;
     } else if (roomIndex >= 10 && roomIndex <= 12) {
         std::cout << "[1] Midboss" << std::endl;
+    } else if (roomIndex == MIDBOSS) {
+        std::cout << "[1] " << floorMap [14].roomType << std::endl;
+        std::cout << "[2] " << floorMap [15].roomType << std::endl;
+        std::cout << "[3] " << floorMap [16].roomType << std::endl;
     } else if (roomIndex >= 23 && roomIndex <= 25) {
         std::cout << "[1] Floor boss" << std::endl;
-    } else if (roomIndex < 26) {
+    } else if (roomIndex < BOSS) {
         std::cout << "[1] " << floorMap [roomIndex+3].roomType << std::endl;
     }
 }

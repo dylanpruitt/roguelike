@@ -102,6 +102,10 @@ void Game::initializeSkills () {
 
     Skill arrow; arrow.name = "Arrow"; arrow.use = skillFunctions::arrow; gameSkills.push_back (arrow);
 
+    Skill shieldSwipe; shieldSwipe.name = "Shield Swipe"; shieldSwipe.use = skillFunctions::shield_swipe; gameSkills.push_back (shieldSwipe);
+
+    Skill tripleAttack; tripleAttack.name = "Triple Attack"; tripleAttack.use = skillFunctions::triple_attack; gameSkills.push_back (tripleAttack);
+
 }
 
 void Game::initializePowers () {
@@ -139,6 +143,20 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.rewardSkill = &gameSkills [1];
 
         entity.ai = aiFunctions::slime;
+    }
+    if (name == "Wisp") {
+        entity.health = 14;
+        entity.maxHealth = 14;
+        entity.name = "Wisp";
+
+        entity.gold = utilityFunctions::random (11, 17);
+
+        entity.skillset [0] = &gameSkills [6];
+        entity.skillset [1] = &gameSkills [1];
+
+        entity.rewardSkill = &gameSkills [6];
+
+        entity.ai = aiFunctions::wisp;
     }
     if (name == "Blue Slime") {
         entity.health = 17;
@@ -241,12 +259,42 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.ai = aiFunctions::bowman;
     }
+    if (name == "Crusader") {
+        entity.health = 27;
+        entity.maxHealth = 27;
+        entity.name = "Crusader";
+
+        entity.gold = utilityFunctions::random (26, 38);
+
+        entity.skillset [0] = &gameSkills [9];
+        entity.skillset [1] = &gameSkills [3];
+        entity.skillset [2] = &gameSkills [0];
+
+        entity.rewardSkill = &gameSkills [9];
+
+        entity.ai = aiFunctions::crusader;
+    }
+    if (name == "Minotaur") {
+        entity.health = 30;
+        entity.maxHealth = 30;
+        entity.name = "Minotaur";
+
+        entity.gold = utilityFunctions::random (28, 36);
+
+        entity.skillset [0] = &gameSkills [10];
+        entity.skillset [1] = &gameSkills [0];
+
+        entity.rewardSkill = &gameSkills [10];
+
+        entity.powers.push_back (&gamePowers [0]);
+        entity.ai = aiFunctions::minotaur;
+    }
     if (name == "Artifact") {
         entity.health = 36;
         entity.maxHealth = 36;
         entity.name = "Artifact";
 
-        entity.gold = utilityFunctions::random (5, 28);
+        entity.gold = utilityFunctions::random (26, 48);
 
         entity.skillset [0] = &gameSkills [1];
         entity.skillset [1] = &gameSkills [3];
@@ -354,12 +402,13 @@ Room Game::generateRoom (int floorNumber) {
                 enemyNames.push_back ("Slime");
                 enemyNames.push_back ("Shield Warrior");
                 enemyNames.push_back ("Vampire");
-
+                enemyNames.push_back ("Wisp");
             } break;
             case 2: {
                 enemyNames.push_back ("Vampire");
                 enemyNames.push_back ("Thornbush");
                 enemyNames.push_back ("Rock");
+                enemyNames.push_back ("Crusader");
 
             } break;
             case 3: {
@@ -368,18 +417,22 @@ Room Game::generateRoom (int floorNumber) {
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Brute");
                 enemyNames.push_back ("Blue Slime");
+                enemyNames.push_back ("Minotaur");
 
             } break;
             case 4: {
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Brute");
                 enemyNames.push_back ("Blue Slime");
+                enemyNames.push_back ("Crusader");
+                enemyNames.push_back ("Minotaur");
 
             } break;
             case 5: {
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Brute");
                 enemyNames.push_back ("Blue Slime");
+                enemyNames.push_back ("Minotaur");
 
             } break;
             case 6: {
@@ -511,8 +564,11 @@ void Game::rewardPower (Entity &player) {
 
     std::cout << "Choose a power: \n[1] " << gamePowers [option_one].name << "\n[2] " << gamePowers [option_two].name
         << "\n[3] " << gamePowers [option_three].name << std::endl;
-    int choice = 1;
-    choice = utilityFunctions::getIntegerInput ();
+    int choice = 0;
+
+    while (choice < 1 || choice > 3) {
+        choice = utilityFunctions::getIntegerInput ();
+    }
 
     switch (choice) {
         case 1: {
@@ -532,6 +588,7 @@ void Game::loop (Entity &player) {
 
     while (player.health > 0) {
         std::cout << player.name << " HP " << player.health << " / " << player.maxHealth << " - " << player.gold << " G" << std::endl;
+        std::cout << "FLOOR " << floor << std::endl;
         displayRoomChoices (roomIndex);
 
         int choice = -1; choice = utilityFunctions::getIntegerInput ();

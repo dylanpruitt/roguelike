@@ -24,6 +24,10 @@ namespace skillFunctions
 
     void arrow (Entity &user, Entity &target);
 
+    void shield_swipe (Entity &user, Entity &target);
+
+    void triple_attack (Entity &user, Entity &target);
+
     /** BUFFS **/
 
     void defend (Entity &user, Entity &target);

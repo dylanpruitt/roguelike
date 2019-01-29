@@ -9,8 +9,10 @@ void powerFunctions::spike (Entity &user, int turnCounter) {
 }
 
 void powerFunctions::grow_strength (Entity &user, int turnCounter) {
-    user.attack++;
-    std::cout << user.name << "'s strength grew!" << std::endl;
+    if (turnCounter % 2 == 0) {
+        user.attack++;
+        std::cout << user.name << "'s strength grew!" << std::endl;
+    }
 }
 
 void powerFunctions::no_guard (Entity &user, int turnCounter) {

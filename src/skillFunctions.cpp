@@ -169,6 +169,68 @@ void skillFunctions::arrow (Entity &user, Entity &target) {
 
 }
 
+void skillFunctions::shield_swipe (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Shield Swipe on " << target.name << "!" << std::endl;
+
+    int damage = user.attack + 3 - target.guard;
+
+    if (damage >= 0) {
+
+        target.guard = 0;
+        target.health -= damage;
+
+    } else {
+
+        target.guard -= damage;
+
+    }
+
+    user.guard += 3;
+
+    if (damage < 0) { damage = 0; }
+
+    if (utilityFunctions::hasPower (target, "Thorns")) {
+        user.health--;
+
+    }
+
+    std::cout << "The attack dealt " << damage << " damage!" << std::endl;
+
+}
+
+void skillFunctions::triple_attack (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Triple Attack on " << target.name << "!" << std::endl;
+
+    for (int i = 0; i < 3; i++) {
+        int damage = user.attack + 2 - target.guard;
+
+        if (damage >= 0) {
+
+            target.guard = 0;
+            target.health -= damage;
+
+        } else {
+
+            target.guard -= damage;
+
+        }
+
+        if (damage < 0) { damage = 0; }
+
+        if (utilityFunctions::hasPower (target, "Thorns")) {
+            user.health--;
+
+        }
+
+        std::cout << "The attack dealt " << damage << " damage!" << std::endl;
+
+    }
+
+}
+
+
 void skillFunctions::guard_break (Entity &user, Entity &target) {
 
     std::cout << user.name << " used Guard Break on " << target.name << "!" << std::endl;

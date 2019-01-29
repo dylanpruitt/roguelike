@@ -14,6 +14,17 @@ void aiFunctions::slime (Entity &user, Entity &target, int turnCounter) {
 
 }
 
+void aiFunctions::wisp (Entity &user, Entity &target, int turnCounter) {
+    const int ATTACK = 0, HEAL = 1;
+
+    if ((turnCounter+1) % 4 == ATTACK) {
+        user.skillset [ATTACK]->use (user, target);
+    } else {
+        user.skillset [HEAL]->use (user, target);
+    }
+
+}
+
 void aiFunctions::blue_slime (Entity &user, Entity &target, int turnCounter) {
     const int DONOTHING = 0, ATTACK = 1;
 
@@ -124,6 +135,41 @@ void aiFunctions::bowman (Entity &user, Entity &target, int turnCounter) {
         user.skillset [ATTACK]->use (user, target);
     } else {
         user.skillset [DEFEND]->use (user, target);
+    }
+
+}
+
+void aiFunctions::crusader (Entity &user, Entity &target, int turnCounter) {
+    const int ATTACK = 1, DEFEND = 2, RANDOM = 0, DONOTHING = 0;
+
+    switch ((turnCounter+1) % 3) {
+        case ATTACK:
+            user.skillset [ATTACK]->use (user, target);
+            break;
+        case DEFEND:
+            user.skillset [DEFEND]->use (user, target);
+            break;
+        case RANDOM:
+            int random = utilityFunctions::random (1,100);
+            if (random < 33) {
+                user.skillset [ATTACK]->use (user, target);
+            } else if (random < 67) {
+                user.skillset [DEFEND]->use (user, target);
+            } else {
+                user.skillset [DONOTHING]->use (user, target);
+            }
+            break;
+    }
+
+}
+
+void aiFunctions::minotaur (Entity &user, Entity &target, int turnCounter) {
+    const int DONOTHING = 0, ATTACK = 1;
+
+    if ((turnCounter+1) % 3 == DONOTHING) {
+        user.skillset [DONOTHING]->use (user, target);
+    } else {
+        user.skillset [ATTACK]->use (user, target);
     }
 
 }

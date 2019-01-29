@@ -8,6 +8,8 @@ namespace aiFunctions
 
     void slime (Entity &user, Entity &target, int turnCounter);
 
+    void wisp (Entity &user, Entity &target, int turnCounter);
+
     void blue_slime (Entity &user, Entity &target, int turnCounter);
 
     void artifact (Entity &user, Entity &target, int turnCounter);
@@ -23,6 +25,10 @@ namespace aiFunctions
     void brute (Entity &user, Entity &target, int turnCounter);
 
     void bowman (Entity &user, Entity &target, int turnCounter);
+
+    void crusader (Entity &user, Entity &target, int turnCounter);
+
+    void minotaur (Entity &user, Entity &target, int turnCounter);
 
     void wither (Entity &user, Entity &target, int turnCounter);
 };

@@ -12,10 +12,6 @@ class Game
 
         void battle (Entity &player, Entity &enemy);
 
-        void updateStatuses (Entity &entity);
-
-        bool hasStatus (Entity &entity, std::string statusName);
-
         void displayPlayerInformation (Entity &player, Entity &enemy);
 
         void initializeSkills ();

@@ -5,8 +5,6 @@
 
 class Skill;
 
-class Status;
-
 class Power;
 
 class Entity
@@ -32,8 +30,6 @@ class Entity
         Skill *rewardSkill;
 
         std::vector <Power*> powers;
-
-        std::vector <Status*> statuses;
 
         void (*ai)(Entity &user, Entity &target, int turnCounter);
 

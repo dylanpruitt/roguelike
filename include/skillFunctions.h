@@ -18,8 +18,6 @@ namespace skillFunctions
 
     void leech (Entity &user, Entity &target);
 
-    void poison (Entity &user, Entity &target);
-
     void last_resort (Entity &user, Entity &target);
 
     void guard_break (Entity &user, Entity &target);

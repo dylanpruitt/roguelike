@@ -1,4 +1,5 @@
 #include "utilityFunctions.h"
+#include "Power.h"
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
@@ -29,3 +30,16 @@ int utilityFunctions::getIntegerInput () {
     return input;
 
 }
+
+
+bool utilityFunctions::hasPower (Entity &entity, std::string name) {
+    for (unsigned int i = 0; i < entity.powers.size (); i++) {
+        if (entity.powers [i]->name == name) {
+            return true;
+        }
+
+    }
+
+    return false;
+}
+

@@ -48,9 +48,6 @@ void Game::battle (Entity &player, Entity &enemy) {
 
         turnCounter++; player.guard = 0;
 
-        updateStatuses (player);
-        updateStatuses (enemy);
-
     }
 
     if (player.health > 0) {
@@ -61,30 +58,9 @@ void Game::battle (Entity &player, Entity &enemy) {
         player.gold += enemy.gold;
         player.maxHealth++; player.health++;
         player.attack = 0;
-        player.statuses.clear ();
 
     }
 
-}
-
-void Game::updateStatuses (Entity &entity) {
-    for (unsigned int i = 0; i < entity.statuses.size (); i++) {
-        entity.statuses [i]->update (entity, entity.statuses [i]->turnsLeft);
-        if (entity.statuses [i]->turnsLeft <= 0) {
-            entity.statuses.erase (entity.statuses.begin () + i);
-        }
-    }
-}
-
-bool Game::hasStatus (Entity &entity, std::string statusName) {
-    for (unsigned int i = 0; i < entity.statuses.size (); i++) {
-        if (entity.statuses [i]->name == statusName) {
-            return true;
-        }
-
-    }
-
-    return false;
 }
 
 void Game::displayPlayerInformation (Entity &player, Entity &enemy) {
@@ -125,8 +101,6 @@ void Game::initializeSkills () {
 
     Skill last_resort; last_resort.name = "Last Resort"; last_resort.use = skillFunctions::last_resort; gameSkills.push_back (last_resort);
 
-    Skill poison; poison.name = "Poison"; poison.use = skillFunctions::poison; gameSkills.push_back (poison);
-
     Skill restore; restore.name = "Restore"; restore.use = skillFunctions::restore; gameSkills.push_back (restore);
 
     Skill guardBreak; guardBreak.name = "Guard Break"; guardBreak.use = skillFunctions::guard_break; gameSkills.push_back (guardBreak);
@@ -146,6 +120,8 @@ void Game::initializePowers () {
     Power metalBody; metalBody.name = "Metal Body"; metalBody.use = powerFunctions::metal_body; gamePowers.push_back (metalBody);
 
     Power strengthBoost; strengthBoost.name = "Strength Boost"; strengthBoost.use = powerFunctions::strength_boost; gamePowers.push_back (strengthBoost);
+
+    Power spike; spike.name = "Thorns"; spike.use = powerFunctions::spike; gamePowers.push_back (spike);
 
 }
 
@@ -195,10 +171,10 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.ai = aiFunctions::rock;
     }
-    if (name == "Spore Flower") {
+    if (name == "Thornbush") {
         entity.health = 14;
         entity.maxHealth = 14;
-        entity.name = "Spore Flower";
+        entity.name = "Thornbush";
 
         entity.gold = utilityFunctions::random (22, 31);
 
@@ -207,6 +183,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [2];
 
+        entity.powers.push_back (&gamePowers [6]);
         entity.ai = aiFunctions::spore_flower;
     }
     if (name == "Shield Warrior") {
@@ -262,7 +239,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.skillset [0] = &gameSkills [1];
         entity.skillset [1] = &gameSkills [3];
-        entity.skillset [2] = &gameSkills [8];
+        entity.skillset [2] = &gameSkills [7];
 
         entity.rewardSkill = &gameSkills [3];
 
@@ -347,7 +324,7 @@ Room Game::generateRoom () {
 
     if (random >= 40) {
         const int AMOUNT_OF_ENEMIES = 8;
-        std::string enemyNames [AMOUNT_OF_ENEMIES] = {"Rock", "Spore Flower", "Slime", "Shield Warrior", "Vampire","Brute","Blue Slime","Artifact"};
+        std::string enemyNames [AMOUNT_OF_ENEMIES] = {"Rock", "Thornbush", "Slime", "Shield Warrior", "Vampire","Brute","Blue Slime","Artifact"};
 
         int index = utilityFunctions::random (0, AMOUNT_OF_ENEMIES - 1);
 

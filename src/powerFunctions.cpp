@@ -3,6 +3,9 @@
 
 void powerFunctions::spike (Entity &user, int turnCounter) {
     int FIRST_TURN = 1;
+    if (turnCounter == FIRST_TURN) {
+        std::cout << user.name << " becomes surrounded by spikes!" << std::endl;
+    }
 }
 
 void powerFunctions::grow_strength (Entity &user, int turnCounter) {

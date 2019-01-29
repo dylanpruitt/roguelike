@@ -25,6 +25,8 @@ void skillFunctions::dagger (Entity &user, Entity &target) {
 
     }
 
+    if (damage < 0) { damage = 0; }
+
     if (utilityFunctions::hasPower (target, "Thorns")) {
         user.health--;
 
@@ -51,6 +53,8 @@ void skillFunctions::attack (Entity &user, Entity &target) {
 
     }
 
+    if (damage < 0) { damage = 0; }
+
     if (utilityFunctions::hasPower (target, "Thorns")) {
         user.health--;
 
@@ -76,6 +80,8 @@ void skillFunctions::lucky_strike (Entity &user, Entity &target) {
         target.guard -= damage;
 
     }
+
+    if (damage < 0) { damage = 0; }
 
     if (utilityFunctions::hasPower (target, "Thorns")) {
         user.health--;
@@ -104,6 +110,8 @@ void skillFunctions::leech (Entity &user, Entity &target) {
 
     }
 
+    if (damage < 0) { damage = 0; }
+
     if (utilityFunctions::hasPower (target, "Thorns")) {
         user.health--;
 
@@ -130,10 +138,33 @@ void skillFunctions::last_resort (Entity &user, Entity &target) {
 
         }
 
+        if (damage < 0) { damage = 0; }
+
         std::cout << "The attack dealt " << damage << " damage! " << std::endl;
 
     } else {
         std::cout << "Nothing happened!" << std::endl;
+    }
+
+}
+
+void skillFunctions::arrow (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Arrow on " << target.name << "!" << std::endl;
+
+    const int CHANCE = 70; int random = utilityFunctions::random (1, 100);
+
+    if (random < CHANCE) {
+        int damage = user.attack + 2 - target.guard;
+
+        target.health -= damage;
+
+        if (damage < 0) { damage = 0; }
+
+        std::cout << "The attack dealt " << damage << " damage! " << std::endl;
+    } else {
+        std::cout << "But it missed!" << std::endl;
+
     }
 
 }

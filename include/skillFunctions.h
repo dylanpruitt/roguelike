@@ -22,6 +22,8 @@ namespace skillFunctions
 
     void guard_break (Entity &user, Entity &target);
 
+    void arrow (Entity &user, Entity &target);
+
     /** BUFFS **/
 
     void defend (Entity &user, Entity &target);

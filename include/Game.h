@@ -7,7 +7,7 @@
 class Game
 {
     public:
-        Game();
+        Game() { initializePowers (); initializeSkills (); };
         virtual ~Game();
 
         void battle (Entity &player, Entity &enemy);

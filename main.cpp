@@ -5,7 +5,7 @@
 
 int main()
 {
-    Entity player; Game game; game.initializeSkills (); game.initializePowers ();
+    Entity player; Game game;
 
     player.skillset [0] = &game.gameSkills [2]; player.skillset [1] = &game.gameSkills[3]; player.skillset [2] = &game.gameSkills[0];
 

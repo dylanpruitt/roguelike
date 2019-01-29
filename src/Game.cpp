@@ -7,11 +7,6 @@
 #include <iostream>
 #include <time.h>
 
-Game::Game()
-{
-    //ctor
-}
-
 Game::~Game()
 {
     //dtor
@@ -349,7 +344,7 @@ Room Game::generateRoom () {
 
 void Game::displayRoomChoices (int roomIndex) {
     const int START = 0, MIDBOSS = 13, BOSS = 26;
-    if (roomIndex == 0) {
+    if (roomIndex == START) {
         std::cout << "[1] " << floorMap [1].roomType << std::endl;
         std::cout << "[2] " << floorMap [2].roomType << std::endl;
         std::cout << "[3] " << floorMap [3].roomType << std::endl;

@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1548722284 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\skillfunctions.cpp
+1548729234 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\skillfunctions.cpp
 	"SkillFunctions.h"
 	<iostream>
 	"statusFunctions.h"
 	"utilityFunctions.h"
 
-1548722291 c:\users\dylan\documents\programming projects 2019\roguelike\include\skillfunctions.h
+1548729122 c:\users\dylan\documents\programming projects 2019\roguelike\include\skillfunctions.h
 	"Entity.h"
 	"Status.h"
 
@@ -20,14 +20,15 @@
 	<string>
 	"Entity.h"
 
-1548717508 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\utilityfunctions.cpp
+1548722339 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\utilityfunctions.cpp
 	"utilityFunctions.h"
+	"Power.h"
 	<stdlib.h>
 	<time.h>
 	<iostream>
 	<limits>
 
-1548722313 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\game.cpp
+1548730439 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\game.cpp
 	"Game.h"
 	"Status.h"
 	"aiFunctions.h"
@@ -37,12 +38,12 @@
 	<iostream>
 	<time.h>
 
-1548721914 c:\users\dylan\documents\programming projects 2019\roguelike\include\game.h
+1548730412 c:\users\dylan\documents\programming projects 2019\roguelike\include\game.h
 	<vector>
 	"Room.h"
 	"Power.h"
 
-1548718838 source:c:\users\dylan\documents\programming projects 2019\roguelike\main.cpp
+1548730350 source:c:\users\dylan\documents\programming projects 2019\roguelike\main.cpp
 	<iostream>
 	"Game.h"
 	"skillFunctions.h"
@@ -55,7 +56,7 @@
 	"Entity.h"
 	"Skill.h"
 
-1548553769 c:\users\dylan\documents\programming projects 2019\roguelike\include\room.h
+1548730183 c:\users\dylan\documents\programming projects 2019\roguelike\include\room.h
 	"Skill.h"
 
 1548676959 c:\users\dylan\documents\programming projects 2019\roguelike\include\status.h

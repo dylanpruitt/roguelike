@@ -39,18 +39,15 @@
 		<Unit filename="include/Power.h" />
 		<Unit filename="include/Room.h" />
 		<Unit filename="include/Skill.h" />
-		<Unit filename="include/Status.h" />
 		<Unit filename="include/aiFunctions.h" />
 		<Unit filename="include/powerFunctions.h" />
 		<Unit filename="include/skillFunctions.h" />
-		<Unit filename="include/statusFunctions.h" />
 		<Unit filename="include/utilityFunctions.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/aiFunctions.cpp" />
 		<Unit filename="src/powerFunctions.cpp" />
 		<Unit filename="src/skillFunctions.cpp" />
-		<Unit filename="src/statusFunctions.cpp" />
 		<Unit filename="src/utilityFunctions.cpp" />
 		<Extensions>
 			<code_completion />

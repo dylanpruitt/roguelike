@@ -10,6 +10,8 @@ namespace aiFunctions
 
     void blue_slime (Entity &user, Entity &target, int turnCounter);
 
+    void artifact (Entity &user, Entity &target, int turnCounter);
+
     void rock (Entity &user, Entity &target, int turnCounter);
 
     void spore_flower (Entity &user, Entity &target, int turnCounter);

@@ -126,6 +126,17 @@ void skillFunctions::last_resort (Entity &user, Entity &target) {
 
 }
 
+void skillFunctions::guard_break (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Guard Break on " << target.name << "!" << std::endl;
+
+    int damage = target.guard + 1;
+
+    target.health -= damage;
+
+    std::cout << "The attack dealt " << damage << " damage! " << std::endl;
+}
+
 void skillFunctions::defend (Entity &user, Entity &target) {
     std::cout << user.name << " used Defend!" << std::endl;
 

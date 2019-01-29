@@ -22,6 +22,8 @@ namespace skillFunctions
 
     void last_resort (Entity &user, Entity &target);
 
+    void guard_break (Entity &user, Entity &target);
+
     /** BUFFS **/
 
     void defend (Entity &user, Entity &target);

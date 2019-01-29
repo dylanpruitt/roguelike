@@ -129,6 +129,8 @@ void Game::initializeSkills () {
 
     Skill restore; restore.name = "Restore"; restore.use = skillFunctions::restore; gameSkills.push_back (restore);
 
+    Skill guardBreak; guardBreak.name = "Guard Break"; guardBreak.use = skillFunctions::guard_break; gameSkills.push_back (guardBreak);
+
 }
 
 void Game::initializePowers () {
@@ -260,11 +262,12 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.skillset [0] = &gameSkills [1];
         entity.skillset [1] = &gameSkills [3];
+        entity.skillset [2] = &gameSkills [8];
 
         entity.rewardSkill = &gameSkills [3];
 
         entity.powers.push_back (&gamePowers [4]);
-        entity.ai = aiFunctions::slime;
+        entity.ai = aiFunctions::artifact;
     }
     if (name == "Wither") {
         entity.health = 60;

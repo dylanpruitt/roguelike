@@ -24,6 +24,40 @@ void aiFunctions::blue_slime (Entity &user, Entity &target, int turnCounter) {
 
 }
 
+void aiFunctions::artifact (Entity &user, Entity &target, int turnCounter) {
+    const int ATTACK = 0, DEFEND = 1, GUARD_BREAK = 2;
+    int offset = turnCounter / 4;
+
+    switch (offset % 3) {
+        case 0: {
+            if ((turnCounter+1) % 3 != DEFEND) {
+                if (target.guard > 0 && (turnCounter+1) % 2 == 0) {
+                    user.skillset [GUARD_BREAK]->use (user, target);
+                } else {
+                   user.skillset [ATTACK]->use (user, target);
+                }
+            } else {
+                user.skillset [DEFEND]->use (user, target);
+            }
+        } break;
+        case 1: {
+            if ((turnCounter+1) % 3 != ATTACK) {
+                user.skillset [DEFEND]->use (user, target);
+            } else {
+                if (target.guard > 0 && (turnCounter+1) % 2 == 0) {
+                    user.skillset [GUARD_BREAK]->use (user, target);
+                } else {
+                   user.skillset [ATTACK]->use (user, target);
+                };
+            }
+        } break;
+        case 2: {
+            user.skillset [ATTACK]->use (user, target);
+        } break;
+    }
+
+}
+
 void aiFunctions::rock (Entity &user, Entity &target, int turnCounter) {
     const int DO_NOTHING = 0;
 

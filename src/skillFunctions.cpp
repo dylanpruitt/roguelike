@@ -40,7 +40,7 @@ void skillFunctions::attack (Entity &user, Entity &target) {
 
     std::cout << user.name << " used Attack on " << target.name << "!" << std::endl;
 
-    int damage = user.attack + 2 - target.guard;
+    int damage = user.attack + 3 - target.guard;
 
     if (damage >= 0) {
 

@@ -137,7 +137,7 @@ void Game::initializeSkills () {
     doNothing.description = "Do nothing."; gameSkills.push_back (doNothing);
 
     Skill attack; attack.name = "Attack"; attack.use = skillFunctions::attack;
-    attack.description = "A basic attack. Deals 2 base damage."; gameSkills.push_back (attack);
+    attack.description = "A basic attack. Deals 3 base damage."; gameSkills.push_back (attack);
 
     Skill dagger; dagger.name = "Dagger"; dagger.use = skillFunctions::dagger;
     dagger.description = "A basic attack. Deals 5 base damage."; gameSkills.push_back (dagger);
@@ -365,8 +365,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::minotaur;
     }
     if (name == "Artifact") {
-        entity.health = 20;
-        entity.maxHealth = 20;
+        entity.health = 10;
+        entity.maxHealth = 10;
         entity.name = "Artifact";
 
         entity.gold = utilityFunctions::random (26, 48);

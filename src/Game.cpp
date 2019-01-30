@@ -365,8 +365,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::minotaur;
     }
     if (name == "Artifact") {
-        entity.health = 36;
-        entity.maxHealth = 36;
+        entity.health = 20;
+        entity.maxHealth = 20;
         entity.name = "Artifact";
 
         entity.gold = utilityFunctions::random (26, 48);
@@ -724,11 +724,12 @@ void Game::loop (Entity &player) {
 
         executeRoomLogic (player, roomIndex);
 
-        if (roomIndex == 26) { roomIndex = 0; floor++; std::cout << "You made it to floor " << floor << "!" << std::endl; std::cin.get (); rewardPower (player); }
+        if (roomIndex == 26 && player.health > 0) { roomIndex = 0; floor++; std::cout << "You made it to floor " << floor << "!" << std::endl; std::cin.get (); rewardPower (player); }
     }
 
     if (player.health <= 0) {
         std::cout << "You died..." << std::endl;
+        std::cin.get ();
         std::cin.get ();
 
     }

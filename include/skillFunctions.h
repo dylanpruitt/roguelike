@@ -35,6 +35,8 @@ namespace skillFunctions
 
     void absorb (Entity &user, Entity &target);
 
+    void missiles (Entity &user, Entity &target);
+
     /** BUFFS **/
 
     void defend (Entity &user, Entity &target);

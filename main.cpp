@@ -8,7 +8,6 @@ int main()
     Entity player; Game game;
 
     player.skillset [0] = &game.gameSkills [2]; player.skillset [1] = &game.gameSkills[3]; player.skillset [2] = &game.gameSkills[0];
-
     std::cout << "Enter a seed (number): ";
     int seed = 0; seed = utilityFunctions::getIntegerInput ();
     game.generateMap (seed);

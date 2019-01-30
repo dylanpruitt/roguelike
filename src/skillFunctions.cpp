@@ -375,3 +375,39 @@ void skillFunctions::absorb (Entity &user, Entity &target) {
     std::cout << "The attack dealt " << damage << " damage!" << std::endl;
 
 }
+
+
+void skillFunctions::missiles (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Missiles on " << target.name << "!" << std::endl;
+    const int CHANCE = 40;
+
+    for (int i = 0; i < utilityFunctions::random (2, 5); i++) {
+
+        int roll = utilityFunctions::random (1, 100);
+
+        if (roll <= CHANCE) {
+            int damage = user.attack + 1 - target.guard;
+
+            if (damage >= 0) {
+
+                target.guard = 0;
+                target.health -= damage;
+
+            } else {
+
+                target.guard -= damage;
+
+            }
+
+            if (damage < 0) { damage = 0; }
+
+            std::cout << "The attack dealt " << damage << " damage!" << std::endl;
+
+        } else {
+            std::cout << "But it missed!" << std::endl;
+        }
+
+    }
+
+}

@@ -47,6 +47,8 @@ class Game
 
         Floor generateFloor (int seed, int floorNumber);
 
+        void displayCombatantPowers (Entity &player, Entity &enemy);
+
         int floor = 1;
 };
 

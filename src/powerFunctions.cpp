@@ -52,18 +52,18 @@ void powerFunctions::strength_boost (Entity &user, int turnCounter) {
 
 void powerFunctions::ethereal_hourglass (Entity &user, int turnCounter) {
     if (turnCounter % 5 == 0) {
-        user.attack += 5;
+        user.attack += 5; std::cout << user.name << "'s power sharply increases!" << std::endl;
     } else if (turnCounter % 5 == 1 && turnCounter > 1) {
-        user.attack -= 5;
+        user.attack -= 5; std::cout << user.name << "'s power returns to normal!" << std::endl;
     }
 
 }
 
 void powerFunctions::lunar_energy (Entity &user, int turnCounter) {
     if (turnCounter % 6 < 3) {
-        user.attack++;
+        user.attack++; std::cout << user.name << "'s power is growing!" << std::endl;
     } else {
-        user.attack--;
+        user.attack--; std::cout << user.name << "'s power is waning!" << std::endl;
     }
 
 }

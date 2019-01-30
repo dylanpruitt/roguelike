@@ -61,18 +61,7 @@ void Game::battle (Entity &player, Entity &enemy) {
 void Game::displayPlayerInformation (Entity &player, Entity &enemy) {
     std::cout << player.name << " vs. " << enemy.name << std::endl;
     std::cout << "HP " << player.health << " / " << player.maxHealth << " vs. " << enemy.health << " / " << enemy.maxHealth << std::endl;
-    std::cout << "Player Powers: ";
-    for (unsigned int i = 0; i < player.powers.size (); i++) {
-        std::cout << player.powers [i]->name;
-
-        if (i < player.powers.size () - 1) { std::cout << ", "; }
-    }
-    std::cout << "\nEnemy Powers: ";
-    for (unsigned int i = 0; i < enemy.powers.size (); i++) {
-        std::cout << enemy.powers [i]->name;
-
-        if (i < enemy.powers.size () - 1) { std::cout << ", "; }
-    }
+    displayCombatantPowers (player, enemy);
 
     std::cout << "\nPlayer Skills:" << std::endl;
 
@@ -82,8 +71,68 @@ void Game::displayPlayerInformation (Entity &player, Entity &enemy) {
 
 }
 
-void Game::initializeSkills () {
+void Game::displayCombatantPowers (Entity &player, Entity &enemy) {
+    std::cout << "Player Powers: ";
 
+    std::vector <std::string> powers; std::vector <int> powerStacks;
+
+    for (unsigned int i = 0; i < player.powers.size (); i++) {
+
+        bool isStacked = false;
+        for (unsigned int j = 0; j < powers.size (); j++) {
+            if (player.powers [i]->name == powers [j]) {
+                powerStacks [j]++;
+                isStacked = true;
+            }
+
+        }
+
+        if (!isStacked) {
+            powers.push_back (player.powers [i]->name);
+            powerStacks.push_back (1);
+        }
+
+    }
+    for (unsigned int i = 0; i < powers.size (); i++) {
+
+        std::cout << powers [i];
+
+        if (powerStacks [i] > 1) { std::cout << " (" << powerStacks [i] << ")"; }
+
+        if (i < powers.size () - 1) { std::cout << ", "; }
+    }
+
+    powers.clear (); powerStacks.clear ();
+    std::cout << "\nEnemy Powers: ";
+    for (unsigned int i = 0; i < enemy.powers.size (); i++) {
+
+        bool isStacked = false;
+        for (unsigned int j = 0; j < powers.size (); j++) {
+            if (enemy.powers [i]->name == powers [j]) {
+                powerStacks [i]++;
+                isStacked = true;
+            }
+
+        }
+
+        if (!isStacked) {
+            powers.push_back (enemy.powers [i]->name);
+            powerStacks.push_back (1);
+        }
+
+    }
+    for (unsigned int i = 0; i < powers.size (); i++) {
+
+        std::cout << powers [i];
+
+        if (powerStacks [i] > 1) { std::cout << " (" << powerStacks [i] << ")"; }
+
+        if (i < powers.size () - 1) { std::cout << ", "; }
+    }
+}
+
+void Game::initializeSkills () {
+    // 0
     Skill doNothing; doNothing.name = "Do Nothing"; doNothing.use = skillFunctions::do_nothing; gameSkills.push_back (doNothing);
 
     Skill attack; attack.name = "Attack"; attack.use = skillFunctions::attack; gameSkills.push_back (attack);
@@ -91,7 +140,7 @@ void Game::initializeSkills () {
     Skill dagger; dagger.name = "Dagger"; dagger.use = skillFunctions::dagger; gameSkills.push_back (dagger);
 
     Skill defend; defend.name = "Defend"; defend.use = skillFunctions::defend; gameSkills.push_back (defend);
-
+    // 4
     Skill leech; leech.name = "Leech"; leech.use = skillFunctions::leech; gameSkills.push_back (leech);
 
     Skill last_resort; last_resort.name = "Last Resort"; last_resort.use = skillFunctions::last_resort; gameSkills.push_back (last_resort);
@@ -99,7 +148,7 @@ void Game::initializeSkills () {
     Skill restore; restore.name = "Restore"; restore.use = skillFunctions::restore; gameSkills.push_back (restore);
 
     Skill guardBreak; guardBreak.name = "Guard Break"; guardBreak.use = skillFunctions::guard_break; gameSkills.push_back (guardBreak);
-
+    // 8
     Skill arrow; arrow.name = "Arrow"; arrow.use = skillFunctions::arrow; gameSkills.push_back (arrow);
 
     Skill shieldSwipe; shieldSwipe.name = "Shield Swipe"; shieldSwipe.use = skillFunctions::shield_swipe; gameSkills.push_back (shieldSwipe);
@@ -107,10 +156,12 @@ void Game::initializeSkills () {
     Skill tripleAttack; tripleAttack.name = "Triple Attack"; tripleAttack.use = skillFunctions::triple_attack; gameSkills.push_back (tripleAttack);
 
     Skill offering; offering.name = "Offering"; offering.use = skillFunctions::offering; gameSkills.push_back (offering);
-
+    // 12
     Skill explode; explode.name = "Explode"; explode.use = skillFunctions::explode; gameSkills.push_back (explode);
 
     Skill cleave; cleave.name = "Cleave"; cleave.use = skillFunctions::cleave; gameSkills.push_back (cleave);
+
+    Skill missiles; missiles.name = "Missiles"; missiles.use = skillFunctions::missiles; gameSkills.push_back (missiles);
 
 }
 
@@ -168,8 +219,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::wisp;
     }
     if (name == "Blue Slime") {
-        entity.health = 17;
-        entity.maxHealth = 17;
+        entity.health = 27;
+        entity.maxHealth = 27;
         entity.name = "Blue Slime";
 
         entity.gold = utilityFunctions::random (8, 24);
@@ -226,8 +277,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::shieldKnight;
     }
     if (name == "Vampire") {
-        entity.health = 12;
-        entity.maxHealth = 12;
+        entity.health = 22;
+        entity.maxHealth = 22;
         entity.name = "Vampire";
 
         entity.gold = utilityFunctions::random (16, 39);
@@ -240,8 +291,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::vampire;
     }
     if (name == "Brute") {
-        entity.health = 26;
-        entity.maxHealth = 26;
+        entity.health = 36;
+        entity.maxHealth = 36;
         entity.name = "Brute";
 
         entity.gold = utilityFunctions::random (23, 32);
@@ -255,8 +306,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::brute;
     }
     if (name == "Bowman") {
-        entity.health = 19;
-        entity.maxHealth = 19;
+        entity.health = 24;
+        entity.maxHealth = 24;
         entity.name = "Bowman";
 
         entity.gold = utilityFunctions::random (16, 22);
@@ -269,8 +320,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::bowman;
     }
     if (name == "Crusader") {
-        entity.health = 27;
-        entity.maxHealth = 27;
+        entity.health = 30;
+        entity.maxHealth = 30;
         entity.name = "Crusader";
 
         entity.gold = utilityFunctions::random (26, 38);
@@ -313,6 +364,41 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.powers.push_back (&gamePowers [4]);
         entity.ai = aiFunctions::artifact;
+    }
+    if (name == "Werewolf") {
+        entity.health = 52;
+        entity.maxHealth = 52;
+        entity.name = "Werewolf";
+
+        entity.gold = utilityFunctions::random (35, 58);
+
+        entity.skillset [0] = &gameSkills [0];
+        entity.skillset [1] = &gameSkills [7];
+        entity.skillset [2] = &gameSkills [13];
+
+        entity.rewardSkill = &gameSkills [13];
+
+        entity.powers.push_back (&gamePowers [8]);
+        entity.ai = aiFunctions::werewolf;
+    }
+    if (name == "Bramble Fortress") {
+        entity.health = 24;
+        entity.maxHealth = 24;
+        entity.name = "Bramble Fortress";
+
+        entity.gold = utilityFunctions::random (46, 82);
+
+        entity.skillset [0] = &gameSkills [1];
+        entity.skillset [1] = &gameSkills [2];
+        entity.skillset [2] = &gameSkills [14];
+
+
+        entity.rewardSkill = &gameSkills [1];
+
+        entity.powers.push_back (&gamePowers [4]);
+        entity.powers.push_back (&gamePowers [6]);
+        entity.powers.push_back (&gamePowers [6]);
+        entity.ai = aiFunctions::bramble;
     }
     if (name == "Wither") {
         entity.health = 60;
@@ -393,7 +479,13 @@ Floor Game::generateFloor (int seed, int floorNumber) {
 
     switch (floorNumber) {
         case 1: {
-           boss.entityInRoom = returnEntityFromName ("Artifact");
+            boss.entityInRoom = returnEntityFromName ("Artifact");
+        } break;
+        case 2: {
+            boss.entityInRoom = returnEntityFromName ("Bramble Fortress");
+        } break;
+        case 3: {
+            boss.entityInRoom = returnEntityFromName ("Wither");
         } break;
         default: {
            boss.entityInRoom = returnEntityFromName ("Blue Slime");

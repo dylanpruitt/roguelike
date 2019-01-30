@@ -1,5 +1,6 @@
 #include "aiFunctions.h"
 #include "utilityFunctions.h"
+#include <iostream>
 
 void aiFunctions::slime (Entity &user, Entity &target, int turnCounter) {
     const int ATTACK = 0, DONOTHING = 1; int offset = 1;
@@ -170,6 +171,57 @@ void aiFunctions::minotaur (Entity &user, Entity &target, int turnCounter) {
         user.skillset [DONOTHING]->use (user, target);
     } else {
         user.skillset [ATTACK]->use (user, target);
+    }
+
+}
+
+void aiFunctions::werewolf (Entity &user, Entity &target, int turnCounter) {
+    const int DONOTHING = 0, GUARD_BREAK = 1, CLEAVE = 2;
+
+    if (turnCounter % 6 < 3) {
+        if (target.guard > 0) {
+            user.skillset [GUARD_BREAK]->use (user, target);
+        }
+    } else if (turnCounter == 3) {
+        user.skillset [CLEAVE]->use (user, target);
+        std::cout << "Werewolf becomes stronger from lunar energy!" << std::endl;
+        user.attack++;
+    } else {
+        user.skillset [DONOTHING]->use (user, target);
+    }
+
+}
+
+void aiFunctions::bramble (Entity &user, Entity &target, int turnCounter) {
+    const int ATTACK = 1, DAGGER = 2, MISSILES = 0;
+    int phase = 1;
+
+    if (turnCounter % 4 == 0) {
+        phase++;
+    }
+
+    if (phase % 2 == 1) {
+         switch ((turnCounter+1) % 3) {
+            case ATTACK:
+                user.skillset [ATTACK]->use (user, target);
+                break;
+            case DAGGER:
+                user.skillset [DAGGER]->use (user, target);
+                break;
+            case MISSILES:
+                user.skillset [MISSILES]->use (user, target);
+                break;
+        }
+
+    } else {
+        switch ((turnCounter+1) % 4) {
+            case MISSILES:
+                user.skillset [MISSILES]->use (user, target);
+                break;
+            default:
+                user.skillset [ATTACK]->use (user, target);
+                break;
+        }
     }
 
 }

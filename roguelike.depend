@@ -15,7 +15,7 @@
 1548721902 c:\users\dylan\documents\programming projects 2019\roguelike\include\utilityfunctions.h
 	"Skill.h"
 
-1548543464 c:\users\dylan\documents\programming projects 2019\roguelike\include\skill.h
+1548886280 c:\users\dylan\documents\programming projects 2019\roguelike\include\skill.h
 	<string>
 	"Entity.h"
 
@@ -42,7 +42,7 @@
 	"Floor.h"
 	"Power.h"
 
-1548885648 source:c:\users\dylan\documents\programming projects 2019\roguelike\main.cpp
+1548886085 source:c:\users\dylan\documents\programming projects 2019\roguelike\main.cpp
 	<iostream>
 	"Game.h"
 	"skillFunctions.h"

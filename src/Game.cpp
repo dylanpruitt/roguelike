@@ -133,35 +133,50 @@ void Game::displayCombatantPowers (Entity &player, Entity &enemy) {
 
 void Game::initializeSkills () {
     // 0
-    Skill doNothing; doNothing.name = "Do Nothing"; doNothing.use = skillFunctions::do_nothing; gameSkills.push_back (doNothing);
+    Skill doNothing; doNothing.name = "Do Nothing"; doNothing.use = skillFunctions::do_nothing;
+    doNothing.description = "Do nothing."; gameSkills.push_back (doNothing);
 
-    Skill attack; attack.name = "Attack"; attack.use = skillFunctions::attack; gameSkills.push_back (attack);
+    Skill attack; attack.name = "Attack"; attack.use = skillFunctions::attack;
+    attack.description = "A basic attack. Deals 2 base damage."; gameSkills.push_back (attack);
 
-    Skill dagger; dagger.name = "Dagger"; dagger.use = skillFunctions::dagger; gameSkills.push_back (dagger);
+    Skill dagger; dagger.name = "Dagger"; dagger.use = skillFunctions::dagger;
+    dagger.description = "A basic attack. Deals 5 base damage."; gameSkills.push_back (dagger);
 
-    Skill defend; defend.name = "Defend"; defend.use = skillFunctions::defend; gameSkills.push_back (defend);
+    Skill defend; defend.name = "Defend"; defend.use = skillFunctions::defend;
+    defend.description = "Adds 5 guard (you can take 5 damage without losing health). Guard goes away on your next turn."; gameSkills.push_back (defend);
     // 4
-    Skill leech; leech.name = "Leech"; leech.use = skillFunctions::leech; gameSkills.push_back (leech);
+    Skill leech; leech.name = "Leech"; leech.use = skillFunctions::leech;
+    leech.description = "A basic attack. Deals 3 damage and heal some of the damage you inflict."; gameSkills.push_back (leech);
 
-    Skill last_resort; last_resort.name = "Last Resort"; last_resort.use = skillFunctions::last_resort; gameSkills.push_back (last_resort);
+    Skill last_resort; last_resort.name = "Last Resort"; last_resort.use = skillFunctions::last_resort;
+    last_resort.description = "Deals 50 damage if user has 1 health. Otherwise does nothing."; gameSkills.push_back (last_resort);
 
-    Skill restore; restore.name = "Restore"; restore.use = skillFunctions::restore; gameSkills.push_back (restore);
+    Skill restore; restore.name = "Restore"; restore.use = skillFunctions::restore;
+    restore.description = "Restore a fourth of your health."; gameSkills.push_back (restore);
 
-    Skill guardBreak; guardBreak.name = "Guard Break"; guardBreak.use = skillFunctions::guard_break; gameSkills.push_back (guardBreak);
+    Skill guardBreak; guardBreak.name = "Guard Break"; guardBreak.use = skillFunctions::guard_break;
+    guardBreak.description = "Deals damage to guarding enemies."; gameSkills.push_back (guardBreak);
     // 8
-    Skill arrow; arrow.name = "Arrow"; arrow.use = skillFunctions::arrow; gameSkills.push_back (arrow);
+    Skill arrow; arrow.name = "Arrow"; arrow.use = skillFunctions::arrow;
+    arrow.description = "A basic attack, can miss but user does not take damage from Thorns."; gameSkills.push_back (arrow);
 
-    Skill shieldSwipe; shieldSwipe.name = "Shield Swipe"; shieldSwipe.use = skillFunctions::shield_swipe; gameSkills.push_back (shieldSwipe);
+    Skill shieldSwipe; shieldSwipe.name = "Shield Swipe"; shieldSwipe.use = skillFunctions::shield_swipe;
+    shieldSwipe.description = "Gain guard and attack at the same time."; gameSkills.push_back (shieldSwipe);
 
-    Skill tripleAttack; tripleAttack.name = "Triple Attack"; tripleAttack.use = skillFunctions::triple_attack; gameSkills.push_back (tripleAttack);
+    Skill tripleAttack; tripleAttack.name = "Triple Attack"; tripleAttack.use = skillFunctions::triple_attack;
+    tripleAttack.description = "Attack three times."; gameSkills.push_back (tripleAttack);
 
-    Skill offering; offering.name = "Offering"; offering.use = skillFunctions::offering; gameSkills.push_back (offering);
+    Skill offering; offering.name = "Offering"; offering.use = skillFunctions::offering;
+    offering.description = "The user sacrifices some of their health but their attack increases."; gameSkills.push_back (offering);
     // 12
-    Skill explode; explode.name = "Explode"; explode.use = skillFunctions::explode; gameSkills.push_back (explode);
+    Skill explode; explode.name = "Explode"; explode.use = skillFunctions::explode;
+    explode.description = "An attack that does more damage the lower the user's health is."; gameSkills.push_back (explode);
 
-    Skill cleave; cleave.name = "Cleave"; cleave.use = skillFunctions::cleave; gameSkills.push_back (cleave);
+    Skill cleave; cleave.name = "Cleave"; cleave.use = skillFunctions::cleave;
+    cleave.description = "A basic attack. Deals 7 base damage."; gameSkills.push_back (cleave);
 
-    Skill missiles; missiles.name = "Missiles"; missiles.use = skillFunctions::missiles; gameSkills.push_back (missiles);
+    Skill missiles; missiles.name = "Missiles"; missiles.use = skillFunctions::missiles;
+    missiles.description = "Fire off 2 to 5 missiles. The user does not take damage from Thorns."; gameSkills.push_back (missiles);
 
 }
 
@@ -425,14 +440,15 @@ Entity Game::returnEntityFromName (std::string name) {
 
 void Game::replaceSkill (Entity &player, Skill *rewardSkill) {
 
-    std::cout << "Reward Skill: " << rewardSkill->name << "\nChoose a skill to replace." << std::endl;
+    std::cout << "Reward Skill: " << rewardSkill->name << std::endl;
+    std::cout << " -- " << rewardSkill->description << "\nChoose a skill to replace." << std::endl;
 
     bool looping = true; int choice = -1;
 
     while (looping) {
         for (int i = 0; i < 3; i++) {
             std::cout << "[" << i << "] - " << player.skillset [i]->name << std::endl;
-
+            std::cout << " -- " << player.skillset [i]->description << std::endl;
         }
 
         choice = utilityFunctions::getIntegerInput ();
@@ -515,7 +531,7 @@ Room Game::generateRoom (int floorNumber) {
                 enemyNames.push_back ("Wisp");
             } break;
             case 2: {
-                enemyNames.push_back ("Vampire");
+                enemyNames.push_back ("Artifact");
                 enemyNames.push_back ("Thornbush");
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Crusader");
@@ -742,6 +758,7 @@ void Game::shop (Entity &player, int roomIndex) {
 
         std::cout << "SHOP\n[1] Buy Skill " << dungeon [floor - 1].floorMap [roomIndex].skillReward.name << " - "
             << dungeon [floor - 1].floorMap [roomIndex].priceOfSkill << std::endl;
+        std::cout << " -- " << dungeon [floor - 1].floorMap [roomIndex].skillReward.description << std::endl;
         std::cout << "[2] Heal " << (player.maxHealth / 2) << " HP - " << dungeon [floor - 1].floorMap [roomIndex].priceOfHeal << std::endl;
         std::cout << "[3] Exit" << std::endl;
         int choice = 0; choice = utilityFunctions::getIntegerInput ();

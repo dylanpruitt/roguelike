@@ -387,7 +387,7 @@ void skillFunctions::missiles (Entity &user, Entity &target) {
         int roll = utilityFunctions::random (1, 100);
 
         if (roll <= CHANCE) {
-            int damage = user.attack + 1 - target.guard;
+            int damage = user.attack + 2 - target.guard;
 
             if (damage >= 0) {
 

@@ -10,6 +10,7 @@ class Skill
         virtual ~Skill() {};
 
         std::string name;
+        std::string description;
         void (*use)(Entity &user, Entity &target);
 
     protected:

@@ -49,3 +49,12 @@ void powerFunctions::strength_boost (Entity &user, int turnCounter) {
     if (turnCounter == 1) { user.attack += 1; }
 
 }
+
+void powerFunctions::ethereal_hourglass (Entity &user, int turnCounter) {
+    if (turnCounter % 5 == 0) {
+        user.attack += 5;
+    } else if (turnCounter % 5 == 1 && turnCounter > 1) {
+        user.attack -= 5;
+    }
+
+}

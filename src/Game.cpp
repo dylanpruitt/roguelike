@@ -106,6 +106,12 @@ void Game::initializeSkills () {
 
     Skill tripleAttack; tripleAttack.name = "Triple Attack"; tripleAttack.use = skillFunctions::triple_attack; gameSkills.push_back (tripleAttack);
 
+    Skill offering; offering.name = "Offering"; offering.use = skillFunctions::offering; gameSkills.push_back (offering);
+
+    Skill explode; explode.name = "Explode"; explode.use = skillFunctions::explode; gameSkills.push_back (explode);
+
+    Skill cleave; cleave.name = "Cleave"; cleave.use = skillFunctions::cleave; gameSkills.push_back (cleave);
+
 }
 
 void Game::initializePowers () {
@@ -123,6 +129,8 @@ void Game::initializePowers () {
     Power strengthBoost; strengthBoost.name = "Strength Boost"; strengthBoost.use = powerFunctions::strength_boost; gamePowers.push_back (strengthBoost);
 
     Power spike; spike.name = "Thorns"; spike.use = powerFunctions::spike; gamePowers.push_back (spike);
+
+    Power etherealHourglass; etherealHourglass.name = "Ethereal Hourglass"; etherealHourglass.use = powerFunctions::ethereal_hourglass; gamePowers.push_back (etherealHourglass);
 
 }
 

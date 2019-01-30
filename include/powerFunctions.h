@@ -19,6 +19,8 @@ namespace powerFunctions
 
     void strength_boost (Entity &user, int turnCounter);
 
+    void ethereal_hourglass (Entity &user, int turnCounter);
+
 };
 
 #endif // POWERFUNCTIONS_H

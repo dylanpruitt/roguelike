@@ -132,6 +132,7 @@ void Game::initializePowers () {
 
     Power etherealHourglass; etherealHourglass.name = "Ethereal Hourglass"; etherealHourglass.use = powerFunctions::ethereal_hourglass; gamePowers.push_back (etherealHourglass);
 
+    Power lunarEnergy; lunarEnergy.name = "Lunar Energy"; lunarEnergy.use = powerFunctions::lunar_energy; gamePowers.push_back (lunarEnergy);
 }
 
 Entity Game::returnEntityFromName (std::string name) {
@@ -388,7 +389,16 @@ Floor Game::generateFloor (int seed, int floorNumber) {
 
     }
 
-    Room boss; boss.roomType = "enemy"; boss.entityInRoom = returnEntityFromName ("Blue Slime");
+    Room boss; boss.roomType = "enemy";
+
+    switch (floorNumber) {
+        case 1: {
+           boss.entityInRoom = returnEntityFromName ("Artifact");
+        } break;
+        default: {
+           boss.entityInRoom = returnEntityFromName ("Blue Slime");
+        } break;
+    }
 
     floor.floorMap [26] = boss;
 

@@ -157,7 +157,16 @@ void skillFunctions::arrow (Entity &user, Entity &target) {
     if (random < CHANCE) {
         int damage = user.attack + 2 - target.guard;
 
-        target.health -= damage;
+        if (damage >= 0) {
+
+            target.guard = 0;
+            target.health -= damage;
+
+        } else {
+
+            target.guard -= damage;
+
+        }
 
         if (damage < 0) { damage = 0; }
 

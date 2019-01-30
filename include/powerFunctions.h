@@ -21,6 +21,8 @@ namespace powerFunctions
 
     void ethereal_hourglass (Entity &user, int turnCounter);
 
+    void lunar_energy (Entity &user, int turnCounter);
+
 };
 
 #endif // POWERFUNCTIONS_H

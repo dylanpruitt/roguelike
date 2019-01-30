@@ -409,36 +409,31 @@ Room Game::generateRoom (int floorNumber) {
                 enemyNames.push_back ("Thornbush");
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Crusader");
-
+                enemyNames.push_back ("Brute");
             } break;
             case 3: {
-                enemyNames.push_back ("Vampire");
-                enemyNames.push_back ("Thornbush");
                 enemyNames.push_back ("Rock");
-                enemyNames.push_back ("Brute");
                 enemyNames.push_back ("Blue Slime");
                 enemyNames.push_back ("Minotaur");
+                enemyNames.push_back ("Crusader");
+
 
             } break;
             case 4: {
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Brute");
                 enemyNames.push_back ("Blue Slime");
-                enemyNames.push_back ("Crusader");
                 enemyNames.push_back ("Minotaur");
 
             } break;
             case 5: {
                 enemyNames.push_back ("Rock");
-                enemyNames.push_back ("Brute");
-                enemyNames.push_back ("Blue Slime");
-                enemyNames.push_back ("Minotaur");
+
 
             } break;
             case 6: {
                 enemyNames.push_back ("Rock");
-                enemyNames.push_back ("Brute");
-                enemyNames.push_back ("Blue Slime");
+
 
             } break;
             case 7: {

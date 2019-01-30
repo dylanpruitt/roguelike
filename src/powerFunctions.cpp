@@ -22,7 +22,9 @@ void powerFunctions::no_guard (Entity &user, int turnCounter) {
 }
 
 void powerFunctions::regenerate (Entity &user, int turnCounter) {
-    user.health += 2;
+    if (turnCounter % 2 == 1) {
+        user.health += 2;
+    }
 
     if (user.health > user.maxHealth) {
         user.health = user.maxHealth;

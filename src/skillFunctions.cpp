@@ -230,6 +230,93 @@ void skillFunctions::triple_attack (Entity &user, Entity &target) {
 
 }
 
+void skillFunctions::explode (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Explode on " << target.name << "!" << std::endl;
+
+    int damage = 10 - target.guard;
+
+    if (damage >= 0) {
+
+        target.guard = 0;
+        target.health -= damage;
+
+    } else {
+
+        target.guard -= damage;
+
+    }
+
+    if (damage < 0) { damage = 0; } else { target.health -= damage; user.health -= (damage / 3); }
+
+    std::cout << "The attack dealt " << damage << " damage! " << std::endl;
+
+}
+
+void skillFunctions::offering (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Offering!" << std::endl;
+
+    user.health *= (2/3);
+    user.attack++;
+
+}
+
+void skillFunctions::desperado (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Desperado on " << target.name << "!" << std::endl;
+
+    int damage = user.attack + (10 * (1 - (user.health / user.maxHealth))) - target.guard;
+
+    if (damage >= 0) {
+
+        target.guard = 0;
+        target.health -= damage;
+
+    } else {
+
+        target.guard -= damage;
+
+    }
+
+    if (damage < 0) { damage = 0; }
+
+    if (utilityFunctions::hasPower (target, "Thorns")) {
+        user.health--;
+
+    }
+
+    std::cout << "The attack dealt " << damage << " damage!" << std::endl;
+
+}
+
+void skillFunctions::cleave (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Cleave on " << target.name << "!" << std::endl;
+
+    int damage = user.attack + 7 - target.guard;
+
+    if (damage >= 0) {
+
+        target.guard = 0;
+        target.health -= damage;
+
+    } else {
+
+        target.guard -= damage;
+
+    }
+
+    if (damage < 0) { damage = 0; }
+
+    if (utilityFunctions::hasPower (target, "Thorns")) {
+        user.health--;
+
+    }
+
+    std::cout << "The attack dealt " << damage << " damage!" << std::endl;
+
+}
 
 void skillFunctions::guard_break (Entity &user, Entity &target) {
 
@@ -258,5 +345,24 @@ void skillFunctions::restore (Entity &user, Entity &target) {
     std::cout << user.name << " used Restore!" << std::endl;
 
     user.health += user.maxHealth / 4; if (user.health > user.maxHealth) { user.health = user.maxHealth; }
+
+}
+
+void skillFunctions::absorb (Entity &user, Entity &target) {
+
+    std::cout << user.name << " used Absorb on " << target.name << "!" << std::endl;
+
+    int damage = 2;
+
+    target.health -= damage;
+
+    if (utilityFunctions::hasPower (target, "Thorns")) {
+        user.health--;
+
+    }
+
+    if (target.health <= 0) { user.maxHealth++; }
+
+    std::cout << "The attack dealt " << damage << " damage!" << std::endl;
 
 }

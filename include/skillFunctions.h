@@ -1,7 +1,6 @@
 #ifndef SKILLFUNCTIONS_H
 #define SKILLFUNCTIONS_H
 #include "Entity.h"
-#include "Status.h"
 
 namespace skillFunctions
 {
@@ -28,14 +27,22 @@ namespace skillFunctions
 
     void triple_attack (Entity &user, Entity &target);
 
+    void explode (Entity &user, Entity &target);
+
+    void desperado (Entity &user, Entity &target);
+
+    void cleave (Entity &user, Entity &target);
+
+    void absorb (Entity &user, Entity &target);
+
     /** BUFFS **/
 
     void defend (Entity &user, Entity &target);
 
     void restore (Entity &user, Entity &target);
 
-    /** FOR USE IN FUNCTIONS BUT NOT ACTUAL SKILLS **/
-    void applyStatus (Entity &target, Status status);
+    void offering (Entity &user, Entity &target);
+
 };
 
 

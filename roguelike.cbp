@@ -35,6 +35,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Entity.h" />
+		<Unit filename="include/Floor.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/Power.h" />
 		<Unit filename="include/Room.h" />

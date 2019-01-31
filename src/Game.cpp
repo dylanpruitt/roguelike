@@ -182,23 +182,32 @@ void Game::initializeSkills () {
 
 void Game::initializePowers () {
 
-    Power growStrength; growStrength.name = "Grow"; growStrength.use = powerFunctions::grow_strength; gamePowers.push_back (growStrength);
+    Power growStrength; growStrength.name = "Grow"; growStrength.use = powerFunctions::grow_strength;
+    growStrength.description = "Gain 1 Strength every two turns."; gamePowers.push_back (growStrength);
 
-    Power noGuard; noGuard.name = "No Guard"; noGuard.use = powerFunctions::no_guard; gamePowers.push_back (noGuard);
+    Power noGuard; noGuard.name = "No Guard"; noGuard.use = powerFunctions::no_guard;
+    noGuard.description = "User has -3 Guard but +3 Strength"; gamePowers.push_back (noGuard);
 
-    Power regen; regen.name = "Regenerate"; regen.use = powerFunctions::regenerate; gamePowers.push_back (regen);
+    Power regen; regen.name = "Regenerate"; regen.use = powerFunctions::regenerate;
+    regen.description = "Regenerate 2 health every 2 turns."; gamePowers.push_back (regen);
 
-    Power wither; wither.name = "Wither"; wither.use = powerFunctions::wither; gamePowers.push_back (wither);
+    Power wither; wither.name = "Wither"; wither.use = powerFunctions::wither;
+    wither.description = "Lose Strength and Guard every turn."; gamePowers.push_back (wither);
 
-    Power metalBody; metalBody.name = "Metal Body"; metalBody.use = powerFunctions::metal_body; gamePowers.push_back (metalBody);
+    Power metalBody; metalBody.name = "Metal Body"; metalBody.use = powerFunctions::metal_body;
+    metalBody.description = "Gain 3 Guard every turn (Guard goes away after your turn)."; gamePowers.push_back (metalBody);
 
-    Power strengthBoost; strengthBoost.name = "Strength Boost"; strengthBoost.use = powerFunctions::strength_boost; gamePowers.push_back (strengthBoost);
+    Power strengthBoost; strengthBoost.name = "Strength Boost"; strengthBoost.use = powerFunctions::strength_boost;
+    strengthBoost.description = "Gain 1 Strength."; gamePowers.push_back (strengthBoost);
 
-    Power spike; spike.name = "Thorns"; spike.use = powerFunctions::spike; gamePowers.push_back (spike);
+    Power spike; spike.name = "Thorns"; spike.use = powerFunctions::spike;
+    spike.description = "Every time you are attacked the enemy takes 1 damage back."; gamePowers.push_back (spike);
 
-    Power etherealHourglass; etherealHourglass.name = "Ethereal Hourglass"; etherealHourglass.use = powerFunctions::ethereal_hourglass; gamePowers.push_back (etherealHourglass);
+    Power etherealHourglass; etherealHourglass.name = "Ethereal Hourglass"; etherealHourglass.use = powerFunctions::ethereal_hourglass;
+    etherealHourglass.description = "Every fifth turn, your attack becomes powerful."; gamePowers.push_back (etherealHourglass);
 
-    Power lunarEnergy; lunarEnergy.name = "Lunar Energy"; lunarEnergy.use = powerFunctions::lunar_energy; gamePowers.push_back (lunarEnergy);
+    Power lunarEnergy; lunarEnergy.name = "Lunar Energy"; lunarEnergy.use = powerFunctions::lunar_energy;
+    lunarEnergy.description = "A cycle where you gain Strength for three turns and return to normal for another three."; gamePowers.push_back (lunarEnergy);
 }
 
 Entity Game::returnEntityFromName (std::string name) {
@@ -683,8 +692,9 @@ void Game::rewardPower (Entity &player) {
     index = utilityFunctions::random (0, gamePowers.size () - 1);
     option_three = index;
 
-    std::cout << "Choose a power: \n[1] " << gamePowers [option_one].name << "\n[2] " << gamePowers [option_two].name
-        << "\n[3] " << gamePowers [option_three].name << std::endl;
+    std::cout << "Choose a power: \n[1] " << gamePowers [option_one].name << std::endl; std::cout << " -- " << gamePowers [option_one].description;
+    std::cout << "\n[2] " << gamePowers [option_two].name << std::endl; std::cout << " -- " << gamePowers [option_two].description;
+    std::cout << "\n[3] " << gamePowers [option_three].name << std::endl; std::cout << " -- " << gamePowers [option_three].description << std::endl;
     int choice = 0;
 
     while (choice < 1 || choice > 3) {

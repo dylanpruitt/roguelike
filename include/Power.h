@@ -10,6 +10,8 @@ class Power
 
         std::string name;
 
+        std::string description;
+
         void (*use)(Entity &user, int turnCounter);
 };
 #endif // POWER_H

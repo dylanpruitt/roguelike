@@ -16,8 +16,6 @@ namespace aiFunctions
 
     void rock (Entity &user, Entity &target, int turnCounter);
 
-    void spore_flower (Entity &user, Entity &target, int turnCounter);
-
     void shieldKnight (Entity &user, Entity &target, int turnCounter);
 
     void vampire (Entity &user, Entity &target, int turnCounter);

@@ -3,11 +3,11 @@
 #include <iostream>
 
 void aiFunctions::slime (Entity &user, Entity &target, int turnCounter) {
-    const int ATTACK = 0, DONOTHING = 1; int offset = 1;
+    const int ATTACK = 0, DONOTHING = 1; int timesToAttack = 1;
 
-    if (turnCounter % 4 == 0) { offset++; }
+    if (turnCounter % 4 == 0) { timesToAttack = utilityFunctions::random (1, 3); user.attack++; std::cout << "Slime is growing." << std::endl; }
 
-    if ((turnCounter+offset) % 2 == ATTACK) {
+    if ((turnCounter) % 4 < timesToAttack) {
         user.skillset [ATTACK]->use (user, target);
     } else {
         user.skillset [DONOTHING]->use (user, target);
@@ -77,31 +77,30 @@ void aiFunctions::rock (Entity &user, Entity &target, int turnCounter) {
     user.skillset [DO_NOTHING]->use (user, target);
 }
 
-void aiFunctions::spore_flower (Entity &user, Entity &target, int turnCounter) {
-    const int POISON = 0, ATTACK = 1;
+void aiFunctions::shieldKnight (Entity &user, Entity &target, int turnCounter) {
+    const int ATTACK = 1, DEFEND = 2, DONOTHING = 0; int phase = 1;
 
-    if ((turnCounter+1) % 2 == POISON) {
-        user.skillset [POISON]->use (user, target);
+    if (phase == 1) {
+        switch ((turnCounter+1) % 3) {
+            case ATTACK:
+                user.skillset [ATTACK]->use (user, target);
+                break;
+            case DEFEND:
+                user.skillset [DEFEND]->use (user, target);
+                break;
+            case DONOTHING:
+                user.skillset [DONOTHING]->use (user, target);
+                break;
+        }
+
+        if (user.health <= user.maxHealth / 2) {
+            phase++; user.attack += 3;
+            std::cout << "Shield Knight's shield breaks! The Shield Knight becomes enraged!" << std::endl;
+        }
     } else {
         user.skillset [ATTACK]->use (user, target);
     }
 
-}
-
-void aiFunctions::shieldKnight (Entity &user, Entity &target, int turnCounter) {
-    const int ATTACK = 1, DEFEND = 2, DONOTHING = 0;
-
-    switch ((turnCounter+1) % 3) {
-        case ATTACK:
-            user.skillset [ATTACK]->use (user, target);
-            break;
-        case DEFEND:
-            user.skillset [DEFEND]->use (user, target);
-            break;
-        case DONOTHING:
-            user.skillset [DONOTHING]->use (user, target);
-            break;
-    }
 
 }
 
@@ -124,6 +123,8 @@ void aiFunctions::brute (Entity &user, Entity &target, int turnCounter) {
     } else {
         user.skillset [DEFEND]->use (user, target);
     }
+
+    if (turnCounter % 6 == 0) { user.attack++; std::cout << "Brute becomes stronger!" << std::endl; }
 
 }
 
@@ -181,6 +182,8 @@ void aiFunctions::werewolf (Entity &user, Entity &target, int turnCounter) {
     if (turnCounter % 6 < 3) {
         if (target.guard > 0) {
             user.skillset [GUARD_BREAK]->use (user, target);
+        } else {
+            user.skillset [DONOTHING]->use (user, target);
         }
     } else if (turnCounter == 3) {
         user.skillset [CLEAVE]->use (user, target);

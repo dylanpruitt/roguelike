@@ -27,7 +27,7 @@
 	<iostream>
 	<limits>
 
-1548814143 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\game.cpp
+1548974069 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\game.cpp
 	"Game.h"
 	"Status.h"
 	"aiFunctions.h"
@@ -76,7 +76,7 @@
 1548617287 c:\users\dylan\documents\programming projects 2019\roguelike\include\statusfunctions.h
 	"Status.h"
 
-1548619881 c:\users\dylan\documents\programming projects 2019\roguelike\include\power.h
+1548973653 c:\users\dylan\documents\programming projects 2019\roguelike\include\power.h
 	"Entity.h"
 
 1548792480 c:\users\dylan\documents\programming projects 2019\roguelike\include\gamedatastructures.h

@@ -5,7 +5,6 @@
 #include "skillFunctions.h"
 #include "utilityFunctions.h"
 #include <iostream>
-#include <time.h>
 
 Game::~Game()
 {
@@ -212,7 +211,6 @@ void Game::initializePowers () {
 
 Entity Game::returnEntityFromName (std::string name) {
     Entity entity;
-    srand (time (NULL));
 
     if (name == "Slime") {
         entity.health = 27;
@@ -283,7 +281,7 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.rewardSkill = &gameSkills [2];
 
         entity.powers.push_back (&gamePowers [6]);
-        entity.ai = aiFunctions::spore_flower;
+        entity.ai = aiFunctions::slime;
     }
     if (name == "Shield Warrior") {
         entity.health = 11;
@@ -482,8 +480,8 @@ Floor Game::generateFloor (int seed, int floorNumber) {
     Room startingPoint; startingPoint.roomType = "start";
 
     floor.floorMap [0] = startingPoint;
+    for (int i = 0; i < 12; i++) {     srand (seed * i);
 
-    for (int i = 0; i < 12; i++) { srand (seed*i);
 
         floor.floorMap [1+i] = generateRoom (floorNumber);
 
@@ -492,8 +490,7 @@ Floor Game::generateFloor (int seed, int floorNumber) {
     Room midBoss; midBoss.roomType = "enemy"; midBoss.entityInRoom = returnEntityFromName ("Bowman");
 
     floor.floorMap [13] = midBoss;
-
-    for (int i = 0; i < 12; i++) {  srand (seed*i);
+    for (int i = 0; i < 12; i++) {      srand (seed * 2 * i);
 
 
         floor.floorMap [14+i] = generateRoom (floorNumber);

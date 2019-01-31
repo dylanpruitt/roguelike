@@ -290,9 +290,9 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (11, 28);
 
-        entity.skillset [0] = &gameSkills [1];
-        entity.skillset [1] = &gameSkills [3];
-        entity.skillset [2] = &gameSkills [0];
+        entity.skillset [0] = &gameSkills [0];
+        entity.skillset [1] = &gameSkills [1];
+        entity.skillset [2] = &gameSkills [3];
 
         entity.rewardSkill = &gameSkills [3];
 

@@ -78,9 +78,9 @@ void aiFunctions::rock (Entity &user, Entity &target, int turnCounter) {
 }
 
 void aiFunctions::shieldKnight (Entity &user, Entity &target, int turnCounter) {
-    const int ATTACK = 1, DEFEND = 2, DONOTHING = 0; int phase = 1;
+    const int ATTACK = 1, DEFEND = 2, DONOTHING = 0;
 
-    if (phase == 1) {
+    if (user.attack < 2) {
         switch ((turnCounter+1) % 3) {
             case ATTACK:
                 user.skillset [ATTACK]->use (user, target);
@@ -94,7 +94,7 @@ void aiFunctions::shieldKnight (Entity &user, Entity &target, int turnCounter) {
         }
 
         if (user.health <= user.maxHealth / 2) {
-            phase++; user.attack += 3;
+            user.attack += 2;
             std::cout << "Shield Knight's shield breaks! The Shield Knight becomes enraged!" << std::endl;
         }
     } else {

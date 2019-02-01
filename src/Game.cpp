@@ -142,7 +142,7 @@ void Game::initializeSkills () {
     dagger.description = "A basic attack. Deals 5 base damage."; gameSkills.push_back (dagger);
 
     Skill defend; defend.name = "Defend"; defend.use = skillFunctions::defend;
-    defend.description = "Adds 5 guard (you can take 5 damage without losing health). Guard goes away on your next turn."; gameSkills.push_back (defend);
+    defend.description = "Adds 4 guard (you can take 4 damage without losing health). Guard goes away on your next turn."; gameSkills.push_back (defend);
     // 4
     Skill leech; leech.name = "Leech"; leech.use = skillFunctions::leech;
     leech.description = "A basic attack. Deals 3 damage and heal some of the damage you inflict."; gameSkills.push_back (leech);
@@ -307,9 +307,11 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.skillset [0] = &gameSkills [4];
         entity.skillset [1] = &gameSkills [3];
+        entity.skillset [2] = &gameSkills [5];
 
         entity.rewardSkill = &gameSkills [4];
 
+        entity.powers.push_back (&gamePowers [7]);
         entity.ai = aiFunctions::vampire;
     }
     if (name == "Brute") {

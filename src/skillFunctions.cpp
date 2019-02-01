@@ -346,7 +346,7 @@ void skillFunctions::guard_break (Entity &user, Entity &target) {
 void skillFunctions::defend (Entity &user, Entity &target) {
     std::cout << user.name << " used Defend!" << std::endl;
 
-    user.guard += 5;
+    user.guard += 4;
 
 }
 

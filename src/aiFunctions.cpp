@@ -105,13 +105,27 @@ void aiFunctions::shieldKnight (Entity &user, Entity &target, int turnCounter) {
 }
 
 void aiFunctions::vampire (Entity &user, Entity &target, int turnCounter) {
-    const int LEECH = 0, DEFEND = 1;
+    const int LEECH = 0, DEFEND = 1, LAST_RESORT = 2;
 
-    if ((turnCounter+1) % 2 == LEECH) {
+    if (user.health == 1) {
+        user.skillset [LAST_RESORT]->use (user, target);
+    } else if (turnCounter % 5 == 0) {
+        user.attack--;
         user.skillset [LEECH]->use (user, target);
+    } else if (user.health < user.maxHealth / 2) {
+        const int CHANCE = 50;
+
+        int random = utilityFunctions::random (1, 100);
+        if (random <= CHANCE) {
+            user.skillset [LEECH]->use (user, target);
+        } else {
+            user.skillset [DEFEND]->use (user, target);
+        }
     } else {
         user.skillset [DEFEND]->use (user, target);
     }
+
+    if (turnCounter % 5 == 1 && turnCounter > 1) { user.attack++; }
 
 }
 

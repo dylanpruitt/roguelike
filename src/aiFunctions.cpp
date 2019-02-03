@@ -5,7 +5,7 @@
 void aiFunctions::slime (Entity &user, Entity &target, int turnCounter) {
     const int ATTACK = 0, DONOTHING = 1; int timesToAttack = 1;
 
-    if (turnCounter % 4 == 0) { timesToAttack = utilityFunctions::random (1, 3); user.attack++; std::cout << "Slime is growing." << std::endl; }
+    if (turnCounter % 4 == 0 || turnCounter == 1) { timesToAttack = utilityFunctions::random (1, 3); user.attack++; std::cout << "Slime is growing." << std::endl; }
 
     if ((turnCounter) % 4 < timesToAttack) {
         user.skillset [ATTACK]->use (user, target);
@@ -105,11 +105,9 @@ void aiFunctions::shieldKnight (Entity &user, Entity &target, int turnCounter) {
 }
 
 void aiFunctions::vampire (Entity &user, Entity &target, int turnCounter) {
-    const int LEECH = 0, DEFEND = 1, LAST_RESORT = 2;
+    const int LEECH = 0, DEFEND = 1;
 
-    if (user.health == 1) {
-        user.skillset [LAST_RESORT]->use (user, target);
-    } else if (turnCounter % 5 == 0) {
+    if (turnCounter % 5 == 0) {
         user.attack--;
         user.skillset [LEECH]->use (user, target);
     } else if (user.health < user.maxHealth / 2) {

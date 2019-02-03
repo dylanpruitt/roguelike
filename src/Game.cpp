@@ -169,7 +169,7 @@ void Game::initializeSkills () {
     offering.description = "The user sacrifices some of their health but their attack increases."; gameSkills.push_back (offering);
     // 12
     Skill explode; explode.name = "Explode"; explode.use = skillFunctions::explode;
-    explode.description = "An attack that does more damage the lower the user's health is."; gameSkills.push_back (explode);
+    explode.description = "An attack that does damage to the user too."; gameSkills.push_back (explode);
 
     Skill cleave; cleave.name = "Cleave"; cleave.use = skillFunctions::cleave;
     cleave.description = "A basic attack. Deals 7 base damage."; gameSkills.push_back (cleave);
@@ -307,7 +307,6 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.skillset [0] = &gameSkills [4];
         entity.skillset [1] = &gameSkills [3];
-        entity.skillset [2] = &gameSkills [5];
 
         entity.rewardSkill = &gameSkills [4];
 
@@ -528,16 +527,22 @@ Floor Game::generateFloor (int seed, int floorNumber) {
 Room Game::generateRoom (int floorNumber) {
     int random = utilityFunctions::random (1, 100); Room room;
 
-    if (random >= 40) {
-        std::vector <std::string> enemyNames;
+    std::vector <std::string> enemyNames;
+    std::vector <int> skillIndices;
 
-        switch (floorNumber) {
+    enum skills { doNothing = 0, attack, dagger, defend, leech, lastResort, restore, guardBreak, arrow,
+                    shieldSwipe, tripleAttack, offering, explode, cleave, missiles};
+
+    switch (floorNumber) {
             case 1: {
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Slime");
                 enemyNames.push_back ("Shield Warrior");
                 enemyNames.push_back ("Vampire");
                 enemyNames.push_back ("Wisp");
+                skillIndices.push_back (skills::attack);
+                skillIndices.push_back (skills::defend);
+                skillIndices.push_back (skills::leech);
             } break;
             case 2: {
                 enemyNames.push_back ("Artifact");
@@ -545,64 +550,78 @@ Room Game::generateRoom (int floorNumber) {
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Crusader");
                 enemyNames.push_back ("Brute");
+                skillIndices.push_back (skills::dagger);
+                skillIndices.push_back (skills::arrow);
+                skillIndices.push_back (skills::leech);
+                skillIndices.push_back (skills::lastResort);
+                skillIndices.push_back (skills::offering);
             } break;
             case 3: {
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Blue Slime");
                 enemyNames.push_back ("Minotaur");
                 enemyNames.push_back ("Crusader");
-
-
+                skillIndices.push_back (skills::shieldSwipe);
+                skillIndices.push_back (skills::restore);
+                skillIndices.push_back (skills::dagger);
             } break;
             case 4: {
                 enemyNames.push_back ("Rock");
                 enemyNames.push_back ("Brute");
                 enemyNames.push_back ("Blue Slime");
                 enemyNames.push_back ("Minotaur");
-
+                skillIndices.push_back (skills::tripleAttack);
+                skillIndices.push_back (skills::cleave);
+                skillIndices.push_back (skills::explode);
             } break;
             case 5: {
                 enemyNames.push_back ("Rock");
-
+                skillIndices.push_back (skills::attack);
 
             } break;
             case 6: {
                 enemyNames.push_back ("Rock");
-
+                skillIndices.push_back (skills::attack);
 
             } break;
             case 7: {
                 enemyNames.push_back ("Rock");
+                skillIndices.push_back (skills::attack);
 
             } break;
             case 8: {
                 enemyNames.push_back ("Rock");
+                skillIndices.push_back (skills::attack);
 
             } break;
             case 9: {
                 enemyNames.push_back ("Rock");
+                skillIndices.push_back (skills::attack);
 
             } break;
             case 10: {
                 enemyNames.push_back ("Rock");
+                skillIndices.push_back (skills::attack);
 
             } break;
         }
 
+    if (random >= 40) {
         int index = utilityFunctions::random (0, enemyNames.size () - 1);
 
         room.entityInRoom = returnEntityFromName (enemyNames [index]); room.roomType = "enemy";
 
     } else if (random >= 20) {
-        int index = utilityFunctions::random (0, gameSkills.size () - 1);
-        room.skillReward = gameSkills [index];
+        int index = utilityFunctions::random (0, skillIndices.size () - 1);
+
+        room.skillReward = gameSkills [skillIndices [index]];
         room.priceOfHeal = utilityFunctions::random (24, 108);
         room.priceOfSkill = utilityFunctions::random (24, 108);
         room.roomType = "shop";
     } else if (random >= 10) {
-        int index = utilityFunctions::random (0, gameSkills.size () - 1);
+        int index = utilityFunctions::random (0, skillIndices.size () - 1);
 
-        room.skillReward = gameSkills [index]; room.roomType = "skillreward";
+        room.skillReward = gameSkills [skillIndices [index]]; room.roomType = "skillreward";
     } else {
         int goldReward = utilityFunctions::random (1, 100); room.goldReward = goldReward; room.roomType = "goldreward";
     }

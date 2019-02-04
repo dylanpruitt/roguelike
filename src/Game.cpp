@@ -60,6 +60,11 @@ void Game::battle (Entity &player, Entity &enemy) {
 void Game::displayPlayerInformation (Entity &player, Entity &enemy) {
     std::cout << player.name << " vs. " << enemy.name << std::endl;
     std::cout << "HP " << player.health << " / " << player.maxHealth << " vs. " << enemy.health << " / " << enemy.maxHealth << std::endl;
+    std::cout << "ATTACK " << player.attack << " vs. " << enemy.attack << std::endl;
+    std::cout << "GUARD " << player.guard << " vs. " << enemy.guard << std::endl;
+    std::cout << "FOCUS " << player.focus << " vs. " << enemy.focus << std::endl;
+    std::cout << "EVADE " << player.evade << " vs. " << enemy.evade << std::endl;
+
     displayCombatantPowers (player, enemy);
 
     std::cout << "\nPlayer Skills:" << std::endl;

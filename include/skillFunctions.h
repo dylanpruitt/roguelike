@@ -37,6 +37,10 @@ namespace skillFunctions
 
     void missiles (Entity &user, Entity &target);
 
+    void evade (Entity &user, Entity &target);
+
+    void focus (Entity &user, Entity &target);
+
     /** BUFFS **/
 
     void defend (Entity &user, Entity &target);
@@ -45,6 +49,9 @@ namespace skillFunctions
 
     void offering (Entity &user, Entity &target);
 
+    /** UTILITY FUNCTIONS **/
+
+    void basicAttack (Entity &user, Entity &target, int baseDamage);
 };
 
 

@@ -23,6 +23,9 @@ class Entity
         int attack = 0;
         int guard = 0;
 
+        int focus = 0;
+        int evade = 0;
+
         int gold = 24;
 
         Skill *skillset [NUMBER_OF_SKILLS];

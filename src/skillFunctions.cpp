@@ -60,7 +60,7 @@ void skillFunctions::leech (Entity &user, Entity &target) {
 
         std::cout << "The attack dealt " << damage << " damage! " << user.name << " healed " << (damage / 2) << "HP!" << std::endl;
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 }
 
@@ -92,7 +92,7 @@ void skillFunctions::last_resort (Entity &user, Entity &target) {
             std::cout << "Nothing happened!" << std::endl;
         }
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 
 
@@ -129,7 +129,7 @@ void skillFunctions::arrow (Entity &user, Entity &target) {
 
         }
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 
 }
@@ -164,7 +164,7 @@ void skillFunctions::shield_swipe (Entity &user, Entity &target) {
 
         std::cout << "The attack dealt " << damage << " damage!" << std::endl;
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 
 }
@@ -203,7 +203,7 @@ void skillFunctions::explode (Entity &user, Entity &target) {
 
         std::cout << "The attack dealt " << damage << " damage! " << std::endl;
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 
 }
@@ -248,7 +248,7 @@ void skillFunctions::guard_break (Entity &user, Entity &target) {
 
         }
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 
 
@@ -288,7 +288,7 @@ void skillFunctions::absorb (Entity &user, Entity &target) {
 
         std::cout << "The attack dealt " << damage << " damage!" << std::endl;
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 
 }
@@ -325,7 +325,7 @@ void skillFunctions::missiles (Entity &user, Entity &target) {
                 std::cout << "But it missed!" << std::endl;
             }
         } else {
-            std::cout << "The attack missed!" << std::endl; target.evade--;
+            std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
         }
 
     }
@@ -370,7 +370,7 @@ void skillFunctions::disarm (Entity &user, Entity &target) {
         std::cout << "The attack dealt " << damage << " damage!" << std::endl;
 
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 }
 
@@ -400,7 +400,7 @@ void skillFunctions::shadow_strike (Entity &user, Entity &target) {
         std::cout << "The attack dealt " << damage << " damage!" << std::endl;
 
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 }
 
@@ -441,7 +441,7 @@ void skillFunctions::basicAttack (Entity &user, Entity &target, int baseDamage) 
 
         }
     } else {
-        std::cout << "The attack missed!" << std::endl; target.evade--;
+        std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 
     std::cout << "The attack dealt " << damage << " damage!" << std::endl;

@@ -18,6 +18,7 @@ void Game::battle (Entity &player, Entity &enemy) {
         std::cout << "TURN " << turnCounter << std::endl;
 
         for (unsigned int i = 0; i < player.powers.size (); i++) { player.powers [i]->use (player, turnCounter); }
+        for (unsigned int i = 0; i < enemy.powers.size (); i++) { enemy.powers [i]->use (enemy, turnCounter); }
 
         displayPlayerInformation (player, enemy);
 
@@ -32,14 +33,18 @@ void Game::battle (Entity &player, Entity &enemy) {
 
         player.skillset [choice]->use (player, enemy);
 
+        if (player.focus < 0) { player.focus++; }
+        if (player.evade < 0) { player.evade++; }
+
         enemy.guard = 0;
 
         if (enemy.health > 0) {
-            for (unsigned int i = 0; i < enemy.powers.size (); i++) { enemy.powers [i]->use (enemy, turnCounter); }
 
             enemy.ai (enemy, player, turnCounter);
         }
 
+        if (enemy.focus < 0) { enemy.focus++; }
+        if (enemy.evade < 0) { enemy.evade++; }
         turnCounter++; player.guard = 0;
 
     }
@@ -182,6 +187,21 @@ void Game::initializeSkills () {
     Skill missiles; missiles.name = "Missiles"; missiles.use = skillFunctions::missiles;
     missiles.description = "Fire off 2 to 5 missiles. The user does not take damage from Thorns."; gameSkills.push_back (missiles);
 
+    Skill observe; observe.name = "Observe"; observe.use = skillFunctions::focus;
+    observe.description = "Gain 1 Focus."; gameSkills.push_back (observe);
+    // 16
+    Skill shadowStrike; shadowStrike.name = "Shadow Strike"; shadowStrike.use = skillFunctions::shadow_strike;
+    shadowStrike.description = "Deal 3 * Evade damage. Lose all Evade."; gameSkills.push_back (shadowStrike);
+
+    Skill disarm; disarm.name = "Disarm"; disarm.use = skillFunctions::disarm;
+    disarm.description = "Deal 3 damage. Target loses 1 Focus."; gameSkills.push_back (disarm);
+
+    Skill smokebomb; smokebomb.name = "Smokebomb"; smokebomb.use = skillFunctions::evade;
+    smokebomb.description = "Gain 1 Evade."; gameSkills.push_back (smokebomb);
+
+    Skill mug; mug.name = "Mug"; mug.use = skillFunctions::mug;
+    mug.description = "Deal 4 damage and steal some gold."; gameSkills.push_back (mug);
+
 }
 
 void Game::initializePowers () {
@@ -212,6 +232,12 @@ void Game::initializePowers () {
 
     Power lunarEnergy; lunarEnergy.name = "Lunar Energy"; lunarEnergy.use = powerFunctions::lunar_energy;
     lunarEnergy.description = "A cycle where you gain Strength for three turns and return to normal for another three."; gamePowers.push_back (lunarEnergy);
+
+    Power eagleEye; eagleEye.name = "Eagle Eye"; eagleEye.use = powerFunctions::eagle_eye;
+    eagleEye.description = "If you have less than 1 Focus, set your Focus equal to 1."; gamePowers.push_back (eagleEye);
+
+    Power elusiveShadow; elusiveShadow.name = "Elusive Shadow"; elusiveShadow.use = powerFunctions::elusive_shadow;
+    elusiveShadow.description = "Gain 3 Evade at the start of combat but the user has 1 max HP."; gamePowers.push_back (elusiveShadow);
 }
 
 Entity Game::returnEntityFromName (std::string name) {
@@ -333,10 +359,10 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.powers.push_back (&gamePowers [1]);
         entity.ai = aiFunctions::brute;
     }
-    if (name == "Bowman") {
+    if (name == "Hunter") {
         entity.health = 24;
         entity.maxHealth = 24;
-        entity.name = "Bowman";
+        entity.name = "Hunter";
 
         entity.gold = utilityFunctions::random (16, 22);
 
@@ -345,6 +371,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [8];
 
+        entity.powers.push_back (&gamePowers [9]);
         entity.ai = aiFunctions::bowman;
     }
     if (name == "Crusader") {
@@ -408,6 +435,55 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.powers.push_back (&gamePowers [8]);
         entity.ai = aiFunctions::werewolf;
+    }
+    if (name == "Thief") {
+        entity.health = 16;
+        entity.maxHealth = 16;
+        entity.name = "Thief";
+
+        entity.gold = utilityFunctions::random (64, 92);
+
+        entity.skillset [0] = &gameSkills [2];
+        entity.skillset [1] = &gameSkills [18];
+        entity.skillset [2] = &gameSkills [19];
+
+        entity.rewardSkill = &gameSkills [19];
+
+        entity.powers.push_back (&gamePowers [10]);
+        entity.ai = aiFunctions::thief;
+    }
+    if (name == "Shadow") {
+        entity.health = 1;
+        entity.maxHealth = 1;
+        entity.name = "Shadow";
+        entity.attack = 3;
+
+        entity.gold = utilityFunctions::random (24, 32);
+
+        entity.skillset [0] = &gameSkills [17];
+        entity.skillset [1] = &gameSkills [18];
+        entity.skillset [2] = &gameSkills [16];
+
+        entity.rewardSkill = &gameSkills [16];
+
+        entity.powers.push_back (&gamePowers [10]);
+        entity.ai = aiFunctions::shadow;
+    }
+    if (name == "Beholder") {
+        entity.health = 53;
+        entity.maxHealth = 53;
+        entity.name = "Beholder";
+        entity.attack = 3;
+
+        entity.gold = utilityFunctions::random (24, 32);
+
+        entity.skillset [0] = &gameSkills [15];
+        entity.skillset [1] = &gameSkills [1];
+        entity.skillset [2] = &gameSkills [17];
+
+        entity.rewardSkill = &gameSkills [15];
+
+        entity.ai = aiFunctions::beholder;
     }
     if (name == "Bramble Fortress") {
         entity.health = 24;
@@ -494,7 +570,7 @@ Floor Game::generateFloor (int seed, int floorNumber) {
 
     }
 
-    Room midBoss; midBoss.roomType = "enemy"; midBoss.entityInRoom = returnEntityFromName ("Bowman");
+    Room midBoss; midBoss.roomType = "enemy"; midBoss.entityInRoom = returnEntityFromName ("Hunter");
 
     floor.floorMap [13] = midBoss;
     for (int i = 0; i < 12; i++) {
@@ -662,6 +738,8 @@ void Game::rewardPower (Entity &player) {
 void Game::loop (Entity &player) {
     int roomIndex = 0;
 
+    choosePlayerStart (player);
+
     while (player.health > 0) {
         std::cout << player.name << " HP " << player.health << " / " << player.maxHealth << " - " << player.gold << " G" << std::endl;
         std::cout << "FLOOR " << floor << std::endl;
@@ -741,4 +819,33 @@ void Game::shop (Entity &player, int roomIndex) {
         }
         if (choice == 3) { looping = false; }
     }
+}
+
+void Game::choosePlayerStart (Entity &player) {
+    const int NUMBER_OF_STARTING_SKILLS = 10;
+    const int startingSkillIndices [NUMBER_OF_STARTING_SKILLS] = {1,2,3,4,5,7,8,15,17,18};
+
+    int skill_options [5];
+
+    std::cout << "CHOOSE 3 SKILLS:" << std::endl;
+    for (unsigned int i = 0; i < 5; i++) {
+        skill_options [i] = startingSkillIndices [utilityFunctions::random (0, NUMBER_OF_STARTING_SKILLS-1)];
+
+        std::cout << "[" << i << "] - " << gameSkills [skill_options [i]].name << std::endl;
+    }
+
+    int choices [3] = {-1,-1,-1};
+
+    for (unsigned int i = 0; i < 3; i++) {
+        while (choices [i] < 0 || choices [i] >= 5) {
+            choices [i] = utilityFunctions::getIntegerInput ();
+        }
+    }
+
+    for (unsigned int i = 0; i < 3; i++) {
+        player.skillset [i] = &gameSkills [skill_options [choices [i]]];
+    }
+
+    rewardPower (player);
+
 }

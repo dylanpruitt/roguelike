@@ -30,6 +30,12 @@ namespace aiFunctions
 
     void werewolf (Entity &user, Entity &target, int turnCounter);
 
+    void shadow (Entity &user, Entity &target, int turnCounter);
+
+    void beholder (Entity &user, Entity &target, int turnCounter);
+
+    void thief (Entity &user, Entity &target, int turnCounter);
+
     void bramble (Entity &user, Entity &target, int turnCounter);
 
     void wither (Entity &user, Entity &target, int turnCounter);

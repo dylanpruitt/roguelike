@@ -67,3 +67,11 @@ void powerFunctions::lunar_energy (Entity &user, int turnCounter) {
     }
 
 }
+
+void powerFunctions::eagle_eye (Entity &user, int turnCounter) {
+    if (user.focus < 1) { user.focus = 1; }
+}
+
+void powerFunctions::elusive_shadow (Entity &user, int turnCounter) {
+    if (turnCounter == 1) { user.evade += 3; user.health = 1; user.maxHealth = 1;}
+}

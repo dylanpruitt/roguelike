@@ -43,6 +43,8 @@ class Game
 
         void shop (Entity &player, int roomIndex);
 
+        void choosePlayerStart (Entity &player);
+
         Room generateRoom (Floor &parent);
 
         Floor generateFloor (int seed, int floorNumber);

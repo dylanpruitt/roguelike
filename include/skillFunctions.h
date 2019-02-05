@@ -37,11 +37,17 @@ namespace skillFunctions
 
     void missiles (Entity &user, Entity &target);
 
+    void disarm (Entity &user, Entity &target);
+
+    void shadow_strike (Entity &user, Entity &target);
+
+    void mug (Entity &user, Entity &target);
+
+    /** BUFFS **/
+
     void evade (Entity &user, Entity &target);
 
     void focus (Entity &user, Entity &target);
-
-    /** BUFFS **/
 
     void defend (Entity &user, Entity &target);
 

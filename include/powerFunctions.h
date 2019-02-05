@@ -23,6 +23,10 @@ namespace powerFunctions
 
     void lunar_energy (Entity &user, int turnCounter);
 
+    void eagle_eye (Entity &user, int turnCounter);
+
+    void elusive_shadow (Entity &user, int turnCounter);
+
 };
 
 #endif // POWERFUNCTIONS_H

@@ -207,6 +207,54 @@ void aiFunctions::werewolf (Entity &user, Entity &target, int turnCounter) {
 
 }
 
+void aiFunctions::shadow (Entity &user, Entity &target, int turnCounter) {
+    const int DISARM = 0, SMOKEBOMB = 1, SHADOW_STRIKE = 2;
+
+    if (user.evade > 2 && turnCounter != 1) {
+       user.skillset [SHADOW_STRIKE]->use (user, target);
+    } else {
+        if (turnCounter % 3 == 1) {
+            user.skillset [DISARM]->use (user, target);
+        } else if (turnCounter % 3 == 2) {
+            user.skillset [SMOKEBOMB]->use (user, target);
+        } else {
+            std::cout << "Shadow does nothing." << std::endl;
+        }
+    }
+
+}
+
+void aiFunctions::beholder (Entity &user, Entity &target, int turnCounter) {
+    const int OBSERVE = 0, ATTACK = 1, DISARM = 2;
+
+    if (turnCounter % 3 == 1) {
+       user.skillset [OBSERVE]->use (user, target);
+    } else {
+        if (target.focus < 2 && turnCounter % 6 != 5) {
+            user.skillset [ATTACK]->use (user, target);
+        } else {
+            user.skillset [DISARM]->use (user, target);
+        }
+    }
+}
+
+void aiFunctions::thief (Entity &user, Entity &target, int turnCounter) {
+    const int DAGGER = 0, SMOKEBOMB = 1, MUG = 2;
+
+    if (user.evade > 2 && turnCounter != 1) {
+       user.skillset [DAGGER]->use (user, target);
+    } else {
+        if (turnCounter % 3 == 1) {
+            user.skillset [MUG]->use (user, target);
+        } else if (turnCounter % 3 == 2) {
+            user.skillset [SMOKEBOMB]->use (user, target);
+        } else {
+            std::cout << "Thief does nothing." << std::endl;
+        }
+    }
+
+}
+
 void aiFunctions::bramble (Entity &user, Entity &target, int turnCounter) {
     const int ATTACK = 1, DAGGER = 2, MISSILES = 0;
     int phase = 1;

@@ -333,15 +333,87 @@ void skillFunctions::missiles (Entity &user, Entity &target) {
 }
 
 void skillFunctions::evade (Entity &user, Entity &target) {
-    user.evade += 2;
-    std::cout << user.name << " used Evade!" << std::endl;
+    user.evade ++;
+    std::cout << user.name << " used Smokebomb!" << std::endl;
 
 }
 
 void skillFunctions::focus (Entity &user, Entity &target) {
-    user.focus += 2;
-    std::cout << user.name << " used Focus!" << std::endl;
+    user.focus ++;
+    std::cout << user.name << " used Observe!" << std::endl;
 
+}
+
+void skillFunctions::disarm (Entity &user, Entity &target) {
+    std::cout << user.name << " used Disarm on " << target.name << "!" << std::endl;
+
+    if (user.focus >= target.evade) {
+
+        int damage = user.attack + 3 - target.guard;
+        if (user.focus > target.evade) { damage += 3; user.focus--;}
+
+        if (damage >= 0) {
+
+            target.guard = 0;
+            target.health -= damage;
+
+        } else {
+
+            target.guard -= damage;
+
+        }
+
+        target.focus--;
+
+        if (damage < 0) { damage = 0; }
+
+        std::cout << "The attack dealt " << damage << " damage!" << std::endl;
+
+    } else {
+        std::cout << "The attack missed!" << std::endl; target.evade--;
+    }
+}
+
+void skillFunctions::shadow_strike (Entity &user, Entity &target) {
+    std::cout << user.name << " used Shadow Strike on " << target.name << "!" << std::endl;
+
+    if (user.focus >= target.evade) {
+
+        int damage = user.attack + 3*user.evade - target.guard;
+        if (user.focus > target.evade) { damage += 3; user.focus--;}
+
+        if (damage >= 0) {
+
+            target.guard = 0;
+            target.health -= damage;
+
+        } else {
+
+            target.guard -= damage;
+
+        }
+
+        target.focus--; user.evade = 0;
+
+        if (damage < 0) { damage = 0; }
+
+        std::cout << "The attack dealt " << damage << " damage!" << std::endl;
+
+    } else {
+        std::cout << "The attack missed!" << std::endl; target.evade--;
+    }
+}
+
+void skillFunctions::mug (Entity &user, Entity &target) {
+    std::cout << user.name << " used Mug!" << std::endl;
+    basicAttack (user, target, 3);
+
+    int goldRobbed = utilityFunctions::random (1, 16);
+
+    if (target.gold < goldRobbed) { goldRobbed = target.gold; }
+
+    std::cout << user.name << " stole " << goldRobbed << " gold!" << std::endl;
+    target.gold -= goldRobbed; user.gold += goldRobbed;
 }
 
 void skillFunctions::basicAttack (Entity &user, Entity &target, int baseDamage) {

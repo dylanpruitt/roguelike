@@ -3,6 +3,7 @@
 #include "statusFunctions.h"
 #include "utilityFunctions.h"
 #include "PlayerStats.h"
+#include "Power.h"
 
 void skillFunctions::do_nothing (Entity &user, Entity &target) {
     std::cout << user.name << " did nothing!" << std::endl;
@@ -56,9 +57,8 @@ void skillFunctions::leech (Entity &user, Entity &target) {
 
         if (damage < 0) { damage = 0; }
 
-        if (utilityFunctions::hasPower (target, "Thorns")) {
-            user.health--;
-
+        for (unsigned int i = 0; i < target.powers.size (); i++) {
+            target.powers [i]->whenAttacked (target, user);
         }
 
         std::cout << "The attack dealt " << damage << " damage! " << user.name << " healed " << (damage / 2) << "HP!" << std::endl;
@@ -164,9 +164,8 @@ void skillFunctions::shield_swipe (Entity &user, Entity &target) {
 
         if (damage < 0) { damage = 0; }
 
-        if (utilityFunctions::hasPower (target, "Thorns")) {
-            user.health--;
-
+        for (unsigned int i = 0; i < target.powers.size (); i++) {
+            target.powers [i]->whenAttacked (target, user);
         }
 
         std::cout << "The attack dealt " << damage << " damage!" << std::endl;
@@ -252,9 +251,8 @@ void skillFunctions::guard_break (Entity &user, Entity &target) {
         target.health -= damage;
         if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
-        if (utilityFunctions::hasPower (target, "Thorns")) {
-            user.health--;
-
+        for (unsigned int i = 0; i < target.powers.size (); i++) {
+            target.powers [i]->whenAttacked (target, user);
         }
     } else {
         std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
@@ -289,9 +287,8 @@ void skillFunctions::absorb (Entity &user, Entity &target) {
         target.health -= damage;
         if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
-        if (utilityFunctions::hasPower (target, "Thorns")) {
-            user.health--;
-
+        for (unsigned int i = 0; i < target.powers.size (); i++) {
+            target.powers [i]->whenAttacked (target, user);
         }
 
         if (target.health <= 0) { user.maxHealth++; }
@@ -468,13 +465,12 @@ void skillFunctions::basicAttack (Entity &user, Entity &target, int baseDamage) 
 
         if (damage < 0) { damage = 0; }
 
-        if (utilityFunctions::hasPower (target, "Thorns")) {
-            user.health--;
-
+        for (unsigned int i = 0; i < target.powers.size (); i++) {
+            target.powers [i]->whenAttacked (target, user);
         }
+        std::cout << "The attack dealt " << damage << " damage!" << std::endl;
     } else {
         std::cout << "The attack missed!" << std::endl; if (target.evade > 0) { target.evade--; }
     }
 
-    std::cout << "The attack dealt " << damage << " damage!" << std::endl;
 }

@@ -216,37 +216,49 @@ void Game::initializeSkills () {
 
 void Game::initializePowers () {
 
-    Power growStrength; growStrength.name = "Grow"; growStrength.use = powerFunctions::grow_strength;
+    Power growStrength; growStrength.name = "Grow";
+    growStrength.use = powerFunctions::grow_strength;
     growStrength.description = "Gain 1 Strength every two turns."; gamePowers.push_back (growStrength);
 
-    Power noGuard; noGuard.name = "No Guard"; noGuard.use = powerFunctions::no_guard;
+    Power noGuard; noGuard.name = "No Guard";
+    noGuard.use = powerFunctions::no_guard;
     noGuard.description = "User has -3 Guard but +3 Strength"; gamePowers.push_back (noGuard);
 
-    Power regen; regen.name = "Regenerate"; regen.use = powerFunctions::regenerate;
+    Power regen; regen.name = "Regenerate";
+    regen.use = powerFunctions::regenerate;
     regen.description = "Regenerate 2 health every 2 turns."; gamePowers.push_back (regen);
 
-    Power wither; wither.name = "Wither"; wither.use = powerFunctions::wither;
+    Power wither; wither.name = "Wither";
+    wither.use = powerFunctions::wither;
     wither.description = "Lose Strength and Guard every turn."; gamePowers.push_back (wither);
 
-    Power metalBody; metalBody.name = "Metal Body"; metalBody.use = powerFunctions::metal_body;
+    Power metalBody; metalBody.name = "Metal Body";
+    metalBody.use = powerFunctions::metal_body;
     metalBody.description = "Gain 3 Guard every turn (Guard goes away after your turn)."; gamePowers.push_back (metalBody);
 
-    Power strengthBoost; strengthBoost.name = "Strength Boost"; strengthBoost.use = powerFunctions::strength_boost;
+    Power strengthBoost; strengthBoost.name = "Strength Boost";
+    strengthBoost.use = powerFunctions::strength_boost;
     strengthBoost.description = "Gain 1 Strength."; gamePowers.push_back (strengthBoost);
 
-    Power spike; spike.name = "Thorns"; spike.use = powerFunctions::spike;
+    Power spike; spike.name = "Thorns";
+    spike.use = powerFunctions::spike;
+    spike.whenAttacked = powerFunctions::deal_spike_damage;
     spike.description = "Every time you are attacked the enemy takes 1 damage back."; gamePowers.push_back (spike);
 
-    Power etherealHourglass; etherealHourglass.name = "Ethereal Hourglass"; etherealHourglass.use = powerFunctions::ethereal_hourglass;
+    Power etherealHourglass; etherealHourglass.name = "Ethereal Hourglass";
+    etherealHourglass.use = powerFunctions::ethereal_hourglass;
     etherealHourglass.description = "Every fifth turn, your attack becomes powerful."; gamePowers.push_back (etherealHourglass);
 
-    Power lunarEnergy; lunarEnergy.name = "Lunar Energy"; lunarEnergy.use = powerFunctions::lunar_energy;
+    Power lunarEnergy; lunarEnergy.name = "Lunar Energy";
+    lunarEnergy.use = powerFunctions::lunar_energy;
     lunarEnergy.description = "A cycle where you gain Strength for three turns and return to normal for another three."; gamePowers.push_back (lunarEnergy);
 
-    Power eagleEye; eagleEye.name = "Eagle Eye"; eagleEye.use = powerFunctions::eagle_eye;
+    Power eagleEye; eagleEye.name = "Eagle Eye";
+    eagleEye.use = powerFunctions::eagle_eye;
     eagleEye.description = "If you have less than 1 Focus, set your Focus equal to 1."; gamePowers.push_back (eagleEye);
 
-    Power elusiveShadow; elusiveShadow.name = "Elusive Shadow"; elusiveShadow.use = powerFunctions::elusive_shadow;
+    Power elusiveShadow; elusiveShadow.name = "Elusive Shadow";
+    elusiveShadow.use = powerFunctions::elusive_shadow;
     elusiveShadow.description = "Gain 3 Evade at the start of combat but the user has halved HP."; gamePowers.push_back (elusiveShadow);
 }
 

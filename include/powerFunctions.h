@@ -27,6 +27,12 @@ namespace powerFunctions
 
     void elusive_shadow (Entity &user, int turnCounter);
 
+    void do_nothing (Entity &user, int turnCounter);
+
+    void do_nothing (Entity &user, Entity &enemy);
+
+    void deal_spike_damage (Entity &user, Entity &enemy);
+
 };
 
 #endif // POWERFUNCTIONS_H

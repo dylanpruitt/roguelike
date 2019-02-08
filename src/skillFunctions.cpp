@@ -416,6 +416,24 @@ void skillFunctions::mug (Entity &user, Entity &target) {
     target.gold -= goldRobbed; user.gold += goldRobbed;
 }
 
+void skillFunctions::split_pain (Entity &user, Entity &target) {
+    std::cout << user.name << " used Split Pain!" << std::endl;
+
+    double userHealthPercentage = (user.health / user.maxHealth), targetHealthPercentage = (target.health / target.maxHealth);
+
+    double splitPercentage = (userHealthPercentage + targetHealthPercentage) / 2;
+
+    int newUserHealth = splitPercentage * user.maxHealth, newTargetHealth = splitPercentage * target.maxHealth;
+
+    user.health = newUserHealth; target.health = newTargetHealth;
+}
+
+void skillFunctions::wail (Entity &user, Entity &target) {
+    std::cout << user.name << " used Wail! " << target.name << "'s guard fell!" << std::endl;
+
+    target.guard -= 3;
+}
+
 void skillFunctions::basicAttack (Entity &user, Entity &target, int baseDamage) {
 
     int damage = user.attack + baseDamage - target.guard;

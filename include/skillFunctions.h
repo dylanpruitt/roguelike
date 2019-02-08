@@ -43,6 +43,10 @@ namespace skillFunctions
 
     void mug (Entity &user, Entity &target);
 
+    void split_pain (Entity &user, Entity &target);
+
+    void wail (Entity &user, Entity &target);
+
     /** BUFFS **/
 
     void evade (Entity &user, Entity &target);

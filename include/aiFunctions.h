@@ -36,6 +36,8 @@ namespace aiFunctions
 
     void thief (Entity &user, Entity &target, int turnCounter);
 
+    void spirit (Entity &user, Entity &target, int turnCounter);
+
     void bramble (Entity &user, Entity &target, int turnCounter);
 
     void wither (Entity &user, Entity &target, int turnCounter);

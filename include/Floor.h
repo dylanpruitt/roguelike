@@ -56,7 +56,6 @@ class Floor
 
                     } break;
                     case 3: {
-                        enemyNames.push_back ("Rock");
                         enemyNames.push_back ("Blue Slime");
                         enemyNames.push_back ("Minotaur");
                         enemyNames.push_back ("Crusader");
@@ -70,7 +69,6 @@ class Floor
 
                     } break;
                     case 4: {
-                        enemyNames.push_back ("Rock");
                         enemyNames.push_back ("Brute");
                         enemyNames.push_back ("Blue Slime");
                         enemyNames.push_back ("Minotaur");
@@ -81,9 +79,9 @@ class Floor
                         skillIndices.push_back (skills::smokebomb);
                     } break;
                     case 5: {
-                        enemyNames.push_back ("Rock");
                         enemyNames.push_back ("Shadow");
                         enemyNames.push_back ("Beholder");
+                        enemyNames.push_back ("Tormented Spirit");
                         skillIndices.push_back (skills::attack);
 
                     } break;

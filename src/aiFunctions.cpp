@@ -255,6 +255,21 @@ void aiFunctions::thief (Entity &user, Entity &target, int turnCounter) {
 
 }
 
+void aiFunctions::spirit (Entity &user, Entity &target, int turnCounter) {
+    const int DISARM = 0, SPLIT_PAIN = 1, WAIL = 2;
+
+    if (user.focus > 1 || (target.health / target.maxHealth) < (user.health / user.maxHealth)) {
+       user.skillset [DISARM]->use (user, target);
+    } else {
+        if (turnCounter % 3 != 2) {
+            user.skillset [SPLIT_PAIN]->use (user, target);
+        } else {
+            user.skillset [WAIL]->use (user, target);
+        }
+    }
+
+}
+
 void aiFunctions::bramble (Entity &user, Entity &target, int turnCounter) {
     const int ATTACK = 1, DAGGER = 2, MISSILES = 0;
     int phase = 1;

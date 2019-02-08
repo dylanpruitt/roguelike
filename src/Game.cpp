@@ -56,7 +56,7 @@ void Game::battle (Entity &player, Entity &enemy) {
         replaceSkill (player, enemy.rewardSkill);
         player.gold += enemy.gold;
         player.maxHealth++; player.health++;
-        player.attack = 0;
+        player.attack = 0; player.evade = 0; player.focus = 0;
 
     }
 
@@ -201,6 +201,13 @@ void Game::initializeSkills () {
 
     Skill mug; mug.name = "Mug"; mug.use = skillFunctions::mug;
     mug.description = "Deal 4 damage and steal some gold."; gameSkills.push_back (mug);
+
+    // 20
+    Skill splitPain; splitPain.name = "Split Pain"; splitPain.use = skillFunctions::split_pain;
+    splitPain.description = "Split pain with the target (changes HP)."; gameSkills.push_back (splitPain);
+
+    Skill wail; wail.name = "Wail"; wail.use = skillFunctions::wail;
+    wail.description = "Lower the target's guard."; gameSkills.push_back (wail);
 
 }
 
@@ -484,6 +491,22 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.rewardSkill = &gameSkills [15];
 
         entity.ai = aiFunctions::beholder;
+    }
+    if (name == "Tormented Spirit") {
+        entity.health = 47;
+        entity.maxHealth = 47;
+        entity.name = "Tormented Spirit";
+        entity.attack = 3;
+
+        entity.gold = utilityFunctions::random (18, 42);
+
+        entity.skillset [0] = &gameSkills [17];
+        entity.skillset [1] = &gameSkills [20];
+        entity.skillset [2] = &gameSkills [21];
+
+        entity.rewardSkill = &gameSkills [20];
+
+        entity.ai = aiFunctions::spirit;
     }
     if (name == "Bramble Fortress") {
         entity.health = 24;

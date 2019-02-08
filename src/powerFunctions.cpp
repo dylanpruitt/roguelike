@@ -76,14 +76,14 @@ void powerFunctions::elusive_shadow (Entity &user, int turnCounter) {
     if (turnCounter == 1) { user.evade += 3; user.health = 0.5 * user.maxHealth;}
 }
 
-void powerFunctions::do_nothing (Entity &user, int turnCounter) {
+void powerFunctions::do_nothing (Entity &user, int turnCounter) { }
 
-}
-
-void powerFunctions::do_nothing (Entity &user, Entity &enemy) {
-
-}
+void powerFunctions::do_nothing (Entity &user, Entity &enemy) { }
 
 void powerFunctions::deal_spike_damage (Entity &user, Entity &enemy) {
     enemy.health--; std::cout << enemy.name << " was hurt by Thorns!" << std::endl;
+}
+
+void powerFunctions::spores (Entity &user, Entity &enemy) {
+    enemy.guard -= 2; std::cout << enemy.name << " was weakened by spores!" << std::endl;
 }

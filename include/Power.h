@@ -19,5 +19,9 @@ class Power
 
         void (*whenAttacked)(Entity &user, Entity &enemy) = powerFunctions::do_nothing;
 
+        void (*whenDebuffApplied)(Entity &user, Entity &enemy) = powerFunctions::do_nothing;
+
+        void (*onBlock)(Entity &user, Entity &enemy) = powerFunctions::do_nothing;
+
 };
 #endif // POWER_H

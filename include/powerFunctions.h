@@ -31,7 +31,14 @@ namespace powerFunctions
 
     void do_nothing (Entity &user, Entity &enemy);
 
+    /** whenAttacked () **/
+
     void deal_spike_damage (Entity &user, Entity &enemy);
+
+    void spores (Entity &user, Entity &enemy);
+
+    /** whenDebuffApplied () **/
+    /** onBlock () **/
 
 };
 

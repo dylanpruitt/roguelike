@@ -543,8 +543,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::bramble;
     }
     if (name == "Wither") {
-        entity.health = 60;
-        entity.maxHealth = 60;
+        entity.health = 128;
+        entity.maxHealth = 128;
         entity.name = "Wither";
 
         entity.gold = utilityFunctions::random (80, 124);

@@ -7,6 +7,9 @@ namespace gameData
             restore, guardBreak, arrow, shieldSwipe, tripleAttack,
             offering, explode, cleave, missiles, observe, shadowStrike,
             disarm, smokebomb, mug, splitPain, wail };
+    enum powers { growStrength = 0, noGuard, regen, wither, metalBody,
+            strengthBoost, spike, etherealHourglass, lunarEnergy,
+            eagleEye, elusiveShadow };
 };
 
 #endif // GAMEDATA_H

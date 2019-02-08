@@ -305,7 +305,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::attack];
 
-        entity.powers.push_back (&gamePowers [2]);
+        entity.powers.push_back (&gamePowers [gameData::powers::regen]);
         entity.ai = aiFunctions::blue_slime;
     }
     if (name == "Rock") {
@@ -333,7 +333,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::dagger];
 
-        entity.powers.push_back (&gamePowers [6]);
+        entity.powers.push_back (&gamePowers [gameData::powers::spike]);
         entity.ai = aiFunctions::slime;
     }
     if (name == "Shield Warrior") {
@@ -363,7 +363,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::leech];
 
-        entity.powers.push_back (&gamePowers [7]);
+        entity.powers.push_back (&gamePowers [gameData::powers::etherealHourglass]);
         entity.ai = aiFunctions::vampire;
     }
     if (name == "Brute") {
@@ -378,7 +378,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::attack];
 
-        entity.powers.push_back (&gamePowers [1]);
+        entity.powers.push_back (&gamePowers [gameData::powers::noGuard]);
         entity.ai = aiFunctions::brute;
     }
     if (name == "Hunter") {
@@ -393,7 +393,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::arrow];
 
-        entity.powers.push_back (&gamePowers [9]);
+        entity.powers.push_back (&gamePowers [gameData::powers::eagleEye]);
         entity.ai = aiFunctions::bowman;
     }
     if (name == "Crusader") {
@@ -423,7 +423,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::tripleAttack];
 
-        entity.powers.push_back (&gamePowers [0]);
+        entity.powers.push_back (&gamePowers [gameData::powers::growStrength]);
         entity.ai = aiFunctions::minotaur;
     }
     if (name == "Artifact") {
@@ -439,7 +439,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::defend];
 
-        entity.powers.push_back (&gamePowers [4]);
+        entity.powers.push_back (&gamePowers [gameData::powers::metalBody]);
         entity.ai = aiFunctions::artifact;
     }
     if (name == "Werewolf") {
@@ -455,7 +455,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::cleave];
 
-        entity.powers.push_back (&gamePowers [8]);
+        entity.powers.push_back (&gamePowers [gameData::powers::lunarEnergy]);
         entity.ai = aiFunctions::werewolf;
     }
     if (name == "Thief") {
@@ -471,7 +471,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::mug];
 
-        entity.powers.push_back (&gamePowers [10]);
+        entity.powers.push_back (&gamePowers [gameData::powers::elusiveShadow]);
         entity.ai = aiFunctions::thief;
     }
     if (name == "Shadow") {
@@ -488,7 +488,7 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::shadowStrike];
 
-        entity.powers.push_back (&gamePowers [10]);
+        entity.powers.push_back (&gamePowers [gameData::powers::elusiveShadow]);
         entity.ai = aiFunctions::shadow;
     }
     if (name == "Beholder") {
@@ -537,9 +537,9 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::attack];
 
-        entity.powers.push_back (&gamePowers [4]);
-        entity.powers.push_back (&gamePowers [6]);
-        entity.powers.push_back (&gamePowers [6]);
+        entity.powers.push_back (&gamePowers [gameData::powers::metalBody]);
+        entity.powers.push_back (&gamePowers [gameData::powers::spike]);
+        entity.powers.push_back (&gamePowers [gameData::powers::spike]);
         entity.ai = aiFunctions::bramble;
     }
     if (name == "Wither") {
@@ -556,8 +556,8 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.rewardSkill = &gameSkills [gameData::skills::attack];
 
-        entity.powers.push_back (&gamePowers [3]);
-        entity.powers.push_back (&gamePowers [1]);
+        entity.powers.push_back (&gamePowers [gameData::powers::wither]);
+        entity.powers.push_back (&gamePowers [gameData::powers::noGuard]);
         entity.ai = aiFunctions::wither;
     }
 

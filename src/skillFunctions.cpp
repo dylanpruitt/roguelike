@@ -2,6 +2,7 @@
 #include <iostream>
 #include "statusFunctions.h"
 #include "utilityFunctions.h"
+#include "PlayerStats.h"
 
 void skillFunctions::do_nothing (Entity &user, Entity &target) {
     std::cout << user.name << " did nothing!" << std::endl;
@@ -45,6 +46,8 @@ void skillFunctions::leech (Entity &user, Entity &target) {
             target.health -= damage;
             user.health += (damage / 2);
             if (user.health > user.maxHealth) { user.health = user.maxHealth; }
+            if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
+
         } else {
 
             target.guard -= damage;
@@ -78,6 +81,8 @@ void skillFunctions::last_resort (Entity &user, Entity &target) {
 
                 target.guard = 0;
                 target.health -= damage;
+                if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
+
             } else {
 
                 target.guard -= damage;
@@ -114,6 +119,7 @@ void skillFunctions::arrow (Entity &user, Entity &target) {
 
                 target.guard = 0;
                 target.health -= damage;
+                if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
             } else {
 
@@ -146,6 +152,7 @@ void skillFunctions::shield_swipe (Entity &user, Entity &target) {
 
             target.guard = 0;
             target.health -= damage;
+            if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
         } else {
 
@@ -192,6 +199,7 @@ void skillFunctions::explode (Entity &user, Entity &target) {
 
             target.guard = 0;
             target.health -= damage;
+            if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
         } else {
 
@@ -242,6 +250,7 @@ void skillFunctions::guard_break (Entity &user, Entity &target) {
     if (user.focus >= target.evade) {
         if (user.focus > target.evade) { damage += 3; user.focus--;}
         target.health -= damage;
+        if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
         if (utilityFunctions::hasPower (target, "Thorns")) {
             user.health--;
@@ -278,6 +287,7 @@ void skillFunctions::absorb (Entity &user, Entity &target) {
     if (user.focus >= target.evade) {
         if (user.focus > target.evade) { damage += 3; user.focus--;}
         target.health -= damage;
+        if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
         if (utilityFunctions::hasPower (target, "Thorns")) {
             user.health--;
@@ -310,6 +320,7 @@ void skillFunctions::missiles (Entity &user, Entity &target) {
 
                     target.guard = 0;
                     target.health -= damage;
+                    if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
                 } else {
 
@@ -356,6 +367,7 @@ void skillFunctions::disarm (Entity &user, Entity &target) {
 
             target.guard = 0;
             target.health -= damage;
+            if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
         } else {
 
@@ -386,6 +398,7 @@ void skillFunctions::shadow_strike (Entity &user, Entity &target) {
 
             target.guard = 0;
             target.health -= damage;
+            if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
 
         } else {
 
@@ -425,6 +438,7 @@ void skillFunctions::split_pain (Entity &user, Entity &target) {
 
     int newUserHealth = splitPercentage * user.maxHealth, newTargetHealth = splitPercentage * target.maxHealth;
 
+    if (user.isPlayer) { PlayerStats::damageThisRun += (target.health - newTargetHealth); }
     user.health = newUserHealth; target.health = newTargetHealth;
 }
 
@@ -445,7 +459,7 @@ void skillFunctions::basicAttack (Entity &user, Entity &target, int baseDamage) 
 
             target.guard = 0;
             target.health -= damage;
-
+            if (user.isPlayer) { PlayerStats::damageThisRun += damage; }
         } else {
 
             target.guard -= damage;

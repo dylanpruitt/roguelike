@@ -2,14 +2,24 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\aiFunctions.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Power.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1149" topLine="0" />
+			<Cursor1 position="198" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\powerFunctions.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Room.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="431" topLine="1" />
+			<Cursor1 position="50" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\aiFunctions.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8483" topLine="245" />
+		</Cursor>
+	</File>
+	<File name="src\utilityFunctions.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="342" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\utilityFunctions.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -22,73 +32,19 @@
 			<Cursor1 position="217" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\Entity.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\powerFunctions.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="438" topLine="11" />
+			<Cursor1 position="431" topLine="1" />
 		</Cursor>
 	</File>
 	<File name="include\Floor.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1615" topLine="18" />
+			<Cursor1 position="996" topLine="52" />
 		</Cursor>
-	</File>
-	<File name="include\skillFunctions.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1084" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="src\aiFunctions.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="8019" topLine="228" />
-		</Cursor>
-	</File>
-	<File name="src\skillFunctions.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1867" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="5" />
-			<Collapse line="271" />
-			<Collapse line="295" />
-		</Folding>
-	</File>
-	<File name="src\Game.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="27981" topLine="157" />
-		</Cursor>
-		<Folding>
-			<Collapse line="13" />
-			<Collapse line="64" />
-			<Collapse line="82" />
-			<Collapse line="245" />
-			<Collapse line="259" />
-			<Collapse line="273" />
-			<Collapse line="288" />
-			<Collapse line="301" />
-			<Collapse line="316" />
-			<Collapse line="331" />
-			<Collapse line="346" />
-			<Collapse line="361" />
-			<Collapse line="376" />
-			<Collapse line="391" />
-			<Collapse line="406" />
-			<Collapse line="422" />
-			<Collapse line="487" />
-			<Collapse line="506" />
-			<Collapse line="529" />
-			<Collapse line="551" />
-			<Collapse line="633" />
-			<Collapse line="771" />
-		</Folding>
 	</File>
 	<File name="src\powerFunctions.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2005" topLine="50" />
-		</Cursor>
-	</File>
-	<File name="include\Power.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="198" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\Game.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -96,19 +52,47 @@
 			<Cursor1 position="1049" topLine="25" />
 		</Cursor>
 	</File>
-	<File name="include\Room.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Game.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="50" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\utilityFunctions.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="342" topLine="0" />
+			<Cursor1 position="29267" topLine="778" />
 		</Cursor>
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="289" topLine="0" />
+			<Cursor1 position="221" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\PlayerStats.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="262" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\PlayerStats.cpp" open="1" top="1" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="672" topLine="48" />
+		</Cursor>
+	</File>
+	<File name="include\Entity.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="438" topLine="11" />
+		</Cursor>
+	</File>
+	<File name="include\aiFunctions.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1215" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="src\skillFunctions.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1480" topLine="54" />
+		</Cursor>
+		<Folding>
+			<Collapse line="6" />
+		</Folding>
+	</File>
+	<File name="include\skillFunctions.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1188" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -28,6 +28,8 @@ class Entity
 
         int gold = 24;
 
+        bool isPlayer = false;
+
         Skill *skillset [NUMBER_OF_SKILLS];
 
         Skill *rewardSkill;

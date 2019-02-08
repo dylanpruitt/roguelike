@@ -37,6 +37,7 @@
 		<Unit filename="include/Entity.h" />
 		<Unit filename="include/Floor.h" />
 		<Unit filename="include/Game.h" />
+		<Unit filename="include/PlayerStats.h" />
 		<Unit filename="include/Power.h" />
 		<Unit filename="include/Room.h" />
 		<Unit filename="include/Skill.h" />
@@ -46,6 +47,7 @@
 		<Unit filename="include/utilityFunctions.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/PlayerStats.cpp" />
 		<Unit filename="src/aiFunctions.cpp" />
 		<Unit filename="src/powerFunctions.cpp" />
 		<Unit filename="src/skillFunctions.cpp" />

@@ -4,6 +4,7 @@
 #include "powerFunctions.h"
 #include "skillFunctions.h"
 #include "utilityFunctions.h"
+#include "PlayerStats.h"
 #include <iostream>
 
 Game::~Game()
@@ -58,8 +59,10 @@ void Game::battle (Entity &player, Entity &enemy) {
         player.maxHealth++; player.health++;
         player.attack = 0; player.evade = 0; player.focus = 0;
 
-    }
+    } else {
+        PlayerStats::enemiesThatKilledPlayer.push_back (enemy.name);
 
+    }
 }
 
 void Game::displayPlayerInformation (Entity &player, Entity &enemy) {
@@ -785,6 +788,9 @@ void Game::loop (Entity &player) {
 
     if (player.health <= 0) {
         std::cout << "You died..." << std::endl;
+        PlayerStats::totalDamageDealt += PlayerStats::damageThisRun;
+        std::cout << "You dealt " << PlayerStats::damageThisRun << " damage this run." << std::endl;
+        PlayerStats::saveStatsToFile ("stats.save");
         std::cin.get ();
         std::cin.get ();
 

@@ -24,7 +24,7 @@ int main()
                 bool isDuplicate = false;
                 for (unsigned int j = 0; j < killerNames.size (); j++) {
                     if (PlayerStats::enemiesThatKilledPlayer [i] == killerNames [j]) {
-                        killCount [j]++; i++; isDuplicate = true; std::cout << "dupe" << killerNames [j];
+                        killCount [j]++; i++; isDuplicate = true;
                     }
                 }
                 if (!isDuplicate) { killerNames.push_back (PlayerStats::enemiesThatKilledPlayer [i]); killCount.push_back (1); }

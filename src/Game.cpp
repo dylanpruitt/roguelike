@@ -858,7 +858,20 @@ void Game::choosePlayerStart (Entity &player) {
 
     std::cout << "CHOOSE 3 SKILLS:" << std::endl;
     for (unsigned int i = 0; i < 5; i++) {
-        skill_options [i] = startingSkillIndices [utilityFunctions::random (0, NUMBER_OF_STARTING_SKILLS-1)];
+        bool looping = true;
+
+        while (looping) {
+            skill_options [i] = startingSkillIndices [utilityFunctions::random (0, NUMBER_OF_STARTING_SKILLS-1)];
+
+            bool isDuplicate = false;
+            for (unsigned int j = 0; j < i; j++) {
+                if (skill_options [i] == skill_options [j]) {
+                    isDuplicate = true;
+                }
+            }
+
+            if (!isDuplicate) { looping = false; }
+        }
 
         std::cout << "[" << i << "] - " << gameSkills [skill_options [i]].name << std::endl;
     }

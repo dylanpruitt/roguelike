@@ -73,5 +73,5 @@ void powerFunctions::eagle_eye (Entity &user, int turnCounter) {
 }
 
 void powerFunctions::elusive_shadow (Entity &user, int turnCounter) {
-    if (turnCounter == 1) { user.evade += 3; user.health = 1; user.maxHealth = 1;}
+    if (turnCounter == 1) { user.evade += 3; user.health = 0.5 * user.maxHealth;}
 }

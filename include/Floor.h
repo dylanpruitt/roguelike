@@ -2,6 +2,7 @@
 #define FLOOR_H
 #include "Room.h"
 #include "Power.h"
+#include "gameData.h"
 #include <vector>
 
 class Floor
@@ -20,9 +21,6 @@ class Floor
     protected:
 
     private:
-        enum skills { doNothing = 0, attack, dagger, defend, leech, lastResort, restore, guardBreak, arrow,
-                    shieldSwipe, tripleAttack, offering, explode, cleave, missiles, observe, shadowStrike, disarm,
-                    smokebomb, mug };
 
         void generateFloorEntities (int floorNumber) {
             switch (floorNumber) {
@@ -32,10 +30,10 @@ class Floor
                         enemyNames.push_back ("Shield Warrior");
                         enemyNames.push_back ("Vampire");
                         enemyNames.push_back ("Wisp");
-                        skillIndices.push_back (skills::attack);
-                        skillIndices.push_back (skills::defend);
-                        skillIndices.push_back (skills::leech);
-                        skillIndices.push_back (skills::disarm);
+                        skillIndices.push_back (gameData::skills::attack);
+                        skillIndices.push_back (gameData::skills::defend);
+                        skillIndices.push_back (gameData::skills::leech);
+                        skillIndices.push_back (gameData::skills::disarm);
 
                     } break;
                     case 2: {
@@ -45,14 +43,14 @@ class Floor
                         enemyNames.push_back ("Rock");
                         enemyNames.push_back ("Crusader");
                         enemyNames.push_back ("Brute");
-                        skillIndices.push_back (skills::dagger);
-                        skillIndices.push_back (skills::arrow);
-                        skillIndices.push_back (skills::leech);
-                        skillIndices.push_back (skills::lastResort);
-                        skillIndices.push_back (skills::offering);
-                        skillIndices.push_back (skills::disarm);
-                        skillIndices.push_back (skills::observe);
-                        skillIndices.push_back (skills::smokebomb);
+                        skillIndices.push_back (gameData::skills::dagger);
+                        skillIndices.push_back (gameData::skills::arrow);
+                        skillIndices.push_back (gameData::skills::leech);
+                        skillIndices.push_back (gameData::skills::lastResort);
+                        skillIndices.push_back (gameData::skills::offering);
+                        skillIndices.push_back (gameData::skills::disarm);
+                        skillIndices.push_back (gameData::skills::observe);
+                        skillIndices.push_back (gameData::skills::smokebomb);
 
                     } break;
                     case 3: {
@@ -60,54 +58,54 @@ class Floor
                         enemyNames.push_back ("Minotaur");
                         enemyNames.push_back ("Crusader");
                         enemyNames.push_back ("Thief");
-                        skillIndices.push_back (skills::shieldSwipe);
-                        skillIndices.push_back (skills::restore);
-                        skillIndices.push_back (skills::dagger);
-                        skillIndices.push_back (skills::disarm);
-                        skillIndices.push_back (skills::observe);
-                        skillIndices.push_back (skills::smokebomb);
+                        skillIndices.push_back (gameData::skills::shieldSwipe);
+                        skillIndices.push_back (gameData::skills::restore);
+                        skillIndices.push_back (gameData::skills::dagger);
+                        skillIndices.push_back (gameData::skills::disarm);
+                        skillIndices.push_back (gameData::skills::observe);
+                        skillIndices.push_back (gameData::skills::smokebomb);
 
                     } break;
                     case 4: {
                         enemyNames.push_back ("Brute");
                         enemyNames.push_back ("Blue Slime");
                         enemyNames.push_back ("Minotaur");
-                        skillIndices.push_back (skills::tripleAttack);
-                        skillIndices.push_back (skills::cleave);
-                        skillIndices.push_back (skills::explode);
-                        skillIndices.push_back (skills::shadowStrike);
-                        skillIndices.push_back (skills::smokebomb);
+                        skillIndices.push_back (gameData::skills::tripleAttack);
+                        skillIndices.push_back (gameData::skills::cleave);
+                        skillIndices.push_back (gameData::skills::explode);
+                        skillIndices.push_back (gameData::skills::shadowStrike);
+                        skillIndices.push_back (gameData::skills::smokebomb);
                     } break;
                     case 5: {
                         enemyNames.push_back ("Shadow");
                         enemyNames.push_back ("Beholder");
                         enemyNames.push_back ("Tormented Spirit");
-                        skillIndices.push_back (skills::attack);
+                        skillIndices.push_back (gameData::skills::attack);
 
                     } break;
                     case 6: {
                         enemyNames.push_back ("Rock");
-                        skillIndices.push_back (skills::attack);
+                        skillIndices.push_back (gameData::skills::attack);
 
                     } break;
                     case 7: {
                         enemyNames.push_back ("Rock");
-                        skillIndices.push_back (skills::attack);
+                        skillIndices.push_back (gameData::skills::attack);
 
                     } break;
                     case 8: {
                         enemyNames.push_back ("Rock");
-                        skillIndices.push_back (skills::attack);
+                        skillIndices.push_back (gameData::skills::attack);
 
                     } break;
                     case 9: {
                         enemyNames.push_back ("Rock");
-                        skillIndices.push_back (skills::attack);
+                        skillIndices.push_back (gameData::skills::attack);
 
                     } break;
                     case 10: {
                         enemyNames.push_back ("Rock");
-                        skillIndices.push_back (skills::attack);
+                        skillIndices.push_back (gameData::skills::attack);
 
                     } break;
                 }

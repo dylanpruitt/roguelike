@@ -247,7 +247,7 @@ void Game::initializePowers () {
     eagleEye.description = "If you have less than 1 Focus, set your Focus equal to 1."; gamePowers.push_back (eagleEye);
 
     Power elusiveShadow; elusiveShadow.name = "Elusive Shadow"; elusiveShadow.use = powerFunctions::elusive_shadow;
-    elusiveShadow.description = "Gain 3 Evade at the start of combat but the user has 1 max HP."; gamePowers.push_back (elusiveShadow);
+    elusiveShadow.description = "Gain 3 Evade at the start of combat but the user has halved HP."; gamePowers.push_back (elusiveShadow);
 }
 
 Entity Game::returnEntityFromName (std::string name) {
@@ -260,10 +260,10 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (8, 24);
 
-        entity.skillset [0] = &gameSkills [1];
-        entity.skillset [1] = &gameSkills [0];
+        entity.skillset [0] = &gameSkills [gameData::skills::attack];
+        entity.skillset [1] = &gameSkills [gameData::skills::doNothing];
 
-        entity.rewardSkill = &gameSkills [1];
+        entity.rewardSkill = &gameSkills [gameData::skills::attack];
 
         entity.ai = aiFunctions::slime;
     }
@@ -274,10 +274,10 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (11, 17);
 
-        entity.skillset [0] = &gameSkills [6];
-        entity.skillset [1] = &gameSkills [1];
+        entity.skillset [0] = &gameSkills [gameData::skills::restore];
+        entity.skillset [1] = &gameSkills [gameData::skills::attack];
 
-        entity.rewardSkill = &gameSkills [6];
+        entity.rewardSkill = &gameSkills [gameData::skills::restore];
 
         entity.ai = aiFunctions::wisp;
     }
@@ -288,10 +288,10 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (8, 24);
 
-        entity.skillset [0] = &gameSkills [1];
-        entity.skillset [1] = &gameSkills [0];
+        entity.skillset [0] = &gameSkills [gameData::skills::attack];
+        entity.skillset [1] = &gameSkills [gameData::skills::doNothing];
 
-        entity.rewardSkill = &gameSkills [1];
+        entity.rewardSkill = &gameSkills [gameData::skills::attack];
 
         entity.powers.push_back (&gamePowers [2]);
         entity.ai = aiFunctions::blue_slime;
@@ -303,9 +303,9 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (1, 3);
 
-        entity.skillset [0] = &gameSkills [0];
+        entity.skillset [0] = &gameSkills [gameData::skills::doNothing];
 
-        entity.rewardSkill = &gameSkills [0];
+        entity.rewardSkill = &gameSkills [gameData::skills::doNothing];
 
         entity.ai = aiFunctions::rock;
     }
@@ -316,10 +316,10 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (22, 31);
 
-        entity.skillset [0] = &gameSkills [2];
-        entity.skillset [1] = &gameSkills [1];
+        entity.skillset [0] = &gameSkills [gameData::skills::dagger];
+        entity.skillset [1] = &gameSkills [gameData::skills::attack];
 
-        entity.rewardSkill = &gameSkills [2];
+        entity.rewardSkill = &gameSkills [gameData::skills::dagger];
 
         entity.powers.push_back (&gamePowers [6]);
         entity.ai = aiFunctions::slime;
@@ -331,11 +331,11 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (11, 28);
 
-        entity.skillset [0] = &gameSkills [0];
-        entity.skillset [1] = &gameSkills [1];
-        entity.skillset [2] = &gameSkills [3];
+        entity.skillset [0] = &gameSkills [gameData::skills::doNothing];
+        entity.skillset [1] = &gameSkills [gameData::skills::attack];
+        entity.skillset [2] = &gameSkills [gameData::skills::defend];
 
-        entity.rewardSkill = &gameSkills [3];
+        entity.rewardSkill = &gameSkills [gameData::skills::defend];
 
         entity.ai = aiFunctions::shieldKnight;
     }
@@ -346,10 +346,10 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (16, 39);
 
-        entity.skillset [0] = &gameSkills [4];
-        entity.skillset [1] = &gameSkills [3];
+        entity.skillset [0] = &gameSkills [gameData::skills::leech];
+        entity.skillset [1] = &gameSkills [gameData::skills::defend];
 
-        entity.rewardSkill = &gameSkills [4];
+        entity.rewardSkill = &gameSkills [gameData::skills::leech];
 
         entity.powers.push_back (&gamePowers [7]);
         entity.ai = aiFunctions::vampire;
@@ -361,10 +361,10 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (23, 32);
 
-        entity.skillset [0] = &gameSkills [1];
-        entity.skillset [1] = &gameSkills [0];
+        entity.skillset [0] = &gameSkills [gameData::skills::attack];
+        entity.skillset [1] = &gameSkills [gameData::skills::doNothing];
 
-        entity.rewardSkill = &gameSkills [1];
+        entity.rewardSkill = &gameSkills [gameData::skills::attack];
 
         entity.powers.push_back (&gamePowers [1]);
         entity.ai = aiFunctions::brute;
@@ -376,10 +376,10 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (16, 22);
 
-        entity.skillset [0] = &gameSkills [8];
-        entity.skillset [1] = &gameSkills [3];
+        entity.skillset [0] = &gameSkills [gameData::skills::arrow];
+        entity.skillset [1] = &gameSkills [gameData::skills::defend];
 
-        entity.rewardSkill = &gameSkills [8];
+        entity.rewardSkill = &gameSkills [gameData::skills::arrow];
 
         entity.powers.push_back (&gamePowers [9]);
         entity.ai = aiFunctions::bowman;
@@ -391,11 +391,11 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (26, 38);
 
-        entity.skillset [0] = &gameSkills [9];
-        entity.skillset [1] = &gameSkills [3];
-        entity.skillset [2] = &gameSkills [0];
+        entity.skillset [0] = &gameSkills [gameData::skills::shieldSwipe];
+        entity.skillset [1] = &gameSkills [gameData::skills::defend];
+        entity.skillset [2] = &gameSkills [gameData::skills::doNothing];
 
-        entity.rewardSkill = &gameSkills [9];
+        entity.rewardSkill = &gameSkills [gameData::skills::shieldSwipe];
 
         entity.ai = aiFunctions::crusader;
     }
@@ -406,10 +406,10 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (28, 36);
 
-        entity.skillset [0] = &gameSkills [10];
-        entity.skillset [1] = &gameSkills [0];
+        entity.skillset [0] = &gameSkills [gameData::skills::tripleAttack];
+        entity.skillset [1] = &gameSkills [gameData::skills::doNothing];
 
-        entity.rewardSkill = &gameSkills [10];
+        entity.rewardSkill = &gameSkills [gameData::skills::tripleAttack];
 
         entity.powers.push_back (&gamePowers [0]);
         entity.ai = aiFunctions::minotaur;
@@ -421,11 +421,11 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (26, 48);
 
-        entity.skillset [0] = &gameSkills [1];
-        entity.skillset [1] = &gameSkills [3];
-        entity.skillset [2] = &gameSkills [7];
+        entity.skillset [0] = &gameSkills [gameData::skills::attack];
+        entity.skillset [1] = &gameSkills [gameData::skills::defend];
+        entity.skillset [2] = &gameSkills [gameData::skills::guardBreak];
 
-        entity.rewardSkill = &gameSkills [3];
+        entity.rewardSkill = &gameSkills [gameData::skills::defend];
 
         entity.powers.push_back (&gamePowers [4]);
         entity.ai = aiFunctions::artifact;
@@ -437,11 +437,11 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (35, 58);
 
-        entity.skillset [0] = &gameSkills [0];
-        entity.skillset [1] = &gameSkills [7];
-        entity.skillset [2] = &gameSkills [13];
+        entity.skillset [0] = &gameSkills [gameData::skills::doNothing];
+        entity.skillset [1] = &gameSkills [gameData::skills::guardBreak];
+        entity.skillset [2] = &gameSkills [gameData::skills::cleave];
 
-        entity.rewardSkill = &gameSkills [13];
+        entity.rewardSkill = &gameSkills [gameData::skills::cleave];
 
         entity.powers.push_back (&gamePowers [8]);
         entity.ai = aiFunctions::werewolf;
@@ -453,11 +453,11 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (64, 92);
 
-        entity.skillset [0] = &gameSkills [2];
-        entity.skillset [1] = &gameSkills [18];
-        entity.skillset [2] = &gameSkills [19];
+        entity.skillset [0] = &gameSkills [gameData::skills::dagger];
+        entity.skillset [1] = &gameSkills [gameData::skills::smokebomb];
+        entity.skillset [2] = &gameSkills [gameData::skills::mug];
 
-        entity.rewardSkill = &gameSkills [19];
+        entity.rewardSkill = &gameSkills [gameData::skills::mug];
 
         entity.powers.push_back (&gamePowers [10]);
         entity.ai = aiFunctions::thief;
@@ -470,11 +470,11 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (24, 32);
 
-        entity.skillset [0] = &gameSkills [17];
-        entity.skillset [1] = &gameSkills [18];
-        entity.skillset [2] = &gameSkills [16];
+        entity.skillset [0] = &gameSkills [gameData::skills::disarm];
+        entity.skillset [1] = &gameSkills [gameData::skills::smokebomb];
+        entity.skillset [2] = &gameSkills [gameData::skills::shadowStrike];
 
-        entity.rewardSkill = &gameSkills [16];
+        entity.rewardSkill = &gameSkills [gameData::skills::shadowStrike];
 
         entity.powers.push_back (&gamePowers [10]);
         entity.ai = aiFunctions::shadow;
@@ -487,11 +487,11 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (24, 32);
 
-        entity.skillset [0] = &gameSkills [15];
-        entity.skillset [1] = &gameSkills [1];
-        entity.skillset [2] = &gameSkills [17];
+        entity.skillset [0] = &gameSkills [gameData::skills::observe];
+        entity.skillset [1] = &gameSkills [gameData::skills::attack];
+        entity.skillset [2] = &gameSkills [gameData::skills::disarm];
 
-        entity.rewardSkill = &gameSkills [15];
+        entity.rewardSkill = &gameSkills [gameData::skills::observe];
 
         entity.ai = aiFunctions::beholder;
     }
@@ -503,11 +503,11 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (18, 42);
 
-        entity.skillset [0] = &gameSkills [17];
-        entity.skillset [1] = &gameSkills [20];
-        entity.skillset [2] = &gameSkills [21];
+        entity.skillset [0] = &gameSkills [gameData::skills::disarm];
+        entity.skillset [1] = &gameSkills [gameData::skills::splitPain];
+        entity.skillset [2] = &gameSkills [gameData::skills::wail];
 
-        entity.rewardSkill = &gameSkills [20];
+        entity.rewardSkill = &gameSkills [gameData::skills::splitPain];
 
         entity.ai = aiFunctions::spirit;
     }
@@ -518,12 +518,12 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (46, 82);
 
-        entity.skillset [0] = &gameSkills [1];
-        entity.skillset [1] = &gameSkills [2];
-        entity.skillset [2] = &gameSkills [14];
+        entity.skillset [0] = &gameSkills [gameData::skills::attack];
+        entity.skillset [1] = &gameSkills [gameData::skills::dagger];
+        entity.skillset [2] = &gameSkills [gameData::skills::missiles];
 
 
-        entity.rewardSkill = &gameSkills [1];
+        entity.rewardSkill = &gameSkills [gameData::skills::attack];
 
         entity.powers.push_back (&gamePowers [4]);
         entity.powers.push_back (&gamePowers [6]);
@@ -537,12 +537,12 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.gold = utilityFunctions::random (80, 124);
 
-        entity.skillset [0] = &gameSkills [4];
-        entity.skillset [1] = &gameSkills [5];
-        entity.skillset [2] = &gameSkills [0];
+        entity.skillset [0] = &gameSkills [gameData::skills::leech];
+        entity.skillset [1] = &gameSkills [gameData::skills::lastResort];
+        entity.skillset [2] = &gameSkills [gameData::skills::doNothing];
 
 
-        entity.rewardSkill = &gameSkills [1];
+        entity.rewardSkill = &gameSkills [gameData::skills::attack];
 
         entity.powers.push_back (&gamePowers [3]);
         entity.powers.push_back (&gamePowers [1]);

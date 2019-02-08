@@ -105,6 +105,7 @@ void Game::displayCombatantPowers (Entity &player, Entity &enemy) {
         }
 
     }
+
     for (unsigned int i = 0; i < powers.size (); i++) {
 
         std::cout << powers [i];
@@ -121,7 +122,7 @@ void Game::displayCombatantPowers (Entity &player, Entity &enemy) {
         bool isStacked = false;
         for (unsigned int j = 0; j < powers.size (); j++) {
             if (enemy.powers [i]->name == powers [j]) {
-                powerStacks [i]++;
+                powerStacks [j]++;
                 isStacked = true;
             }
 

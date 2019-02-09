@@ -672,6 +672,7 @@ Room Game::generateRoom (Floor &parent) {
 
 void Game::displayRoomChoices (int roomIndex) {
     const int START = 0, MIDBOSS = 13, BOSS = 26;
+    displayPaths ();
     if (roomIndex == START) {
         std::cout << "[1] " << dungeon [floor - 1].floorMap [1].roomType << std::endl;
         std::cout << "[2] " << dungeon [floor - 1].floorMap [2].roomType << std::endl;
@@ -887,6 +888,7 @@ void Game::choosePlayerStart (Entity &player) {
         }
 
         std::cout << "[" << i << "] - " << gameSkills [skill_options [i]].name << std::endl;
+        std::cout << " -- " << gameSkills [skill_options [i]].description << std::endl;
     }
 
     int choices [3] = {-1,-1,-1};

@@ -1,6 +1,7 @@
 #include "utilityFunctions.h"
 #include "Power.h"
 #include <stdlib.h>
+#include <string>
 #include <time.h>
 #include <iostream>
 #include <limits>
@@ -42,4 +43,3 @@ bool utilityFunctions::hasPower (Entity &entity, std::string name) {
 
     return false;
 }
-

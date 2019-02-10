@@ -42,6 +42,7 @@
 		<Unit filename="include/Room.h" />
 		<Unit filename="include/Skill.h" />
 		<Unit filename="include/aiFunctions.h" />
+		<Unit filename="include/gameData.h" />
 		<Unit filename="include/powerFunctions.h" />
 		<Unit filename="include/skillFunctions.h" />
 		<Unit filename="include/utilityFunctions.h" />

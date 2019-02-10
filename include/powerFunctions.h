@@ -37,6 +37,8 @@ namespace powerFunctions
 
     void spores (Entity &user, Entity &enemy);
 
+    void counter (Entity &user, Entity &enemy);
+
     /** whenDebuffApplied () **/
     /** onBlock () **/
 

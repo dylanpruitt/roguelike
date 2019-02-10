@@ -87,3 +87,11 @@ void powerFunctions::deal_spike_damage (Entity &user, Entity &enemy) {
 void powerFunctions::spores (Entity &user, Entity &enemy) {
     enemy.guard -= 2; std::cout << enemy.name << " was weakened by spores!" << std::endl;
 }
+
+void powerFunctions::counter (Entity &user, Entity &enemy) {
+    if (user.guard > 0) {
+        enemy.health -= user.attack + 3;
+        std::cout << user.name << " countered " << enemy.name << "'s attack!" << std::endl;
+    }
+
+}

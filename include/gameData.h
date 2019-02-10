@@ -9,7 +9,7 @@ namespace gameData
             disarm, smokebomb, mug, splitPain, wail };
     enum powers { growStrength = 0, noGuard, regen, wither, metalBody,
             strengthBoost, spike, etherealHourglass, lunarEnergy,
-            eagleEye, elusiveShadow };
+            eagleEye, elusiveShadow, counter, spore };
 };
 
 #endif // GAMEDATA_H

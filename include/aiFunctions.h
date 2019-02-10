@@ -40,7 +40,11 @@ namespace aiFunctions
 
     void bramble (Entity &user, Entity &target, int turnCounter);
 
+    void herbalist (Entity &user, Entity &target, int turnCounter);
+
     void wither (Entity &user, Entity &target, int turnCounter);
+
+    void dragon (Entity &user, Entity &target, int turnCounter);
 };
 
 

@@ -37,7 +37,7 @@ class Game
         std::vector <Power> gamePowers;
 
     private:
-        Floor dungeon [10];
+        Floor dungeon [5];
 
         void executeRoomLogic (Entity &player, int roomIndex);
 

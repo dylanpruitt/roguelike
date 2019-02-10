@@ -83,31 +83,6 @@ class Floor
                         skillIndices.push_back (gameData::skills::attack);
 
                     } break;
-                    case 6: {
-                        enemyNames.push_back ("Rock");
-                        skillIndices.push_back (gameData::skills::attack);
-
-                    } break;
-                    case 7: {
-                        enemyNames.push_back ("Rock");
-                        skillIndices.push_back (gameData::skills::attack);
-
-                    } break;
-                    case 8: {
-                        enemyNames.push_back ("Rock");
-                        skillIndices.push_back (gameData::skills::attack);
-
-                    } break;
-                    case 9: {
-                        enemyNames.push_back ("Rock");
-                        skillIndices.push_back (gameData::skills::attack);
-
-                    } break;
-                    case 10: {
-                        enemyNames.push_back ("Rock");
-                        skillIndices.push_back (gameData::skills::attack);
-
-                    } break;
                 }
         }
 

@@ -316,3 +316,27 @@ void aiFunctions::wither (Entity &user, Entity &target, int turnCounter) {
     }
 
 }
+
+void aiFunctions::dragon (Entity &user, Entity &target, int turnCounter) {
+    const int CLEAVE = 0, GUARD_BREAK = 1, WAIL = 2;
+
+    if (target.guard >= 2) {
+        user.skillset [GUARD_BREAK]->use (user, target);
+    }
+
+}
+
+void aiFunctions::herbalist (Entity &user, Entity &target, int turnCounter) {
+    const int DISARM = 0, DAGGER = 1, OBSERVE = 2;
+
+    if (user.focus > 1 || (target.health / target.maxHealth) < (user.health / user.maxHealth)) {
+       user.skillset [DISARM]->use (user, target);
+    } else {
+        if (turnCounter % 2 != 0) {
+            user.skillset [DAGGER]->use (user, target);
+        } else {
+            user.skillset [OBSERVE]->use (user, target);
+        }
+    }
+
+}

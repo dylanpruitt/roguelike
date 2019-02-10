@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Status.h"
 #include "aiFunctions.h"
 #include "powerFunctions.h"
 #include "skillFunctions.h"
@@ -261,6 +260,16 @@ void Game::initializePowers () {
     Power elusiveShadow; elusiveShadow.name = "Elusive Shadow";
     elusiveShadow.use = powerFunctions::elusive_shadow;
     elusiveShadow.description = "Gain 3 Evade at the start of combat but the user has halved HP."; gamePowers.push_back (elusiveShadow);
+
+    Power counter; counter.name = "Counter";
+    counter.use = powerFunctions::do_nothing;
+    counter.whenAttacked = powerFunctions::counter;
+    counter.description = "When the user is attacked, if the user has at least 1 Guard left, they counter-attack."; gamePowers.push_back (counter);
+
+    Power spore; spore.name = "Spore";
+    spore.use = powerFunctions::do_nothing;
+    spore.whenAttacked = powerFunctions::spores;
+    spore.description = "When the user is attacked, the enemy loses 2 Guard."; gamePowers.push_back (counter);
 }
 
 Entity Game::returnEntityFromName (std::string name) {
@@ -524,6 +533,23 @@ Entity Game::returnEntityFromName (std::string name) {
 
         entity.ai = aiFunctions::spirit;
     }
+    if (name == "Herbalist") {
+        entity.health = 60;
+        entity.maxHealth = 60;
+        entity.name = "Herbalist";
+        entity.attack = 3;
+
+        entity.gold = utilityFunctions::random (50, 64);
+
+        entity.skillset [0] = &gameSkills [gameData::skills::disarm];
+        entity.skillset [1] = &gameSkills [gameData::skills::dagger];
+        entity.skillset [2] = &gameSkills [gameData::skills::observe];
+
+        entity.rewardSkill = &gameSkills [gameData::skills::observe];
+
+        entity.powers.push_back (&gamePowers [gameData::powers::spore]);
+        entity.ai = aiFunctions::herbalist;
+    }
     if (name == "Bramble Fortress") {
         entity.health = 24;
         entity.maxHealth = 24;
@@ -544,8 +570,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::bramble;
     }
     if (name == "Wither") {
-        entity.health = 128;
-        entity.maxHealth = 128;
+        entity.health = 80;
+        entity.maxHealth = 80;
         entity.name = "Wither";
 
         entity.gold = utilityFunctions::random (80, 124);
@@ -561,7 +587,25 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.powers.push_back (&gamePowers [gameData::powers::noGuard]);
         entity.ai = aiFunctions::wither;
     }
+    if (name == "Dragon") {
+        entity.health = 77;
+        entity.maxHealth = 77;
+        entity.name = "Dragon";
 
+        entity.gold = utilityFunctions::random (80, 124);
+
+        entity.skillset [0] = &gameSkills [gameData::skills::cleave];
+        entity.skillset [1] = &gameSkills [gameData::skills::guardBreak];
+        entity.skillset [2] = &gameSkills [gameData::skills::wail];
+
+
+        entity.rewardSkill = &gameSkills [gameData::skills::cleave];
+
+        entity.powers.push_back (&gamePowers [gameData::powers::strengthBoost]);
+        entity.powers.push_back (&gamePowers [gameData::powers::strengthBoost]);
+        entity.powers.push_back (&gamePowers [gameData::powers::spike]);
+        entity.ai = aiFunctions::dragon;
+    }
     return entity;
 
 }
@@ -589,7 +633,7 @@ void Game::replaceSkill (Entity &player, Skill *rewardSkill) {
 }
 
 void Game::generateMap (int seed) {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
         dungeon [i] = generateFloor (seed, i + 1);
 
     }
@@ -609,7 +653,22 @@ Floor Game::generateFloor (int seed, int floorNumber) {
 
     }
 
-    Room midBoss; midBoss.roomType = "enemy"; midBoss.entityInRoom = returnEntityFromName ("Hunter");
+    Room midBoss; midBoss.roomType = "enemy";
+
+    switch (floorNumber) {
+        case 1: {
+            midBoss.entityInRoom = returnEntityFromName ("Hunter");
+        } break;
+        case 2: {
+            midBoss.entityInRoom = returnEntityFromName ("Werewolf");
+        } break;
+        case 3: {
+            midBoss.entityInRoom = returnEntityFromName ("Beholder");
+        } break;
+        default: {
+           midBoss.entityInRoom = returnEntityFromName ("Blue Slime");
+        } break;
+    }
 
     floor.floorMap [13] = midBoss;
     for (int i = 0; i < 12; i++) {
@@ -630,6 +689,9 @@ Floor Game::generateFloor (int seed, int floorNumber) {
         } break;
         case 3: {
             boss.entityInRoom = returnEntityFromName ("Wither");
+        } break;
+        case 4: {
+            boss.entityInRoom = returnEntityFromName ("Dragon");
         } break;
         default: {
            boss.entityInRoom = returnEntityFromName ("Blue Slime");
@@ -785,7 +847,10 @@ void Game::loop (Entity &player) {
         std::cout << "FLOOR " << floor << std::endl;
         displayRoomChoices (roomIndex);
 
-        int choice = -1; choice = utilityFunctions::getIntegerInput ();
+        int choice = -1;
+        choice = utilityFunctions::getIntegerInput ();
+
+        if (choice > 3 || choice <= 0) { choice = 1; }
 
         if (roomIndex == 0) { roomIndex = choice;
         } else if (roomIndex >= 10 && roomIndex <= 12) { roomIndex = 13;

@@ -146,70 +146,92 @@ void Game::displayCombatantPowers (Entity &player, Entity &enemy) {
 void Game::initializeSkills () {
     // 0
     Skill doNothing; doNothing.name = "Do Nothing"; doNothing.use = skillFunctions::do_nothing;
+    doNothing.minimumPrice = 0; doNothing.maximumPrice = 0;
     doNothing.description = "Do nothing."; gameSkills.push_back (doNothing);
 
     Skill attack; attack.name = "Attack"; attack.use = skillFunctions::attack;
+    attack.minimumPrice = 16; attack.maximumPrice = 24;
     attack.description = "A basic attack. Deals 3 base damage."; gameSkills.push_back (attack);
 
     Skill dagger; dagger.name = "Dagger"; dagger.use = skillFunctions::dagger;
+    dagger.minimumPrice = 36; dagger.maximumPrice = 54;
     dagger.description = "A basic attack. Deals 5 base damage."; gameSkills.push_back (dagger);
 
     Skill defend; defend.name = "Defend"; defend.use = skillFunctions::defend;
+    defend.minimumPrice = 27; defend.maximumPrice = 44;
     defend.description = "Adds 4 guard (you can take 4 damage without losing health). Guard goes away on your next turn."; gameSkills.push_back (defend);
     // 4
     Skill leech; leech.name = "Leech"; leech.use = skillFunctions::leech;
+    leech.minimumPrice = 36; leech.maximumPrice = 54;
     leech.description = "A basic attack. Deals 3 damage and heal some of the damage you inflict."; gameSkills.push_back (leech);
 
     Skill last_resort; last_resort.name = "Last Resort"; last_resort.use = skillFunctions::last_resort;
+    last_resort.minimumPrice = 27; last_resort.maximumPrice = 44;
     last_resort.description = "Deals 50 damage if user has 1 health. Otherwise does nothing."; gameSkills.push_back (last_resort);
 
     Skill restore; restore.name = "Restore"; restore.use = skillFunctions::restore;
+    restore.minimumPrice = 56; restore.maximumPrice = 72;
     restore.description = "Restore a fourth of your health."; gameSkills.push_back (restore);
 
     Skill guardBreak; guardBreak.name = "Guard Break"; guardBreak.use = skillFunctions::guard_break;
+    guardBreak.minimumPrice = 36; guardBreak.maximumPrice = 54;
     guardBreak.description = "Deals damage to guarding enemies."; gameSkills.push_back (guardBreak);
     // 8
     Skill arrow; arrow.name = "Arrow"; arrow.use = skillFunctions::arrow;
+    arrow.minimumPrice = 27; arrow.maximumPrice = 44;
     arrow.description = "A basic attack, can miss but user does not take damage from Thorns."; gameSkills.push_back (arrow);
 
     Skill shieldSwipe; shieldSwipe.name = "Shield Swipe"; shieldSwipe.use = skillFunctions::shield_swipe;
+    shieldSwipe.minimumPrice = 64; shieldSwipe.maximumPrice = 80;
     shieldSwipe.description = "Gain guard and attack at the same time."; gameSkills.push_back (shieldSwipe);
 
     Skill tripleAttack; tripleAttack.name = "Triple Attack"; tripleAttack.use = skillFunctions::triple_attack;
+    tripleAttack.minimumPrice = 64; tripleAttack.maximumPrice = 80;
     tripleAttack.description = "Attack three times."; gameSkills.push_back (tripleAttack);
 
     Skill offering; offering.name = "Offering"; offering.use = skillFunctions::offering;
+    offering.minimumPrice = 36; offering.maximumPrice = 54;
     offering.description = "The user sacrifices some of their health but their attack increases."; gameSkills.push_back (offering);
     // 12
     Skill explode; explode.name = "Explode"; explode.use = skillFunctions::explode;
+    offering.minimumPrice = 36; offering.maximumPrice = 54;
     explode.description = "An attack that does damage to the user too."; gameSkills.push_back (explode);
 
     Skill cleave; cleave.name = "Cleave"; cleave.use = skillFunctions::cleave;
+    cleave.minimumPrice = 64; cleave.maximumPrice = 80;
     cleave.description = "A basic attack. Deals 7 base damage."; gameSkills.push_back (cleave);
 
     Skill missiles; missiles.name = "Missiles"; missiles.use = skillFunctions::missiles;
+    missiles.minimumPrice = 90; missiles.maximumPrice = 128;
     missiles.description = "Fire off 2 to 5 missiles. The user does not take damage from Thorns."; gameSkills.push_back (missiles);
 
     Skill observe; observe.name = "Observe"; observe.use = skillFunctions::focus;
+    observe.minimumPrice = 36; observe.maximumPrice = 54;
     observe.description = "Gain 1 Focus."; gameSkills.push_back (observe);
     // 16
     Skill shadowStrike; shadowStrike.name = "Shadow Strike"; shadowStrike.use = skillFunctions::shadow_strike;
+    shadowStrike.minimumPrice = 54; shadowStrike.maximumPrice = 72;
     shadowStrike.description = "Deal 3 * Evade damage. Lose all Evade."; gameSkills.push_back (shadowStrike);
 
     Skill disarm; disarm.name = "Disarm"; disarm.use = skillFunctions::disarm;
+    disarm.minimumPrice = 54; disarm.maximumPrice = 72;
     disarm.description = "Deal 3 damage. Target loses 1 Focus."; gameSkills.push_back (disarm);
 
     Skill smokebomb; smokebomb.name = "Smokebomb"; smokebomb.use = skillFunctions::evade;
+    smokebomb.minimumPrice = 48; smokebomb.maximumPrice = 64;
     smokebomb.description = "Gain 1 Evade."; gameSkills.push_back (smokebomb);
 
     Skill mug; mug.name = "Mug"; mug.use = skillFunctions::mug;
+    mug.minimumPrice = 48; mug.maximumPrice = 64;
     mug.description = "Deal 4 damage and steal some gold."; gameSkills.push_back (mug);
 
     // 20
     Skill splitPain; splitPain.name = "Split Pain"; splitPain.use = skillFunctions::split_pain;
+    splitPain.minimumPrice = 54; splitPain.maximumPrice = 72;
     splitPain.description = "Split pain with the target (changes HP)."; gameSkills.push_back (splitPain);
 
     Skill wail; wail.name = "Wail"; wail.use = skillFunctions::wail;
+    wail.minimumPrice = 36; wail.maximumPrice = 54;
     wail.description = "Lower the target's guard."; gameSkills.push_back (wail);
 
 }
@@ -715,16 +737,20 @@ Room Game::generateRoom (Floor &parent) {
         room.entityInRoom = returnEntityFromName (parent.enemyNames [index]); room.roomType = "enemy";
 
     } else if (random >= 20) {
-        int index = utilityFunctions::random (0, parent.skillIndices.size () - 1);
-
-        room.skillReward = gameSkills [parent.skillIndices [index]];
+        for (int i = 0; i < 3; i++) {
+            int index = utilityFunctions::random (0, parent.skillIndices.size () - 1);
+            Skill skillReward; skillReward = gameSkills [parent.skillIndices [index]];
+            room.skillRewards.push_back (skillReward);
+            room.priceOfSkills [i] = utilityFunctions::random (gameSkills [parent.skillIndices [index]].minimumPrice, gameSkills [parent.skillIndices [index]].maximumPrice);
+        }
         room.priceOfHeal = utilityFunctions::random (24, 108);
-        room.priceOfSkill = utilityFunctions::random (24, 108);
         room.roomType = "shop";
     } else if (random >= 10) {
         int index = utilityFunctions::random (0, parent.skillIndices.size () - 1);
 
-        room.skillReward = gameSkills [parent.skillIndices [index]]; room.roomType = "skillreward";
+        Skill skillReward; skillReward = gameSkills [parent.skillIndices [index]];
+        room.skillRewards.push_back (skillReward);
+        room.roomType = "skillreward";
     } else {
         int goldReward = utilityFunctions::random (1, 100); room.goldReward = goldReward; room.roomType = "goldreward";
     }
@@ -886,7 +912,7 @@ void Game::executeRoomLogic (Entity &player, int roomIndex) {
 
     } else if (dungeon [floor - 1].floorMap [roomIndex].roomType == "skillreward") {
         std::cout << "You find an ancient text that teaches you a skill." << std::endl;
-        replaceSkill (player, &dungeon [floor - 1].floorMap [roomIndex].skillReward);
+        replaceSkill (player, &dungeon [floor - 1].floorMap [roomIndex].skillRewards [0]);
     } else {
         std::cout << "You found a chest of gold!" << std::endl;
         player.gold += dungeon [floor - 1].floorMap [roomIndex].goldReward;
@@ -897,25 +923,27 @@ void Game::shop (Entity &player, int roomIndex) {
 
     bool looping = true;
     while (looping) {
-
-        std::cout << "SHOP\n[1] Buy Skill " << dungeon [floor - 1].floorMap [roomIndex].skillReward.name << " - "
-            << dungeon [floor - 1].floorMap [roomIndex].priceOfSkill << std::endl;
-        std::cout << " -- " << dungeon [floor - 1].floorMap [roomIndex].skillReward.description << std::endl;
-        std::cout << "[2] Heal " << (player.maxHealth / 2) << " HP - " << dungeon [floor - 1].floorMap [roomIndex].priceOfHeal << std::endl;
-        std::cout << "[3] Exit" << std::endl;
+        std::cout << "SHOP - " << player.gold << " G" << std::endl;
+        for (int i = 0; i < 3; i++) {
+            std::cout << "[" << (i+1) << "] Buy Skill " << dungeon [floor - 1].floorMap [roomIndex].skillRewards [i].name << " - "
+            << dungeon [floor - 1].floorMap [roomIndex].priceOfSkills [i] << std::endl;
+            std::cout << " -- " << dungeon [floor - 1].floorMap [roomIndex].skillRewards [i].description << std::endl;
+        }
+        std::cout << "[4] Heal " << (player.maxHealth / 2) << " HP - " << dungeon [floor - 1].floorMap [roomIndex].priceOfHeal << std::endl;
+        std::cout << "[5] Exit" << std::endl;
         int choice = 0; choice = utilityFunctions::getIntegerInput ();
 
-        if (choice == 1) {
-            if (player.gold >= dungeon [floor - 1].floorMap [roomIndex].priceOfSkill) {
-                player.gold -= dungeon [floor - 1].floorMap [roomIndex].priceOfSkill;
-                replaceSkill (player, &dungeon [floor - 1].floorMap [roomIndex].skillReward);
+        if (choice >= 1 && choice <= 3) {
+            if (player.gold >= dungeon [floor - 1].floorMap [roomIndex].priceOfSkills [choice-1]) {
+                player.gold -= dungeon [floor - 1].floorMap [roomIndex].priceOfSkills [choice-1];
+                replaceSkill (player, &dungeon [floor - 1].floorMap [roomIndex].skillRewards [choice-1]);
 
             } else {
                 std::cout << "Not enough money!" << std::endl;
             }
 
         }
-        if (choice == 2) {
+        if (choice == 4) {
             if (player.gold >= dungeon [floor - 1].floorMap [roomIndex].priceOfHeal) {
                 player.gold -= dungeon [floor - 1].floorMap [roomIndex].priceOfHeal;
                 player.health += (player.maxHealth / 2); if (player.health > player.maxHealth) { player.health = player.maxHealth; }
@@ -925,7 +953,7 @@ void Game::shop (Entity &player, int roomIndex) {
             }
 
         }
-        if (choice == 3) { looping = false; }
+        if (choice == 5) { looping = false; }
     }
 }
 

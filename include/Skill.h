@@ -13,6 +13,9 @@ class Skill
         std::string description;
         void (*use)(Entity &user, Entity &target);
 
+        int minimumPrice;
+        int maximumPrice;
+
     protected:
 
     private:

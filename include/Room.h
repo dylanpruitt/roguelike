@@ -1,6 +1,7 @@
 #ifndef ROOM_H
 #define ROOM_H
 #include "Skill.h"
+#include <vector>
 
 class Room
 {
@@ -13,11 +14,11 @@ class Room
 
         Entity entityInRoom;
 
-        Skill skillReward;
+        std::vector <Skill> skillRewards;
 
         int goldReward;
 
-        int priceOfSkill = 0;
+        int priceOfSkills [3] = {0, 0, 0};
         int priceOfHeal = 0;
 
 };

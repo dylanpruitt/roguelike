@@ -32,10 +32,6 @@ class Game
 
         void rewardPower (Entity &player);
 
-        std::vector <Skill> gameSkills;
-
-        std::vector <Power> gamePowers;
-
     private:
         Floor dungeon [5];
 

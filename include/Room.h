@@ -1,6 +1,7 @@
 #ifndef ROOM_H
 #define ROOM_H
 #include "Skill.h"
+#include "Event.h"
 #include <vector>
 
 class Room
@@ -9,10 +10,11 @@ class Room
         Room() {}
         virtual ~Room() {}
 
-        /** Room types: enemy, shop, skillreward, goldreward, start **/
+        /** Room types: enemy, shop, skillreward, goldreward, event, start **/
         std::string roomType = "enemy";
 
         Entity entityInRoom;
+        Event event;
 
         std::vector <Skill> skillRewards;
 

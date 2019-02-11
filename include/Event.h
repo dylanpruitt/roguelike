@@ -1,6 +1,6 @@
 #ifndef EVENT_H
 #define EVENT_H
-
+#include "Skill.h"
 
 class Event
 {
@@ -10,7 +10,7 @@ class Event
 
         std::string name;
         std::string description;
-        void (*use)(Entity &user, Entity &target);
+        void (*trigger)(Entity &player);
 
     protected:
 

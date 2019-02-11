@@ -1,5 +1,7 @@
 #ifndef GAMEDATA_H
 #define GAMEDATA_H
+#include "Skill.h"
+#include "Power.h"
 
 namespace gameData
 {
@@ -10,6 +12,10 @@ namespace gameData
     enum powers { growStrength = 0, noGuard, regen, wither, metalBody,
             strengthBoost, spike, etherealHourglass, lunarEnergy,
             eagleEye, elusiveShadow, counter, spore };
+
+    static std::vector <Skill> gameSkills;
+
+    static std::vector <Power> gamePowers;
 };
 
 #endif // GAMEDATA_H

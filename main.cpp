@@ -31,11 +31,20 @@ int main()
     char input = ' ';
 
     while (input != 'P' && input != 'p') {
-        std::cout << "[P]lay Game or [V]iew Stats" << std::endl;
+        std::cout << "[P]lay Game | [V]iew Stats | Game [O]ptions" << std::endl;
 
         std::cin >> input;
         if (input == 'V' || input == 'v') {
             displayGameStatistics ();
+        }
+        if (input == 'O' || input == 'o') {
+            std::cout << "Game Options\nSkill Lock (" << game.skillLock << ")\n --  You can't replace the same skill twice in a row.\n[1] Set True - [0] Set False" << std::endl;
+            int choice = -1;
+            while (choice < 0 || choice > 1) {
+                choice = utilityFunctions::getIntegerInput ();
+            }
+
+            game.skillLock = (bool) choice;
         }
     }
 

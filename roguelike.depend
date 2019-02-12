@@ -29,23 +29,22 @@
 	<iostream>
 	<limits>
 
-1549903553 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\game.cpp
+1550010038 source:c:\users\dylan\documents\programming projects 2019\roguelike\src\game.cpp
 	"Game.h"
 	"aiFunctions.h"
 	"powerFunctions.h"
 	"skillFunctions.h"
 	"utilityFunctions.h"
-	"eventFunctions.h"
 	"PlayerStats.h"
 	<iostream>
 
-1550009652 c:\users\dylan\documents\programming projects 2019\roguelike\include\game.h
+1550010532 c:\users\dylan\documents\programming projects 2019\roguelike\include\game.h
 	<vector>
 	"Floor.h"
 	"Power.h"
 	<iostream>
 
-1549902768 source:c:\users\dylan\documents\programming projects 2019\roguelike\main.cpp
+1550010696 source:c:\users\dylan\documents\programming projects 2019\roguelike\main.cpp
 	<iostream>
 	"Game.h"
 	"skillFunctions.h"
@@ -95,7 +94,7 @@
 	"skillFunctions.h"
 	"powerFunctions.h"
 
-1549823245 c:\users\dylan\documents\programming projects 2019\roguelike\include\floor.h
+1550010085 c:\users\dylan\documents\programming projects 2019\roguelike\include\floor.h
 	"Room.h"
 	"Power.h"
 	"gameData.h"

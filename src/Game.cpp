@@ -656,16 +656,21 @@ void Game::replaceSkill (Entity &player, Skill *rewardSkill) {
 
     while (looping) {
         for (int i = 0; i < 3; i++) {
-            std::cout << "[" << i << "] - " << player.skillset [i]->name << std::endl;
-            std::cout << " -- " << player.skillset [i]->description << std::endl;
+            if (skillLock == true && lockedSkill == i) {
+                std::cout << "[SKILL LOCKED]" << std::endl;
+            } else {
+                std::cout << "[" << i << "] - " << player.skillset [i]->name << std::endl;
+                std::cout << " -- " << player.skillset [i]->description << std::endl;
+            }
+
         }
 
         choice = utilityFunctions::getIntegerInput ();
 
-        if (choice >= 0 && choice < 3) { looping = false; }
+        if (choice >= 0 && choice < 3 && ((choice != lockedSkill && skillLock == true) || skillLock == false)) { looping = false; }
     }
 
-    player.skillset [choice] = rewardSkill;
+    player.skillset [choice] = rewardSkill; lockedSkill = choice;
 
 }
 

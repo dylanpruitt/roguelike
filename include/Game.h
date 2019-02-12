@@ -33,6 +33,10 @@ class Game
 
         void rewardPower (Entity &player);
 
+        bool skillLock = false;
+
+        int lockedSkill = -1;
+
     private:
         Floor dungeon [5];
 

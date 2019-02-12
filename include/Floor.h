@@ -70,6 +70,8 @@ class Floor
                         enemyNames.push_back ("Brute");
                         enemyNames.push_back ("Blue Slime");
                         enemyNames.push_back ("Minotaur");
+                        enemyNames.push_back ("Herbalist");
+                        enemyNames.push_back ("Tormented Spirit");
                         skillIndices.push_back (gameData::skills::tripleAttack);
                         skillIndices.push_back (gameData::skills::cleave);
                         skillIndices.push_back (gameData::skills::explode);

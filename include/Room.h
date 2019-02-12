@@ -1,7 +1,6 @@
 #ifndef ROOM_H
 #define ROOM_H
 #include "Skill.h"
-#include "Event.h"
 #include <vector>
 
 class Room
@@ -14,7 +13,6 @@ class Room
         std::string roomType = "enemy";
 
         Entity entityInRoom;
-        Event event;
 
         std::vector <Skill> skillRewards;
 

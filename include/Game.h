@@ -3,6 +3,7 @@
 #include <vector>
 #include "Floor.h"
 #include "Power.h"
+#include <iostream>
 
 class Game
 {

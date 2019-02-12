@@ -35,6 +35,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Entity.h" />
+		<Unit filename="include/Event.h" />
 		<Unit filename="include/Floor.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/PlayerStats.h" />
@@ -42,6 +43,7 @@
 		<Unit filename="include/Room.h" />
 		<Unit filename="include/Skill.h" />
 		<Unit filename="include/aiFunctions.h" />
+		<Unit filename="include/eventFunctions.h" />
 		<Unit filename="include/gameData.h" />
 		<Unit filename="include/powerFunctions.h" />
 		<Unit filename="include/skillFunctions.h" />
@@ -50,6 +52,7 @@
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/PlayerStats.cpp" />
 		<Unit filename="src/aiFunctions.cpp" />
+		<Unit filename="src/eventFunctions.cpp" />
 		<Unit filename="src/powerFunctions.cpp" />
 		<Unit filename="src/skillFunctions.cpp" />
 		<Unit filename="src/utilityFunctions.cpp" />

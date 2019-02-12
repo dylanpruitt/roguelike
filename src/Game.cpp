@@ -4,7 +4,6 @@
 #include "skillFunctions.h"
 #include "utilityFunctions.h"
 #include "PlayerStats.h"
-#include "gameData.h"
 #include <iostream>
 
 Game::~Game()
@@ -234,7 +233,6 @@ void Game::initializeSkills () {
     Skill wail; wail.name = "Wail"; wail.use = skillFunctions::wail;
     wail.minimumPrice = 36; wail.maximumPrice = 54;
     wail.description = "Lower the target's guard."; gameData::gameSkills.push_back (wail);
-
 }
 
 void Game::initializePowers () {
@@ -629,6 +627,22 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.powers.push_back (&gameData::gamePowers [gameData::powers::spike]);
         entity.ai = aiFunctions::dragon;
     }
+    if (name == "Carl") {
+        entity.health = 100;
+        entity.maxHealth = 100;
+        entity.name = "Carl";
+        entity.attack = 5;
+
+        entity.gold = utilityFunctions::random (80, 124);
+
+        entity.skillset [0] = &gameData::gameSkills [gameData::skills::cleave];
+        entity.skillset [1] = &gameData::gameSkills [gameData::skills::guardBreak];
+        entity.skillset [2] = &gameData::gameSkills [gameData::skills::wail];
+
+
+        entity.rewardSkill = &gameData::gameSkills [gameData::skills::cleave];
+
+    }
     return entity;
 
 }
@@ -732,7 +746,7 @@ Floor Game::generateFloor (int seed, int floorNumber) {
 Room Game::generateRoom (Floor &parent) {
     int random = utilityFunctions::random (1, 100); Room room;
 
-    if (random >= 40) {
+    if (random >= 60) {
         int index = utilityFunctions::random (0, parent.enemyNames.size () - 1);
 
         room.entityInRoom = returnEntityFromName (parent.enemyNames [index]); room.roomType = "enemy";

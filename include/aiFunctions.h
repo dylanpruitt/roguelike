@@ -45,6 +45,8 @@ namespace aiFunctions
     void wither (Entity &user, Entity &target, int turnCounter);
 
     void dragon (Entity &user, Entity &target, int turnCounter);
+
+    void carl (Entity &user, Entity &target, int turnCounter);
 };
 
 

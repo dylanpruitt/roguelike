@@ -572,8 +572,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::herbalist;
     }
     if (name == "Bramble Fortress") {
-        entity.health = 24;
-        entity.maxHealth = 24;
+        entity.health = 34;
+        entity.maxHealth = 34;
         entity.name = "Bramble Fortress";
 
         entity.gold = utilityFunctions::random (46, 82);
@@ -591,8 +591,8 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.ai = aiFunctions::bramble;
     }
     if (name == "Wither") {
-        entity.health = 80;
-        entity.maxHealth = 80;
+        entity.health = 60;
+        entity.maxHealth = 60;
         entity.name = "Wither";
 
         entity.gold = utilityFunctions::random (80, 124);
@@ -636,12 +636,12 @@ Entity Game::returnEntityFromName (std::string name) {
         entity.gold = utilityFunctions::random (80, 124);
 
         entity.skillset [0] = &gameData::gameSkills [gameData::skills::cleave];
-        entity.skillset [1] = &gameData::gameSkills [gameData::skills::guardBreak];
-        entity.skillset [2] = &gameData::gameSkills [gameData::skills::wail];
+        entity.skillset [1] = &gameData::gameSkills [gameData::skills::tripleAttack];
+        entity.skillset [2] = &gameData::gameSkills [gameData::skills::restore];
 
 
         entity.rewardSkill = &gameData::gameSkills [gameData::skills::cleave];
-
+        entity.ai = aiFunctions::carl;
     }
     return entity;
 
@@ -707,8 +707,11 @@ Floor Game::generateFloor (int seed, int floorNumber) {
         case 3: {
             midBoss.entityInRoom = returnEntityFromName ("Beholder");
         } break;
-        default: {
-           midBoss.entityInRoom = returnEntityFromName ("Blue Slime");
+        case 4: {
+            midBoss.entityInRoom = returnEntityFromName ("Tormented Spirit");
+        } break;
+        case 5: {
+            midBoss.entityInRoom = returnEntityFromName ("Wither");
         } break;
     }
 
@@ -727,16 +730,16 @@ Floor Game::generateFloor (int seed, int floorNumber) {
             boss.entityInRoom = returnEntityFromName ("Artifact");
         } break;
         case 2: {
-            boss.entityInRoom = returnEntityFromName ("Bramble Fortress");
+            boss.entityInRoom = returnEntityFromName ("Wither");
         } break;
         case 3: {
-            boss.entityInRoom = returnEntityFromName ("Wither");
+            boss.entityInRoom = returnEntityFromName ("Bramble Fortress");
         } break;
         case 4: {
             boss.entityInRoom = returnEntityFromName ("Dragon");
         } break;
         default: {
-           boss.entityInRoom = returnEntityFromName ("Blue Slime");
+           boss.entityInRoom = returnEntityFromName ("Carl");
         } break;
     }
 
@@ -910,6 +913,14 @@ void Game::loop (Entity &player) {
         executeRoomLogic (player, roomIndex);
 
         if (roomIndex == 26 && player.health > 0) { roomIndex = 0; floor++; std::cout << "You made it to floor " << floor << "!" << std::endl; std::cin.get (); rewardPower (player); }
+        if (floor == 6) {
+            std::cout << "You won! You dealt " << PlayerStats::damageThisRun << " damage this run." << std::endl;
+            PlayerStats::totalDamageDealt += PlayerStats::damageThisRun;
+            PlayerStats::saveStatsToFile ("stats.save");
+            std::cin.get ();
+            std::cin.get ();
+            return;
+        }
     }
 
     if (player.health <= 0) {

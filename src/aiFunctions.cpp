@@ -3,11 +3,9 @@
 #include <iostream>
 
 void aiFunctions::slime (Entity &user, Entity &target, int turnCounter) {
-    const int ATTACK = 0, DONOTHING = 1; int timesToAttack = 1;
+    const int ATTACK = 0, DONOTHING = 1;
 
-    if (turnCounter % 4 == 0 || turnCounter == 1) { timesToAttack = utilityFunctions::random (1, 3); user.attack++; std::cout << "Slime is growing." << std::endl; }
-
-    if ((turnCounter) % 4 < timesToAttack) {
+    if ((turnCounter+1) % 4 != DONOTHING) {
         user.skillset [ATTACK]->use (user, target);
     } else {
         user.skillset [DONOTHING]->use (user, target);
@@ -18,7 +16,7 @@ void aiFunctions::slime (Entity &user, Entity &target, int turnCounter) {
 void aiFunctions::wisp (Entity &user, Entity &target, int turnCounter) {
     const int ATTACK = 0, HEAL = 1;
 
-    if ((turnCounter+1) % 4 == ATTACK) {
+    if ((turnCounter-1) % 4 == ATTACK) {
         user.skillset [ATTACK]->use (user, target);
     } else {
         user.skillset [HEAL]->use (user, target);
@@ -43,7 +41,7 @@ void aiFunctions::artifact (Entity &user, Entity &target, int turnCounter) {
 
     switch (offset % 3) {
         case 0: {
-            if ((turnCounter+1) % 3 != DEFEND) {
+            if ((turnCounter) % 3 != DEFEND) {
                 if (target.guard > 0 && (turnCounter+1) % 2 == 0) {
                     user.skillset [GUARD_BREAK]->use (user, target);
                 } else {
@@ -54,7 +52,7 @@ void aiFunctions::artifact (Entity &user, Entity &target, int turnCounter) {
             }
         } break;
         case 1: {
-            if ((turnCounter+1) % 3 != ATTACK) {
+            if ((turnCounter) % 3 != ATTACK) {
                 user.skillset [DEFEND]->use (user, target);
             } else {
                 if (target.guard > 0 && (turnCounter+1) % 2 == 0) {
@@ -81,7 +79,7 @@ void aiFunctions::shieldKnight (Entity &user, Entity &target, int turnCounter) {
     const int ATTACK = 1, DEFEND = 2, DONOTHING = 0;
 
     if (user.attack < 2) {
-        switch ((turnCounter+1) % 3) {
+        switch ((turnCounter) % 3) {
             case ATTACK:
                 user.skillset [ATTACK]->use (user, target);
                 break;
@@ -156,7 +154,7 @@ void aiFunctions::bowman (Entity &user, Entity &target, int turnCounter) {
 void aiFunctions::crusader (Entity &user, Entity &target, int turnCounter) {
     const int ATTACK = 1, DEFEND = 2, RANDOM = 0, DONOTHING = 0;
 
-    switch ((turnCounter+1) % 3) {
+    switch ((turnCounter) % 3) {
         case ATTACK:
             user.skillset [ATTACK]->use (user, target);
             break;
@@ -180,7 +178,7 @@ void aiFunctions::crusader (Entity &user, Entity &target, int turnCounter) {
 void aiFunctions::minotaur (Entity &user, Entity &target, int turnCounter) {
     const int DONOTHING = 0, ATTACK = 1;
 
-    if ((turnCounter+1) % 3 == DONOTHING) {
+    if ((turnCounter-1) % 3 == DONOTHING) {
         user.skillset [DONOTHING]->use (user, target);
     } else {
         user.skillset [ATTACK]->use (user, target);
@@ -255,6 +253,21 @@ void aiFunctions::thief (Entity &user, Entity &target, int turnCounter) {
 
 }
 
+void aiFunctions::herbalist (Entity &user, Entity &target, int turnCounter) {
+    const int DISARM = 0, DAGGER = 1, OBSERVE = 2;
+
+    if (user.focus > 1 || (target.health / target.maxHealth) < (user.health / user.maxHealth)) {
+       user.skillset [DISARM]->use (user, target);
+    } else {
+        if (turnCounter % 2 != 0) {
+            user.skillset [DAGGER]->use (user, target);
+        } else {
+            user.skillset [OBSERVE]->use (user, target);
+        }
+    }
+
+}
+
 void aiFunctions::spirit (Entity &user, Entity &target, int turnCounter) {
     const int DISARM = 0, SPLIT_PAIN = 1, WAIL = 2;
 
@@ -279,7 +292,7 @@ void aiFunctions::bramble (Entity &user, Entity &target, int turnCounter) {
     }
 
     if (phase % 2 == 1) {
-         switch ((turnCounter+1) % 3) {
+         switch ((turnCounter) % 3) {
             case ATTACK:
                 user.skillset [ATTACK]->use (user, target);
                 break;
@@ -322,21 +335,33 @@ void aiFunctions::dragon (Entity &user, Entity &target, int turnCounter) {
 
     if (target.guard >= 2) {
         user.skillset [GUARD_BREAK]->use (user, target);
+    } else {
+        int random = utilityFunctions::random (1, 100);
+
+        if (random < (turnCounter % 3)*33) {
+            user.skillset [CLEAVE]->use (user, target);
+        } else {
+            user.skillset [WAIL]->use (user, target);
+        }
     }
 
 }
 
-void aiFunctions::herbalist (Entity &user, Entity &target, int turnCounter) {
-    const int DISARM = 0, DAGGER = 1, OBSERVE = 2;
-
-    if (user.focus > 1 || (target.health / target.maxHealth) < (user.health / user.maxHealth)) {
-       user.skillset [DISARM]->use (user, target);
-    } else {
-        if (turnCounter % 2 != 0) {
-            user.skillset [DAGGER]->use (user, target);
-        } else {
-            user.skillset [OBSERVE]->use (user, target);
-        }
+void aiFunctions::carl (Entity &user, Entity &target, int turnCounter) {
+    const int CLEAVE = 0, TRIPLE_ATTACK = 1, RESTORE = 2;
+    switch (turnCounter-1 % 4) {
+        case CLEAVE:
+            user.skillset [CLEAVE]->use (user, target);
+        break;
+        case TRIPLE_ATTACK:
+            user.skillset [TRIPLE_ATTACK]->use (user, target);
+        break;
+        case RESTORE:
+            user.skillset [RESTORE]->use (user, target);
+        break;
+        case 3:
+            std::cout << "Carl does nothing." << std::endl;
+        break;
     }
 
 }

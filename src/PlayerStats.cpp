@@ -5,6 +5,7 @@ namespace PlayerStats {
 
     int damageThisRun = 0;
     int totalDamageDealt = 0;
+    int runVictories = 0;
 
     std::vector <std::string> enemiesThatKilledPlayer;
 
@@ -23,6 +24,7 @@ namespace PlayerStats {
 
                 enemiesThatKilledPlayer.push_back (name);
             }
+            file >> runVictories;
             file.close ();
 
         }
@@ -41,6 +43,7 @@ namespace PlayerStats {
                 file << enemiesThatKilledPlayer [i] << " | \n";
 
             }
+            file << runVictories << "\n";
             file.close ();
 
         }

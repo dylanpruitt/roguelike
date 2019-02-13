@@ -5,7 +5,7 @@
 #include "PlayerStats.h"
 
 void displayGameStatistics () {
-    std::cout << "PLAYER STATS\nTotal Damage Dealt: " << PlayerStats::totalDamageDealt << std::endl;
+    std::cout << "PLAYER STATS\nTotal Damage Dealt: " << PlayerStats::totalDamageDealt << "\nTotal Runs Won: " << PlayerStats::runVictories << std::endl;
     std::cout << "Killed by:" << std::endl;
 
     std::vector <std::string> killerNames; std::vector <int> killCount;

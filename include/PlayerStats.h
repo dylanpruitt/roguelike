@@ -9,6 +9,7 @@ namespace PlayerStats
 
     extern int totalDamageDealt;
     extern int damageThisRun;
+    extern int runVictories;
 
     extern std::vector <std::string> enemiesThatKilledPlayer;
 
